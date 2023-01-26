@@ -1,0 +1,163 @@
+
+
+/* 카드 리스트 요소 전체를 감싸는 컨테이너 */
+.reserved_list_container{
+    width: 1720px;
+    height: 620px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 리스트 내부 해더와 카드리스트를 감싸는 컨테이너 */
+.reserved_list_inner_container{
+    /* box-sizing: border-box; */
+    margin:0px;
+    width: 1480px;
+    height: 620px;
+    background: #FFFFFF;
+    border: 1px solid #031059;
+    border-radius: 15px;
+}
+
+/* 제목이 들어가는 헤더 */
+.reserved_list_header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+
+    width: 1480px;
+    height: 60px;
+
+
+    background: #031059;
+    border-radius: 13px;
+}
+
+/* 헤더 내용 텍스트 */
+.header_text{
+    text-align: center;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* 좌 우 화살표를 담는 컨테이너 */
+.reserved_list_arrow{
+    width: 80px;
+    height: 620px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+/* 화살표를 담는 버튼 */
+.arrow_button{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 80px;
+    height: 80px;
+    
+    background: #031059;
+
+    border-radius: 30px;
+    
+}
+
+.sam{
+    width: 0;
+    height: 0;
+    position: relative;
+    border-bottom: 20px solid transparent;
+    border-top: 20px solid transparent;
+    border-left: 20px solid white;
+    border-right: 20px solid transparent;
+    transform: translate(30%);
+}
+
+.arrow{
+    text-align: center;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #FFFFFF;    
+    
+}
+
+/* 카드들을 담는 컨테이너 */
+.reserved_card_container{
+    width: 1480px;
+    height: 560px;
+    display: flex;
+}
+/* 카드 바깥 */
+.reserved_card_outer{
+    width: 360px;
+    height: 560px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+/* 카드 본체 */
+.reserved_card{
+    width: 340px;
+    height: 400px;
+    margin: 10px;
+    background-color: #ffffff;
+    border: solid black 1px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+/* 
+<div className="reserved_card_time"></div>
+                <div className="reserved_card_content"></div>
+                <div className="reserved_card_content"></div>
+                <div className="reserved_card_content"></div>
+                <div className="reserved_card_content"></div>
+                <div className="reserved_card_button"></div> */
+
+.reserved_card_header{
+    height: 20%;
+}
+.reserved_card_content_container{
+    height: 15%;
+    font-size: 16px;
+    font: Inter;
+}
+.reserved_card_button_container{
+    height: 20%;
+
+    display: flex;
+    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.reserved_card_button{
+    height: 60%;
+    width: 80%;
+
+    color:#FFFFFF;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    
+
+    background-color: #031059;
+}
+
+.reserved_card_text{
+    height: 60%;
+    transform: translate(0,50%);
+    color:#FFFFFF;
+    
+
+    background-color: #031059;
+}

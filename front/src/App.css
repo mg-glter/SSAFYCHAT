@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,10 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+
+#root{  	
+  font-family: 'Do Hyeon', sans-serif;
 }

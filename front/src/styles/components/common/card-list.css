@@ -1,5 +1,98 @@
+/* 카드 리스트 요소 전체를 감싸는 컨테이너 */
 .card_list_container{
-    width: 1600px;
+    width: 1720px;
     height: 320px;
-    background-color: red;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 리스트 내부 해더와 카드리스트를 감싸는 컨테이너 */
+.card_list_inner_container{
+    /* box-sizing: border-box; */
+    margin:0px;
+    width: 1480px;
+    height: 320px;
+    background: #FFFFFF;
+    border: 1px solid #031059;
+    border-radius: 15px;
+}
+
+/* 제목이 들어가는 헤더 */
+.card_list_header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+    gap: 1px;
+
+    width: 1480px;
+    height: 60px;
+
+
+    background: #031059;
+    border-radius: 13px;
+}
+
+/* 헤더 내용 텍스트 */
+.header_text{
+    text-align: center;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* 좌 우 화살표를 담는 컨테이너 */
+.card_list_arrow{
+    width: 80px;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+/* 화살표를 담는 버튼 */
+.arrow_button{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 80px;
+    height: 80px;
+    
+    background: #031059;
+
+    border-radius: 30px;
+    
+}
+
+.arrow{
+    text-align: center;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #FFFFFF;    
+    
+}
+
+/* 카드들을 담는 컨테이너 */
+.card_container{
+    width: 1480px;
+    height: 260px;
+    display: flex;
+}
+/* 카드 바깥 */
+.card_outer{
+    width: 360px;
+    height: 260px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+/* 카드 본체 */
+.card{
+    width: 340px;
+    height: 220px;
+    margin: 10px;
+    background-color: #A6A6A6;
+    border-radius: 20px;
 }
