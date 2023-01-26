@@ -1,4 +1,8 @@
 package com.ssafychat.domain.member.service;
 
-public class MemberService {
+import com.ssafychat.domain.member.model.Member;
+import org.springframework.stereotype.Service;
+
+public interface MemberService {
+//    Member find(Member member);
 }
