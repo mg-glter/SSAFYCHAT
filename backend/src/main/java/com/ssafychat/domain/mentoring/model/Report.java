@@ -10,17 +10,18 @@ import javax.persistence.*;
 @RequiredArgsConstructor
 @Builder
 @Entity
+@IdClass(ReportInterface.class)
 public class Report {
 
     @Id
     @Column
     private int reporter;
 
-    // 복합키 설정 필요
+    @Id
     @Column(name = "complete_mentoring_id")
     private int completeMentoringId; // 외래키
     @Column
     private int reported;
-    @Column
-    private String reason; // 길이제한?
+    @Column(columnDefinition = "TEXT")
+    private String reason;
 }
