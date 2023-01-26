@@ -1,7 +1,7 @@
 function Footer (){
-    return(
+    return (
         <div>
-            This is footer.
+           
         </div>
     )
 }
