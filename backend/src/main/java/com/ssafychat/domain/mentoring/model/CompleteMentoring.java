@@ -30,7 +30,7 @@ public class CompleteMentoring {
     private String company;
     @Column(nullable = false)
     private int score;
-    @Column(name = "review_content") // 길이 제한?
+    @Column(name = "review_content", columnDefinition = "TEXT") // 길이 제한?
     private String reviewContent;
     @Column(name = "review_width")
     private int reviewWidth;
