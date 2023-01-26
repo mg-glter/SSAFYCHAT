@@ -10,6 +10,7 @@ import javax.persistence.*;
 @RequiredArgsConstructor
 @Builder
 @Entity
+@IdClass(MentoringDateInterface.class)
 public class MentoringDate {
 
     @Id
@@ -17,7 +18,7 @@ public class MentoringDate {
     private String time;
 
 
-    // 복합키 설정 필요
+    @Id
     @Column(name = "apply_mentoring_id") // 외래키
     private int applyMentoringId;
 }
