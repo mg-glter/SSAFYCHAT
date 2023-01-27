@@ -5,9 +5,8 @@ function ReservedCard(props : any){
     return(
         <div className="reserved_card_outer">
             <div className="reserved_card">
-                <div className="reserved_card_header">
-                    멘토링
-                    2022.02.02
+                <div className="reserved_card_header">                
+                    <ruby>2022.02.02<rt>멘토링</rt></ruby>
                 </div>
                 <div className="reserved_card_content_container">
                     이름
@@ -65,7 +64,7 @@ function ReservedList(props : any){
         {/* 우측 화살표 */}
         <div className="reserved_list_arrow">
         <div className="arrow_button">
-            <div className="sam">
+            <div className="arrow">
                 &gt;
             </div>
         </div>
