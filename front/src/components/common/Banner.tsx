@@ -3,6 +3,7 @@ import "../../styles/components/common/banner.css";
 function Banner(props: any) {
     const banner_img = {
         backgroundImage: `url(${process.env.PUBLIC_URL}/img/${props.imgName}.png)`,
+        backgroundSize: "cover",
     } as React.CSSProperties;
 
     return (
