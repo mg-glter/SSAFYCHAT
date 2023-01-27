@@ -16,6 +16,8 @@
     justify-content: flex-evenly;
     padding: 0px;
 
+    transform: translate(0,50%);
+
     position: relative;
     width: 1084.82px;
     height: 150.59px;
@@ -73,8 +75,11 @@
     display: flex;
     position: relative;
     width: 130px;
+    height: 155px;
+    transform: translate(0,-25%);
     left: 200px;
-
-    border: 1px solid #0D0D0D;
-    transform: rotate(90deg);
+    bottom: 100px;
+    border-left: 2px solid ;
+    /* border: 1px solid #0D0D0D; */
+    /* transform: rotate(90deg); */
 }
