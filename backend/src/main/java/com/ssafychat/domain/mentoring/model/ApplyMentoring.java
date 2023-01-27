@@ -18,9 +18,8 @@ public class ApplyMentoring {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int applyMentoringId;
 
-    @Column(nullable = false)
     @ManyToOne
-    @JoinColumn(name = "user_id")// 외래키
+    @JoinColumn(name = "mentee_id", nullable = false)// 외래키
     private Member menteeUid;
 
     @Column(columnDefinition = "VARCHAR(20)", nullable = false)

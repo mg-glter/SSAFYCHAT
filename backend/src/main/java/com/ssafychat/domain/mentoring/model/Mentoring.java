@@ -16,21 +16,19 @@ public class Mentoring {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ManyToOne
-    @JoinColumn(name = "user_id")// 외래키
-    private Member mentoringId;
+    private int mentoringId;
 
-    @Column(nullable = false)
     @ManyToOne
-    @JoinColumn(name = "user_id")// 외래키// 외래키
+    @JoinColumn(name = "mentee_uid", nullable = false) // 외래키
     private Member menteeUid;
 
-    @Column(nullable = false) // 외래키
-    private int mentorUid;
+    @ManyToOne
+    @JoinColumn(name = "mentor_uid", nullable = false) // 외래키
+    private Member mentorUid;
 
     @Convert(converter= DateToStringConverter.class)
     @Column(nullable = false)
-    private String time; // 1. 형식? 2. default가 null로 되어 있는데 맞나요?
+    private String time; // 1. 형식
 
     @Column(nullable = false, columnDefinition = "VARCHAR(20)")
     private String job;
