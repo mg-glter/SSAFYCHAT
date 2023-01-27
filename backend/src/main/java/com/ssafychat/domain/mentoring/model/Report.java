@@ -14,14 +14,14 @@ import javax.persistence.*;
 public class Report {
 
     @Id
-    @Column
     private int reporter;
 
     @Id
-    @Column(name = "complete_mentoring_id")
-    private int completeMentoringId; // 외래키
-    @Column
+    @ManyToOne
+    @JoinColumn(name = "complete_mentoring_id")
+    private CompleteMentoring completeMentoring; // 외래키
+    @Column(nullable = false)
     private int reported;
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT",  nullable = false)
     private String reason;
 }

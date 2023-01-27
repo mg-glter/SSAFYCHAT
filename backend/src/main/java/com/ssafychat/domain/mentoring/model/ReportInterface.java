@@ -4,6 +4,6 @@ import java.io.Serializable;
 
 public class ReportInterface implements Serializable {
     private int reporter;
-    private int completeMentoringId;
+    private CompleteMentoring completeMentoring;
 
 }
