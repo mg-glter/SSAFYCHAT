@@ -4,5 +4,5 @@ import java.io.Serializable;
 
 public class MentoringDateInterface implements Serializable {
     private String time;
-    private int applyMentoringId;
+    private ApplyMentoring applyMentoring;
 }

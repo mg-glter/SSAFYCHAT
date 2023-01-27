@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Getter
+@Setter
 @ToString
 @AllArgsConstructor
 @RequiredArgsConstructor
@@ -19,6 +20,7 @@ public class MentoringDate {
 
 
     @Id
-    @Column(name = "apply_mentoring_id") // 외래키
-    private int applyMentoringId;
+    @ManyToOne
+    @JoinColumn(name = "apply_mentoring_id") // 외래키
+    private ApplyMentoring applyMentoring;
 }

@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Getter
+@Setter
 @ToString
 @AllArgsConstructor
 @RequiredArgsConstructor
@@ -14,12 +15,14 @@ public class ApplyMentoring {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "apply_mentoring_id")
-    private int mentoringId;
-    @Column(name = "mentee_uid", nullable = false) // 외래키
+    private int applyMentoringId;
+    @Column(nullable = false) // 외래키
     private int menteeUid;
-    @Column(nullable = false)
+    @Column(columnDefinition = "VARCHAR(20)", nullable = false)
     private String job;
-    @Column(nullable = false)
+    @Column(columnDefinition = "VARCHAR(30)", nullable = false)
     private String company;
+//    @OneToMany
+//    @JoinColumn(name = "apply_mentoring_id")
+//    private List<MentoringDate> mentoringDates = new ArrayList<>();
 }
