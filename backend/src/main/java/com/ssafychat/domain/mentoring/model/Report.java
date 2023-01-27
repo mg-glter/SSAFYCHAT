@@ -19,9 +19,12 @@ public class Report {
     @Id
     @ManyToOne
     @JoinColumn(name = "complete_mentoring_id")
-    private CompleteMentoring completeMentoring; // 외래키
+    private CompleteMentoring completeMentoring;
+
     @Column(nullable = false)
     private int reported;
+
     @Column(columnDefinition = "TEXT",  nullable = false)
     private String reason;
+
 }

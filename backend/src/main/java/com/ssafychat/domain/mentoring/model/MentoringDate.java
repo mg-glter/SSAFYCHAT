@@ -1,11 +1,11 @@
 package com.ssafychat.domain.mentoring.model;
 
+import com.ssafychat.global.util.DateToStringConverter;
 import lombok.*;
 
 import javax.persistence.*;
 
 @Getter
-@Setter
 @ToString
 @AllArgsConstructor
 @RequiredArgsConstructor
@@ -15,12 +15,13 @@ import javax.persistence.*;
 public class MentoringDate {
 
     @Id
-    @Column
+    @Convert(converter= DateToStringConverter.class)
+    @Column(nullable = false)
     private String time;
-
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "apply_mentoring_id") // 외래키
+    @JoinColumn(name = "apply_mentoring_id")
     private ApplyMentoring applyMentoring;
+
 }
