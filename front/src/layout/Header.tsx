@@ -10,14 +10,18 @@ function Header (){
               <span>
                 <div className="dropdown">
                   <span className="dropbtn"> 
-                  <span className="dropbtn_image"></span>
-                    김겨울 님
-                  <span className="dropbtn_icon"></span>
+                  <span>
+                    <div className="dropbtn_image"></div>
+                  </span>
+                  <span>김겨울 님</span>
+                  <span>
+                    <div className="dropbtn_icon"></div>
+                    </span>
                   </span>
                   <div className="dropdown_content">
-                    <a href="#">profile</a>
-                    <a href="#">write a post</a>
-                    <a href="#">settings</a>
+                    <a href="#">로그아웃</a>
+                    <a href="#">마이페이지</a>
+                    <a href="#">롤링페이퍼</a>
                   </div>
                 </div>
               </span>
