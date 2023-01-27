@@ -6,7 +6,6 @@ import lombok.*;
 import javax.persistence.*;
 
 @Getter
-@Setter
 @ToString
 @AllArgsConstructor
 @RequiredArgsConstructor
@@ -19,8 +18,8 @@ public class ApplyMentoring {
     private int applyMentoringId;
 
     @ManyToOne
-    @JoinColumn(name = "mentee_id", nullable = false)// 외래키
-    private Member menteeUid;
+    @JoinColumn(name = "mentee_id", nullable = false)
+    private Member mentee;
 
     @Column(columnDefinition = "VARCHAR(20)", nullable = false)
     private String job;

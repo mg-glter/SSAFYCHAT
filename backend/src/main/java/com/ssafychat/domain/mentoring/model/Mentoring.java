@@ -19,20 +19,21 @@ public class Mentoring {
     private int mentoringId;
 
     @ManyToOne
-    @JoinColumn(name = "mentee_uid", nullable = false) // 외래키
-    private Member menteeUid;
+    @JoinColumn(name = "mentee_uid", nullable = false)
+    private Member mentee;
 
     @ManyToOne
-    @JoinColumn(name = "mentor_uid", nullable = false) // 외래키
-    private Member mentorUid;
+    @JoinColumn(name = "mentor_uid", nullable = false)
+    private Member mentor;
 
     @Convert(converter= DateToStringConverter.class)
     @Column(nullable = false)
-    private String time; // 1. 형식
+    private String time;
 
-    @Column(nullable = false, columnDefinition = "VARCHAR(20)")
+    @Column(columnDefinition = "VARCHAR(20)", nullable = false)
     private String job;
 
-    @Column(nullable = false, columnDefinition = "VARCHAR(30)")
+    @Column(columnDefinition = "VARCHAR(30)", nullable = false)
     private String company;
+
 }
