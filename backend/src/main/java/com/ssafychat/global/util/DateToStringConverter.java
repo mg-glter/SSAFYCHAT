@@ -32,7 +32,7 @@ public class DateToStringConverter implements AttributeConverter<String, Date> {
     public String convertToEntityAttribute(Date dbData) {
         if(dbData != null) {
             return simpleFormat.format(dbData);
-        }else {
+        } else {
             return null;
         }
     }
