@@ -2,7 +2,7 @@
 
 /* 카드 리스트 요소 전체를 감싸는 컨테이너 */
 .reserved_list_container{
-    width: 1720px;
+    width: 1600px;
     height: 620px;
     display: flex;
     flex-direction: column;
@@ -16,7 +16,7 @@
 .reserved_list_inner_container{
     /* box-sizing: border-box; */
     margin:0px;
-    width: 1720px;
+    width: 1600px;
     height: 560px;
 
     display: flex;
@@ -33,7 +33,7 @@
     text-align: center;
     color: #FFFFFF;
 
-    width: 1720px;
+    width: 1600px;
     height: 60px;
 
 
