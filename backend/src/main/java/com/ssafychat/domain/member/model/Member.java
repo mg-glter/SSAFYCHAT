@@ -27,17 +27,17 @@ public class Member {
 
     private int totalScore;
 
-    @Column(columnDefinition = "VARCHAR(50)")
+    @Column(columnDefinition = "VARCHAR(50)", nullable = false)
     private String email;
 
-    @Column(columnDefinition = "VARCHAR(100)")
+    @Column(columnDefinition = "VARCHAR(100)", nullable = false)
     private String password;
 
-    @Column(columnDefinition = "VARCHAR(10)")
+    @Column(columnDefinition = "VARCHAR(10)", nullable = false)
     private String social;
 
-    @Column(nullable = false)
-    private int studentNumber;
+    @Column(columnDefinition = "VARCHAR(10)", nullable = false)
+    private String studentNumber;
 
     @Column(columnDefinition = "VARCHAR(1000)")
     private String refreshToken;
