@@ -7,7 +7,6 @@ function MainPage (){
     return (
         <div>
             <Header></Header>
-            <Banner name="마이페이지" imgName="banner1"></Banner>
             <MainContainer></MainContainer>            
             <Footer></Footer>
         </div>
