@@ -1,14 +1,22 @@
 package com.ssafychat.domain.member.controller;
 
 
+import com.ssafychat.global.jwt.JwtServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
 @CrossOrigin("*")
 public class MemberController {
+    @Autowired
+    private JwtServiceImpl jwtService;
+
     @GetMapping("/")
     public ResponseEntity<?> aliveCheck() {
         return new ResponseEntity<String>("Alive", HttpStatus.OK);
@@ -26,10 +34,15 @@ public class MemberController {
     public ResponseEntity<?> socialRegist() {
         return new ResponseEntity<String>("registinfo", HttpStatus.OK);
     }
+
     @GetMapping("/login")
     public ResponseEntity<?> nomalLogin() {
-        return new ResponseEntity<String>("login", HttpStatus.OK);
+        Map<String,String> token_obj = new HashMap<>();
+        token_obj.put("access-token",jwtService.createAccessToken("memberid", "temp id"));
+        token_obj.put("refresh-token",jwtService.createRefreshToken("memberid", "temp id"));
+        return new ResponseEntity<>(token_obj, HttpStatus.OK);
     }
+
     @GetMapping("/user-info")
     public ResponseEntity<?> userInfo() {
         return new ResponseEntity<String>("user-info", HttpStatus.OK);
