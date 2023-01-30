@@ -41,11 +41,18 @@
     border-radius: 15px;
 }
 
-.reserved_list_tr_body{
-    height: 65px;
-}
-
 .reserved_list_tr_head{
     height: 45px;
     background: #f8f8f8;
+}
+.reserved_list_tr_body{
+    height: 65px;
+}
+.reserved_list_tr_body:hover{
+    background: #dadada;
+}
+.reserved_list_enter_button{
+    /* background: #031059;
+    height: 40px;
+    width: 80px; */
 }

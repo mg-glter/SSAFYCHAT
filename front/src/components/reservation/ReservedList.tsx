@@ -7,6 +7,7 @@ function ReservedListItem(props : any){
             <td>김도원</td>
             <td>7전8기</td>
             <td>ssafy@ssafy.com</td>
+            <td><div className="reserved_list_enter_button">입장</div></td>
         </tr>
     )
 }
@@ -24,6 +25,7 @@ function ReservedList(props : any){
                        <th>이름</th>
                        <th>타이틀</th>
                        <th>이메일</th>
+                       <th></th>
                     </tr>
                 </thead>
                 <tbody className="reserved_list_tbody">

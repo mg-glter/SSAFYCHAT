@@ -1,16 +1,5 @@
 import "../../styles/components/common/card-list.css";
-
-// function test(event : any){
-
-//     const con = event.target.parentElement;
-//     const card = event.target;
-    
-
-//     con.addEventListener("dragleave",(e:Event)=>{
-//         e.preventDefault();
-//         console.log(123);
-//     })
-// }
+import ReservationCard from "../../widget/ReservationCard";
 
 function test(e : any){
     // 요소 가져오기
@@ -128,10 +117,11 @@ function CardList(props : any){
             {/* 카드리스트 */}
             <div className="card_container">
                 {/* 카드 */}
-                <Card></Card>
+                {/* <Card></Card>
                 <Card></Card>                
                 <Card></Card>                
-                <Card></Card>                
+                <Card></Card>                 */}
+                <ReservationCard></ReservationCard>
             </div>
                     {/* 우측 화살표 */}
         <div className="card_list_arrow">
