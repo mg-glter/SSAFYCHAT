@@ -1,7 +1,6 @@
 import Header from "../layout/Header"
 import Footer from "../layout/Footer"
 import MainContainer from "../container/MainContainer"
-import Banner from "../components/common/Banner"
 
 function MainPage (){
     return (
