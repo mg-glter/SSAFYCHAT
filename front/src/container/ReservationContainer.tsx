@@ -1,5 +1,6 @@
 import CardList from "../components/common/CardList";
-import ReservedList from "../components/common/ReservedList";
+import ReservedCardList from "../components/common/ReservedCardList";
+import ReservedList from "../components/reservation/ReservedList";
 import "../styles/container/reservation-container.css"
 
 function ReservationContainer(){
@@ -7,8 +8,9 @@ function ReservationContainer(){
         <div className="reservation_page_container">
             <div className="reservation_page_inner_container">
                 <CardList></CardList>
-                <ReservedList></ReservedList>
+                <ReservedCardList></ReservedCardList>
                 <CardList></CardList>
+                <ReservedList></ReservedList>
             </div>
         </div>
     )

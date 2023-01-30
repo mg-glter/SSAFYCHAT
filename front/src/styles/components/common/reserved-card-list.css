@@ -1,7 +1,7 @@
 
 
 /* 카드 리스트 요소 전체를 감싸는 컨테이너 */
-.reserved_list_container{
+.reserved_card_list_container{
     width: 1600px;
     height: 620px;
     display: flex;
@@ -13,7 +13,7 @@
 }
 
 /* 카드리스트를 감싸는 컨테이너 */
-.reserved_list_inner_container{
+.reserved_card_list_inner_container{
     /* box-sizing: border-box; */
     margin:0px;
     width: 1600px;
@@ -26,7 +26,7 @@
 }
 
 /* 제목이 들어가는 헤더 */
-.reserved_list_header{
+.reserved_card_list_header{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -50,7 +50,7 @@
 }
 
 /* 좌 우 화살표를 담는 컨테이너 */
-.reserved_list_arrow{
+.reserved_card_list_arrow{
     width: 80px;
     height: 560px;
     display: flex;
@@ -59,7 +59,7 @@
 
     align-items: center;
 }
-.reserved_list_arrow:hover{
+.reserved_card_list_arrow:hover{
     cursor: pointer;
 }
 /* 화살표를 담는 버튼 card_list쪽 css를 건드릴 것 */
