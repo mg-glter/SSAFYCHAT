@@ -1,9 +1,9 @@
 package com.ssafychat.domain.mentoring.model;
 
-import com.ssafychat.global.util.DateToStringConverter;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Getter
 @ToString
@@ -15,9 +15,9 @@ import javax.persistence.*;
 public class MentoringDate {
 
     @Id
-    @Convert(converter= DateToStringConverter.class)
+//    @Convert(converter= DateToStringConverter.class)
     @Column(nullable = false)
-    private String time;
+    private Date time;
 
     @Id
     @ManyToOne

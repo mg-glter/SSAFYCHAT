@@ -34,11 +34,11 @@ public class MentoringController {
         return new ResponseEntity<String>("main-info", HttpStatus.OK);
     }
     @GetMapping("/job/{job}")
-    public ResponseEntity<?> jobSeach(@PathVariable("job") String job) {
+    public ResponseEntity<?> jobSearch(@PathVariable("job") String job) {
         return new ResponseEntity<String>("job:"+job, HttpStatus.OK);
     }
     @PostMapping("/apply")
-    public ResponseEntity<?> applayMentoring() {
+    public ResponseEntity<?> applyMentoring() {
         return new ResponseEntity<String>("apply", HttpStatus.OK);
     }
     @GetMapping("/reservation")
@@ -62,7 +62,7 @@ public class MentoringController {
         return new ResponseEntity<String>("appointment", HttpStatus.OK);
     }
     @GetMapping("/review")
-    public ResponseEntity<?> reviewRollingpaper() {
+    public ResponseEntity<?> reviewRollingPaper() {
         return new ResponseEntity<String>("review", HttpStatus.OK);
     }
 
