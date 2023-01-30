@@ -1,10 +1,14 @@
-import "../../styles/components/common/login.css";
+import "../../styles/components/common/sign_in_up.css";
 import TextBox from "../../widget/InputTextBox";
+import {Link} from 'react-router-dom';
 
 function Login(props: any){
     const imgUrlGithub = "/img/Github.png"
     const imgUrlGoogle = "/img/Google.png"
     const imgUrlkakao = "/img/kakao.png"
+    const footer_text = {
+        key: process.env.REACT_APP_FOOTER,
+    }
     return(
         <div className="login_join_container">
             <div className="login_join_logo_name draggable">SSAFY CHAT</div>
@@ -27,7 +31,7 @@ function Login(props: any){
                         <input className="submit_btn_upper draggable" type="submit" value="Sign In" />
                         <hr className="hr_tag" />
                         {/* 회원가입 버튼 */}
-                        <button className="submit_btn_lower draggable" type="submit">Sing Up</button>
+                        <Link to="/index"><button className="submit_btn_lower draggable" type="submit">Sing Up</button></Link>
                     </form>
                 </div>
             </div>
@@ -42,7 +46,7 @@ function Login(props: any){
                     <img src={imgUrlGoogle} alt="Google" />
                 </div>
                 <div className="login_footer">
-                    <p className="footer_text draggable">ⓣTeam BlueBerryPie. All rights reserved.</p>
+                    <p className="footer_text draggable">{footer_text.key}</p>
                 </div>
             </div>
         </div>
