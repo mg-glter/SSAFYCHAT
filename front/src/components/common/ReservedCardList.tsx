@@ -1,4 +1,4 @@
-import "../../styles/components/common/reserved-list.css";
+import "../../styles/components/common/reserved-card-list.css";
 
 
 function ReservedCard(props : any){
@@ -34,21 +34,21 @@ function ReservedCard(props : any){
     )
 }
 
-function ReservedList(props : any){
+function ReservedCardList(props : any){
     return (
     // 카드리스트 전체를 감싸는 컨테이너
-    <div className="reserved_list_container">
+    <div className="reserved_card_list_container">
         {/* 헤더 */}
-        <div className="reserved_list_header">
+        <div className="reserved_card_list_header">
                 <div className="header_text">
                     멘토링 목록
                 </div>
            </div>
        
         {/* 카드리스트와 헤더를 감싸는 컨테이너 */}
-        <div className="reserved_list_inner_container">
+        <div className="reserved_card_list_inner_container">
         {/* 좌 화살표 */}
-        <div className="reserved_list_arrow">
+        <div className="reserved_card_list_arrow">
             <div className="arrow_button">
                 <div className="arrow">&lt;</div>
             </div>
@@ -58,11 +58,13 @@ function ReservedList(props : any){
             <div className="reserved_card_container">
                 <ReservedCard></ReservedCard>
                 <ReservedCard></ReservedCard>                
+                <ReservedCard></ReservedCard>                
+                <ReservedCard></ReservedCard>                
             </div>
 
             
         {/* 우측 화살표 */}
-        <div className="reserved_list_arrow">
+        <div className="reserved_card_list_arrow">
             <div className="arrow_button">
                 <div className="arrow">
                     &gt;
@@ -78,4 +80,4 @@ function ReservedList(props : any){
     )
 }
 
-export default ReservedList;
+export default ReservedCardList;
