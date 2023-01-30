@@ -1,8 +1,8 @@
 import CardList from "../components/common/CardList";
 import ReservedList from "../components/common/ReservedList";
-import "../styles/pages/reservation-page.css"
+import "../styles/container/reservation-container.css"
 
-function ReservationPage(){
+function ReservationContainer(){
     return (
         <div className="reservation_page_container">
             <div className="reservation_page_inner_container">
@@ -14,4 +14,4 @@ function ReservationPage(){
     )
 }
 
-export default ReservationPage;
+export default ReservationContainer;
