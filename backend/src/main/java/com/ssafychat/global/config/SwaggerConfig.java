@@ -15,7 +15,7 @@ public class SwaggerConfig {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2).select()
-                .apis(RequestHandlerSelectors.basePackage("com.ssafychat.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.ssafychat.domain"))
                 .paths(PathSelectors.ant("/**")).build().apiInfo(apiInfo());
     }
 
