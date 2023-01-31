@@ -69,28 +69,28 @@ function test(e : any){
     }
 }
 
-function Card(props : any){
-    return(
-        <div className="card_outer">
-            <div className="card" onMouseDown={(event)=>{
-                test(event);                
-            }}>
-                <div className="card_mentor_name">
-                    멘토 이름
-                </div>
-                <div className="card_mentor_info">
-                    회사
-                </div>
-                <div className="card_mentor_info">
-                    직무
-                </div>
-                <div className="card_time">
-                    날짜, 시간
-                </div>
-          </div>
-        </div>
-    )
-}
+// function Card(props : any){
+//     return(
+//         <div className="card_outer">
+//             <div className="card" onMouseDown={(event)=>{
+//                 test(event);                
+//             }}>
+//                 <div className="card_mentor_name">
+//                     멘토 이름
+//                 </div>
+//                 <div className="card_mentor_info">
+//                     회사
+//                 </div>
+//                 <div className="card_mentor_info">
+//                     직무
+//                 </div>
+//                 <div className="card_time">
+//                     날짜, 시간
+//                 </div>
+//           </div>
+//         </div>
+//     )
+// }
 
 function CardList(props : any){
     return (
@@ -119,7 +119,7 @@ function CardList(props : any){
                 {/* <Card></Card>
                 <Card></Card>                
                 <Card></Card>                
-                <Card></Card>                 */}
+                <Card></Card>*/}
                 <ReservationCard></ReservationCard>
             </div>
                     {/* 우측 화살표 */}

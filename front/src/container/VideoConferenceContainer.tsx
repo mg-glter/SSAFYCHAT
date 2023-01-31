@@ -11,7 +11,7 @@ function VideoConferenceContainer(props : any){
             <div className="vcTmp">
                 <form>
                     <input placeholder="nickName"></input><br></br>
-                    <input placeholder="rommCode"></input><br></br>
+                    <input placeholder="roomCode"></input><br></br>
                     <button>입력</button>
                 </form>
             </div>
@@ -35,8 +35,23 @@ function VideoConferenceContainer(props : any){
 
                     </div>
                 </div>
-                <div>
 
+                {/* 각종 버튼을 담는 컨테이너 */}
+                <div className="video_conference_footer">
+                    <div className="video_conference_button_container">
+                        <div className="video_conference_button">
+                            <img src="img/video-control.png" alt="recording"></img>
+                        </div>
+                        <div className="video_conference_button">
+                        <img src="img/voice-control.png" alt="recording"></img>
+                        </div>
+                        <div className="video_conference_button">
+                        <img src="img/screen-sharing.png" alt="recording"></img>
+                        </div>
+                        <div className="video_conference_button">
+                        <img src="img/exit-button.png" alt="recording"></img>
+                        </div>
+                    </div>
                 </div>
             </div>
 
