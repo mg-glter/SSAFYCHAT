@@ -1,6 +1,7 @@
 package com.ssafychat.domain.member.controller;
 
 
+import com.ssafychat.domain.member.service.MemberServiceImpl;
 import com.ssafychat.global.jwt.JwtServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,9 @@ import java.util.Map;
 public class MemberController {
     @Autowired
     private JwtServiceImpl jwtService;
+
+    @Autowired
+    private MemberServiceImpl memberService;
 
     @GetMapping("/")
     public ResponseEntity<?> aliveCheck() {
@@ -51,4 +55,5 @@ public class MemberController {
     public ResponseEntity<?> socialLogin(@PathVariable("social") String social) {
         return new ResponseEntity<String>("social:"+social, HttpStatus.OK);
     }
+
 }

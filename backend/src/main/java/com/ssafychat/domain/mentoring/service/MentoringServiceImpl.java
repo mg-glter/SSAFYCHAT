@@ -1,6 +1,7 @@
 package com.ssafychat.domain.mentoring.service;
 
 import com.ssafychat.domain.member.dao.MemberRepository;
+import com.ssafychat.domain.member.dto.PossibleMentoringDto;
 import com.ssafychat.domain.member.model.Member;
 import com.ssafychat.domain.mentoring.dao.ApplyMentoringRepository;
 import com.ssafychat.domain.mentoring.dao.MentoringDao;
@@ -21,10 +22,10 @@ public class MentoringServiceImpl implements MentoringService {
     private MentoringDao mentoringDao;
 
     @Autowired
-    private ApplyMentoringRepository applyMentoringRepository;
+    private MemberRepository memberRepository;
 
     @Autowired
-    private MemberRepository memberRepository;
+    private ApplyMentoringRepository applyMentoringRepository;
 
     @Override
     public List<Mentoring> findMentoring(){
@@ -48,6 +49,10 @@ public class MentoringServiceImpl implements MentoringService {
     public void applyMentoring(ApplyMentoring applyMentoring) {
         this.applyMentoringRepository.save(applyMentoring);
 
+    }
+
+    public List<PossibleMentoringDto> getPossibleMentoringList(String job, String belong) {
+        return memberRepository.findDistinctByJobAndBelong(job, belong);
     }
 
 }

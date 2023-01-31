@@ -1,10 +1,9 @@
 package com.ssafychat.domain.mentoring.controller;
 
-import com.ssafychat.domain.mentoring.dao.ApplyMentoringRepository;
+import com.ssafychat.domain.member.dto.PossibleMentoringDto;
 import com.ssafychat.domain.mentoring.dto.ApplyMentoringDto;
 import com.ssafychat.domain.mentoring.model.ApplyMentoring;
 import com.ssafychat.domain.mentoring.model.Mentoring;
-import com.ssafychat.domain.mentoring.service.MentoringService;
 import com.ssafychat.domain.mentoring.service.MentoringServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,9 +37,10 @@ public class MentoringController {
     public ResponseEntity<?> mainInfo() {
         return new ResponseEntity<String>("main-info", HttpStatus.OK);
     }
-    @GetMapping("/job/{job}")
-    public ResponseEntity<?> jobSearch(@PathVariable("job") String job) {
-        return new ResponseEntity<String>("job:"+job, HttpStatus.OK);
+    @GetMapping("/search")
+    public ResponseEntity<?> SearchPossibleMentoring(@RequestParam(defaultValue = "") String job, @RequestParam(defaultValue = "") String belong) {
+        List<PossibleMentoringDto> possibleMentorings = mentoringService.getPossibleMentoringList(job, belong);
+        return new ResponseEntity<>(possibleMentorings, HttpStatus.OK);
     }
     @PostMapping("/apply")
     public ResponseEntity<String> applyMentoring(ApplyMentoringDto applyMentoringDto, HttpServletRequest request) {
