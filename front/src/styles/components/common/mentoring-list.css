@@ -1,0 +1,7 @@
+.mentoring_list_component{
+    position: relative;
+    display: grid;
+    width: 500px;
+    height: 500px;
+    margin-left: 100px;
+}

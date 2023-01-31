@@ -1,7 +1,7 @@
 .card_banner{
     position: relative;
     width: 1000px;
-    left: calc(50% - 1000px/2 - 36px);
+    left: calc(50% - 1000px/2);
     height: 650px;
     background: url("../../../assets/cardBanner.png");
     border-radius: 70px;
