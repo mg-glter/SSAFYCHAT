@@ -1,12 +1,17 @@
 package com.ssafychat.domain.mentoring.controller;
 
+import com.ssafychat.domain.mentoring.dao.ApplyMentoringRepository;
+import com.ssafychat.domain.mentoring.dto.ApplyMentoringDto;
+import com.ssafychat.domain.mentoring.model.ApplyMentoring;
 import com.ssafychat.domain.mentoring.model.Mentoring;
+import com.ssafychat.domain.mentoring.service.MentoringService;
 import com.ssafychat.domain.mentoring.service.MentoringServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -38,8 +43,14 @@ public class MentoringController {
         return new ResponseEntity<String>("job:"+job, HttpStatus.OK);
     }
     @PostMapping("/apply")
-    public ResponseEntity<?> applyMentoring() {
-        return new ResponseEntity<String>("apply", HttpStatus.OK);
+    public ResponseEntity<String> applyMentoring(ApplyMentoringDto applyMentoringDto, HttpServletRequest request) {
+
+        ApplyMentoring applyMentoring = mentoringService.toEntity(applyMentoringDto);
+
+        //applyMentoringRepository
+        mentoringService.applyMentoring(applyMentoring);
+        return new ResponseEntity<String>("apply", HttpStatus.CREATED);
+
     }
     @GetMapping("/reservation")
     public ResponseEntity<?> reservationMentoring() {

@@ -1,6 +1,7 @@
 package com.ssafychat.domain.member.model;
 
 import lombok.*;
+import org.springframework.beans.factory.annotation.Required;
 
 import javax.persistence.*;
 
@@ -44,5 +45,6 @@ public class Member {
 
     @Column(columnDefinition = "VARCHAR(10)", nullable = false)
     private String name;
+
 
 }

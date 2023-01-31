@@ -18,7 +18,7 @@ public class ApplyMentoring {
     private int applyMentoringId;
 
     @ManyToOne
-    @JoinColumn(name = "mentee_id", nullable = false)
+    @JoinColumn(name = "mentee_uid", nullable = false)
     private Member mentee;
 
     @Column(columnDefinition = "VARCHAR(20)", nullable = false)
