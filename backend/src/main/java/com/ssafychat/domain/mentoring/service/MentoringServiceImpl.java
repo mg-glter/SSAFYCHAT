@@ -1,10 +1,10 @@
 package com.ssafychat.domain.mentoring.service;
 
-import com.ssafychat.domain.member.dao.MemberRepository;
+import com.ssafychat.domain.member.repository.MemberRepository;
 import com.ssafychat.domain.member.dto.PossibleMentoringDto;
 import com.ssafychat.domain.member.model.Member;
-import com.ssafychat.domain.mentoring.dao.ApplyMentoringRepository;
-import com.ssafychat.domain.mentoring.dao.MentoringDao;
+import com.ssafychat.domain.mentoring.repository.ApplyMentoringRepository;
+import com.ssafychat.domain.mentoring.repository.MentoringRepository;
 import com.ssafychat.domain.mentoring.dto.ApplyMentoringDto;
 import com.ssafychat.domain.mentoring.model.ApplyMentoring;
 import com.ssafychat.domain.mentoring.model.Mentoring;
@@ -19,7 +19,7 @@ import java.util.Optional;
 public class MentoringServiceImpl implements MentoringService {
 
     @Autowired
-    private MentoringDao mentoringDao;
+    private MentoringRepository mentoringRepository;
 
     @Autowired
     private MemberRepository memberRepository;
@@ -29,7 +29,7 @@ public class MentoringServiceImpl implements MentoringService {
 
     @Override
     public List<Mentoring> findMentoring(){
-        return mentoringDao.findAll();
+        return mentoringRepository.findAll();
     }
 
     @Transactional

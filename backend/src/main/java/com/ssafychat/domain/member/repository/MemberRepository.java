@@ -1,4 +1,4 @@
-package com.ssafychat.domain.member.dao;
+package com.ssafychat.domain.member.repository;
 
 import com.ssafychat.domain.member.dto.PossibleMentoringDto;
 import com.ssafychat.domain.member.model.Member;
