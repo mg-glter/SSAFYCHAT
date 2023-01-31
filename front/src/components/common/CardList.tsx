@@ -73,8 +73,7 @@ function Card(props : any){
     return(
         <div className="card_outer">
             <div className="card" onMouseDown={(event)=>{
-                test(event);
-                
+                test(event);                
             }}>
                 <div className="card_mentor_name">
                     멘토 이름
@@ -97,8 +96,8 @@ function CardList(props : any){
     return (
     // 카드리스트 전체를 감싸는 컨테이너
     <div className="card_list_container">
-                    {/* 헤더 */}
-                    <div className="card_list_header">
+            {/* 헤더 */}
+            <div className="card_list_header">
                 <div className="header_text">
                     무엇의 목록
                 </div>
