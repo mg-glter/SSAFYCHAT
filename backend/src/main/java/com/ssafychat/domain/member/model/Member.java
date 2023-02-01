@@ -1,9 +1,13 @@
 package com.ssafychat.domain.member.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Getter
 @ToString
@@ -11,7 +15,7 @@ import javax.persistence.*;
 @RequiredArgsConstructor
 @Builder
 @Entity
-public class Member {
+public class Member implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +35,7 @@ public class Member {
     @Column(columnDefinition = "VARCHAR(50)", nullable = false)
     private String email;
 
+    //나중에 JsonProperty 어노테이션 추가
     @Column(columnDefinition = "VARCHAR(100)", nullable = false)
     private String password;
 
@@ -50,4 +55,41 @@ public class Member {
         this.refreshToken = refreshToken;
     }
 
+
+
+    //시큐리티 관련 
+
+    @Override //해당유저의 권한정보 출력
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override // 시큐리티에서 구분하는 사용자 id
+    public String getUsername() {
+        return Integer.toString(this.userId);
+    }
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Override //계정 만료되었는지 체크
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Override //계정이 잠겼는지 체크
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Override //계정 패스워드 만료 체크
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Override //계정이 사용가능한지 체크
+    public boolean isEnabled() {
+        return false;
+    }
 }
