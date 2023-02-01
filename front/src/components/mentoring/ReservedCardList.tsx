@@ -1,7 +1,8 @@
-import CardList from "../components/common/CardList";
-import ReservedCardList from "../components/mentoring/ReservedCardList";
-import ReservedList from "../components/mentoring/ReservedList";
-import "../styles/container/reservation-container.css"
+import "../../styles/components/mentoring/reserved-card-list.css";
+import ReservedCard from "../../widget/ReservedCard";
+import ArrowButton from "../../widget/ArrowButton";
+
+
 
 function dragCard(event : any){
     // 요소 가져오기
@@ -10,12 +11,17 @@ function dragCard(event : any){
     // elem.ondragstart = function(){
     //     return false;
     // }
+    
+    if(elem.className === "reserved_card_button"){
+        console.log(123);
+        return;
+    }
 
     // 드래그
     let onDrag = true;
 
     // 요소가 카드를 가리키게 하기
-    while(elem.className !== "reservation_card"){
+    while(elem.className !== "reserved_card"){
         elem = elem.parentElement;        
     }
     // 카드 아우터 요소를 가져오기
@@ -56,10 +62,10 @@ function dragCard(event : any){
 
     container.onmouseleave = function(){
         if(onDrag){
-            alert("삭제합니다");
             // **********************
             // 이 곳에 기능을 넣어야 함
             // **********************
+            alert("삭제합니다");
             onDrag = false;
         }
     }
@@ -78,18 +84,45 @@ function dragCard(event : any){
     }
 }
 
-function ReservationContainer(){
-    const cardList = [["김도원","네이버","백엔드 개발자","2023-01-01"],["김겨울","SMENT","가수","2023-01-01"]];
+function enterMeeting(event : any){
+    alert('입장합니다.');
+}
+
+function ReservedCardList(props : any){
     return (
-        <div className="reservation_page_container">
-            <div className="reservation_page_inner_container">
-                <CardList drag={dragCard} header={"신청 목록"} cardList = {cardList}></CardList>
-                <ReservedCardList></ReservedCardList>
-                <CardList drag={()=>{return;}} header={"취소 목록"}></CardList>
-                <ReservedList></ReservedList>
-            </div>
+    // 카드리스트 전체를 감싸는 컨테이너
+    <div className="reserved_card_list_container">
+        {/* 헤더 */}
+        <div className="reserved_card_list_header">
+                <div className="header_text">
+                    멘토링 목록
+                </div>
+           </div>
+       
+        {/* 카드리스트와 헤더를 감싸는 컨테이너 */}
+        <div className="reserved_card_list_inner_container">
+        {/* 좌 화살표 */}
+        <div className="reserved_card_list_arrow">
+            <ArrowButton text={"<"}></ArrowButton>
         </div>
+        
+            {/* 카드리스트 */}
+            <div className="reserved_card_container">
+                <ReservedCard drag={dragCard} button={enterMeeting}></ReservedCard>
+            </div>
+
+            
+        {/* 우측 화살표 */}
+        <div className="reserved_card_list_arrow">
+            <ArrowButton text={">"}></ArrowButton>
+        </div>
+
+        </div>
+
+
+        
+    </div>
     )
 }
 
-export default ReservationContainer;
+export default ReservedCardList;

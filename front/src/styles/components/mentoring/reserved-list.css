@@ -33,19 +33,19 @@
 .reserved_list_tbody{
     
 }
-
-.reserved_list_tr{
+.reserved_list_tr_head{
     text-align: center;
     border: dotted 1px #dadada;
     border-top: none;
     border-radius: 15px;
-}
-
-.reserved_list_tr_head{
     height: 45px;
     background: #f8f8f8;
 }
 .reserved_list_tr_body{
+    text-align: center;
+    border: dotted 1px #dadada;
+    border-top: none;
+    border-radius: 15px;
     height: 65px;
 }
 .reserved_list_tr_body:hover{
