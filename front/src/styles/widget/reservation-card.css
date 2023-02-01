@@ -7,7 +7,7 @@
     justify-content: center;
 }
 /* 카드 본체 */
-.card{
+.reservation_card{
     width: 340px;
     height: 220px;
     margin: 10px;
@@ -38,7 +38,7 @@
 }
 
 
-.card:hover{
+.reservation_card:hover{
     box-shadow: 0px 0px 0px #FFFFFF;
     background: #a6a6a6;
     cursor: pointer;
