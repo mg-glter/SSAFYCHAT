@@ -4,10 +4,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @ToString
@@ -57,11 +61,14 @@ public class Member implements UserDetails {
 
 
 
-    //시큐리티 관련 
+    //시큐리티 관련
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Builder.Default
+    private List<String> roles = new ArrayList<>();
 
     @Override //해당유저의 권한정보 출력
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return this.roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 
     @Override // 시큐리티에서 구분하는 사용자 id
@@ -78,18 +85,18 @@ public class Member implements UserDetails {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Override //계정이 잠겼는지 체크
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Override //계정 패스워드 만료 체크
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Override //계정이 사용가능한지 체크
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }

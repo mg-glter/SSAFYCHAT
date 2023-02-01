@@ -1,4 +1,4 @@
 package com.ssafychat.domain.member.exception;
 
-public class MemberException {
+public class MemberException extends Exception{
 }

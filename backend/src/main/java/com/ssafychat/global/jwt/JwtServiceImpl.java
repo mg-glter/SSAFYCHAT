@@ -1,9 +1,17 @@
 package com.ssafychat.global.jwt;
 
+import com.ssafychat.domain.member.service.MemberDetailsImpl;
+import com.ssafychat.domain.member.service.MemberService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -15,9 +23,14 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-@Service
+@RequiredArgsConstructor
+@Component
 public class JwtServiceImpl implements JwtService {
-    public static final Logger logger = LoggerFactory.getLogger(JwtServiceImpl.class);
+
+    @Autowired
+    private MemberDetailsImpl memberDetails;
+
+    private static final Logger logger = LoggerFactory.getLogger(JwtServiceImpl.class);
 
     @Value("${jwt-token}")
     private String JWT_TOKEN;
@@ -69,11 +82,11 @@ public class JwtServiceImpl implements JwtService {
     }
 
     @Override
-    public boolean checkToken(String jwt) {
+    public boolean validateToken(String jwt) {
         try {
             Jws<Claims> claims = Jwts.parser().setSigningKey(this.generateKey()).parseClaimsJws(jwt);
             logger.debug("토큰체크하기 : {}", claims);
-            return true;
+            return !claims.getBody().getExpiration().before(new Date());
         } catch (Exception e) {
             logger.error(e.getMessage());
             return false;
@@ -81,19 +94,20 @@ public class JwtServiceImpl implements JwtService {
     }
 
     @Override
-    public Map<String, Object> get(String key) {
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
-                .getRequest();
-        String jwt = request.getHeader("access-token");
-        Jws<Claims> claims = null;
-        try {
-            claims = Jwts.parser().setSigningKey(JWT_TOKEN.getBytes("UTF-8")).parseClaimsJws(jwt);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-        }
-        Map<String, Object> value = claims.getBody();
-        logger.info("값 확인 : {}", value);
+    public <T> Authentication getAuthentication(String token) {
+        String user_id = String.valueOf(this.getData(token).get("user_id"));
+        UserDetails userDetails = memberDetails.loadUserByUsername(user_id);
+        return new UsernamePasswordAuthenticationToken(userDetails, "",
+                userDetails.getAuthorities());
+    }
+
+    @Override
+    public Map<String, Object> getData(String token) {
+        Map<String, Object> value = Jwts.parser().setSigningKey(this.generateKey()).parseClaimsJws(token).getBody();
         return value;
     }
 
+    public String resolveToken(HttpServletRequest request) {
+        return request.getHeader("authorization");
+    }
 }

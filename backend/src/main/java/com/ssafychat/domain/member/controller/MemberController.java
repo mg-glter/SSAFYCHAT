@@ -10,6 +10,7 @@ import com.ssafychat.global.jwt.JwtServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -34,29 +35,10 @@ public class MemberController {
         return new ResponseEntity<String>("mentoring-infos", HttpStatus.OK);
     }
 
-    @PostMapping("/regist")
-    public ResponseEntity<?> registUser(MemberDto member_info) {
-        boolean success = memberService.registUser(member_info);
-        if(success){
-            return new ResponseEntity<>(success, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(success, HttpStatus.BAD_REQUEST);
-    }
+
     @GetMapping("/registinfo")//생각해볼 것 소셜로그인 매커니즘에 따르면 rest api가 필요한가?
     public ResponseEntity<?> socialRegist() {
         return new ResponseEntity<String>("registinfo", HttpStatus.OK);
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<?> nomalLogin(MemberDto member_info) {
-        //사용자가 전달한 email, password와 일치하는 사용자 찾기
-        Member member = memberService.getUser(member_info);
-        if(member != null){//존재한다면 토큰생성
-            String access_token = memberService.createToken(member);
-            return new ResponseEntity<>(member, HttpStatus.OK);
-        }
-
-        return new ResponseEntity<>("fail",HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @GetMapping("/user-info")
