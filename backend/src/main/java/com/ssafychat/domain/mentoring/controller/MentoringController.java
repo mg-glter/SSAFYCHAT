@@ -1,19 +1,18 @@
 package com.ssafychat.domain.mentoring.controller;
 
 import com.ssafychat.domain.member.dto.PossibleMentoringDto;
-import com.ssafychat.domain.mentoring.dto.ApplyMentoringDto;
-import com.ssafychat.domain.mentoring.dto.ApplyMentoringForMentorDto;
-import com.ssafychat.domain.mentoring.dto.MatchMentoringForMentorDto;
-import com.ssafychat.domain.mentoring.dto.MentoringListForMentorDto;
+import com.ssafychat.domain.mentoring.dto.*;
 import com.ssafychat.domain.mentoring.model.ApplyMentoring;
 import com.ssafychat.domain.mentoring.model.Mentoring;
-import com.ssafychat.domain.mentoring.service.MentoringServiceImpl;
+import com.ssafychat.domain.mentoring.service.MentoringService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +21,7 @@ import java.util.Map;
 @CrossOrigin("*")
 public class MentoringController {
     @Autowired
-    private MentoringServiceImpl mentoringService;
+    private MentoringService mentoringService;
 
     @GetMapping("/")
     public ResponseEntity<?> aliveCheck() {
@@ -93,9 +92,24 @@ public class MentoringController {
         MentoringListForMentorDto list = MentoringListForMentorDto.builder().applys(applyList).matches(matchList).build();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
-    @PostMapping("/appointment")
-    public ResponseEntity<?> appointmentAccept() {
-        return new ResponseEntity<String>("appointment", HttpStatus.OK);
+    @PostMapping("/appointment") // apply_mentoring_id에 해당하는 멘토링 요청을 수락처리
+    @Transactional
+    public ResponseEntity<?> appointmentAccept(@RequestHeader Map<String, String> data, @RequestBody MentoringDateDto mentoringDateDto) {
+        // 프론트 헤더로 userId 받아온다.
+        int userId = 1; // 임시
+        // 프론트 body로 apply_mentoring_id 와 time 정보 받아온다. MentoringDateDto에 둘다 있음
+        int applyMentoringId = mentoringDateDto.getApplyMentoringId();
+        Timestamp time = mentoringDateDto.getTime();
+        // mentoring_date 테이블에서 삭제한다.
+        int rowsDeleted = mentoringService.deleteMentoringDate(applyMentoringId);
+        System.out.println(rowsDeleted);
+        // apply_mentoring 테이블에서 삭제하면서 apply_mentoring정보 반환 받는다.
+        ApplyMentoring applyMentoring = mentoringService.deleteApplyMentoring(applyMentoringId);
+        System.out.println(applyMentoring);
+        // mentoring 테이블에 넣는다.
+        Mentoring mentoring = mentoringService.insertMentoring(userId, applyMentoring, time);
+
+        return new ResponseEntity<>(mentoring, HttpStatus.OK);
     }
     @GetMapping("/review")
     public ResponseEntity<?> reviewRollingPaper() {

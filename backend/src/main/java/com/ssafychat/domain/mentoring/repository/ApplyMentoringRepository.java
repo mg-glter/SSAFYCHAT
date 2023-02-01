@@ -9,5 +9,7 @@ import java.util.List;
 public interface ApplyMentoringRepository extends JpaRepository<ApplyMentoring, Long> {
 
     List<ApplyMentoring> findByJobAndCompany(String job, String belong);
+    ApplyMentoring findByApplyMentoringId(int applyMentoringId);
+    int deleteApplyMentoringByApplyMentoringId(int applyMentoringId);
 
 }

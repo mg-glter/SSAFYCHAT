@@ -3,14 +3,11 @@ package com.ssafychat.domain.mentoring.service;
 import com.ssafychat.domain.member.repository.MemberRepository;
 import com.ssafychat.domain.member.dto.PossibleMentoringDto;
 import com.ssafychat.domain.member.model.Member;
-import com.ssafychat.domain.mentoring.dto.ApplyMentoringForMentorDto;
-import com.ssafychat.domain.mentoring.dto.MatchMentoringForMentorDto;
-import com.ssafychat.domain.mentoring.dto.MentoringDateDto;
+import com.ssafychat.domain.mentoring.dto.*;
 import com.ssafychat.domain.mentoring.model.MentoringDate;
 import com.ssafychat.domain.mentoring.repository.ApplyMentoringRepository;
 import com.ssafychat.domain.mentoring.repository.MentoringDateRepository;
 import com.ssafychat.domain.mentoring.repository.MentoringRepository;
-import com.ssafychat.domain.mentoring.dto.ApplyMentoringDto;
 import com.ssafychat.domain.mentoring.model.ApplyMentoring;
 import com.ssafychat.domain.mentoring.model.Mentoring;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +38,7 @@ public class MentoringServiceImpl implements MentoringService {
     public List<Mentoring> findMentoring(){
         return mentoringRepository.findAll();
     }
+
 
     @Transactional
     public ApplyMentoring toEntity(ApplyMentoringDto applyMentoringDto){
@@ -89,7 +87,6 @@ public class MentoringServiceImpl implements MentoringService {
 //            MentoringDate mentoringDate = this.toEntity(mentoringDateDto);
             System.out.println("mentoringDateDto => mentoringDate");
 //            System.out.println(new Date());
-            System.out.println(new Timestamp(0,0,0,0,0,0,0));
 //            System.out.println(mentoringDate);
 //            System.out.println(mentoringDate.getApplyMentoring());
 
@@ -142,6 +139,35 @@ public class MentoringServiceImpl implements MentoringService {
             );
         }
         return matchList;
+    }
+
+    @Override
+    public int deleteMentoringDate(int applyMentoringId) {
+        return mentoringDateRepository.deleteMentoringDatesByApplyMentoring_ApplyMentoringId(applyMentoringId);
+    }
+
+    @Override
+    public ApplyMentoring deleteApplyMentoring(int applyMentoringId) {
+        ApplyMentoring applyMentoring = applyMentoringRepository.findByApplyMentoringId(applyMentoringId);
+        applyMentoringRepository.deleteApplyMentoringByApplyMentoringId(applyMentoringId);
+        return applyMentoring;
+    }
+
+    @Override
+    public Mentoring insertMentoring(int userId, ApplyMentoring applyMentoring, Timestamp time) {
+        // userId는 mentor_uid가 된다.
+        // applyMentoring에서 job, company, mentee_uid를 가져온다.
+        // time을 넣는다.
+        Mentoring mentoring = Mentoring.builder()
+                .mentor(memberRepository.findByUserId(userId))
+                .mentee(applyMentoring.getMentee())
+                .job(applyMentoring.getJob())
+                .company(applyMentoring.getCompany())
+                .time(time)
+                .build();
+        // insert!
+        mentoringRepository.save(mentoring);
+        return mentoring;
     }
 
 }

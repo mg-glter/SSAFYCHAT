@@ -10,5 +10,5 @@ import java.util.List;
 public interface MentoringDateRepository extends JpaRepository<MentoringDate, Integer> {
 
     List<MentoringDate> findByApplyMentoring_ApplyMentoringId(int applyMentoringId);
-//    List<MentoringDateDto> findByApplyMentoringI
+    int deleteMentoringDatesByApplyMentoring_ApplyMentoringId(int applyMentoringId);
 }
