@@ -1,10 +1,10 @@
-.calendar_component{
-    position: relative;
-    display: grid;
-    width: 600px;
-    height: 600px;
-    background-color: #A6A6A6;
-    border-radius: 50px;
+.calendar_component {
+  position: relative;
+  display: grid;
+  width: 600px;
+  height: 600px;
+  background-color: #a6a6a6;
+  border-radius: 50px;
 
-    text-align: center;
+  text-align: center;
 }

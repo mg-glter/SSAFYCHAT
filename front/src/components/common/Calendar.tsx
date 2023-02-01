@@ -1,11 +1,7 @@
-import '../../styles/components/common/calendar.css'
+import "../../styles/components/common/calendar.css";
 
-function Calendar (){
-    return (
-        <div className='calendar_component'>
-            달력
-        </div>
-    )
+function Calendar() {
+  return <div className="calendar_component">달력</div>;
 }
 
-export default Calendar
+export default Calendar;
