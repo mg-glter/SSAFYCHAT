@@ -46,5 +46,8 @@ public class Member {
     @Column(columnDefinition = "VARCHAR(10)", nullable = false)
     private String name;
 
+    public void changeRefreshToken(String refreshToken){
+        this.refreshToken = refreshToken;
+    }
 
 }
