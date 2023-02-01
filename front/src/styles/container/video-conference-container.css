@@ -74,15 +74,50 @@
 .video_conference_footer{
     display: flex;
     justify-content: center;
+    color: #ffffff;
+    line-height: 40px;
 }
 
 .video_conference_button_container{
-    width: 500px;
+    width: 400px;
     height: 40px;
     display: flex;
     justify-content: space-around;
 }
 
-.video_conference_button{
-        
+.video_conference_button{    
+    width: 120px;
+    height: 40px;
+    border: solid 1px #a6a6a6;
+    border-radius: 40px;
+
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+.video_conference_button:hover{
+    background: #363636;
+}
+
+.video_conference_button > img{
+    margin: auto;
+}
+
+.video_conference_cancel{
+    background: #DB1F2E;
+    width: 40px;
+    height: 40px;
+    border: solid 1px #a6a6a6;
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.video_conference_cancel:hover{
+    background: #db1f2fbc;
+}
+
+.video_conference_cancel > img{
+    margin: auto;
 }

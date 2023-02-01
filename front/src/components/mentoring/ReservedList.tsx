@@ -1,25 +1,28 @@
-import CardList from "../components/common/CardList";
-import ReservedCardList from "../components/mentoring/ReservedCardList";
-import ReservedList from "../components/mentoring/ReservedList";
-import "../styles/container/reservation-container.css"
+import "../../styles/components/mentoring/reserved-list.css"
 
-function dragCard(event : any){
+function dragItem(event : any){
     // 요소 가져오기
     let elem = event.target;
     // 기존의 드래그를 없애기
     // elem.ondragstart = function(){
     //     return false;
     // }
+    
+    if(elem.className === "reserved_list_enter_button"){
+        return;
+    }
 
     // 드래그
     let onDrag = true;
 
     // 요소가 카드를 가리키게 하기
-    while(elem.className !== "reservation_card"){
+    while(elem.className !== "reserved_list_tr_body"){
         elem = elem.parentElement;        
     }
+    console.log(elem)
     // 카드 아우터 요소를 가져오기
     const outer = elem.parentElement;
+    console.log(outer);
     // 카드 컨테이너 요소를 가져오기
     const container = outer.parentElement;
 
@@ -32,7 +35,7 @@ function dragCard(event : any){
     const topPos = elem.style.top;
 
     // 카드를 body의 자식으로
-    document.body.append(elem);
+    // document.body.append(elem);
 
     // 드래그 위치에 따라 위치를 바꾸는 함수
     function moveAt(pageX : number,pageY : number){
@@ -56,10 +59,10 @@ function dragCard(event : any){
 
     container.onmouseleave = function(){
         if(onDrag){
-            alert("삭제합니다");
             // **********************
             // 이 곳에 기능을 넣어야 함
             // **********************
+            alert("삭제합니다");
             onDrag = false;
         }
     }
@@ -75,21 +78,58 @@ function dragCard(event : any){
         elem.style.left = leftPos;
         elem.style.top = topPos;
         elem.style.zIndex = 'auto';
+        elem.style.left = 'auto';
+        elem.style.top = 'auto';
+        elem.style.display = 'table-row';
+        console.log(elem.parentElement);
     }
 }
 
-function ReservationContainer(){
-    const cardList = [["김도원","네이버","백엔드 개발자","2023-01-01"],["김겨울","SMENT","가수","2023-01-01"]];
+
+function ReservedListItem(props : any){
+    return(
+        <tr className="reserved_list_tr_body" onMouseDown={(event)=>{
+            dragItem(event);
+        }}>
+            <td>2023.01.01</td>
+            <td>김도원</td>
+            <td>7전8기</td>
+            <td>ssafy@ssafy.com</td>
+            <td><div className="reserved_list_enter_button" onClick={(event)=>{
+                props.func(event);
+            }} >입장</div></td>
+        </tr>
+    )
+}
+
+function enterMeeting(event : any){
+    alert('입장합니다.');
+}
+
+function ReservedList(props : any){
     return (
-        <div className="reservation_page_container">
-            <div className="reservation_page_inner_container">
-                <CardList drag={dragCard} header={"신청 목록"} cardList = {cardList}></CardList>
-                <ReservedCardList></ReservedCardList>
-                <CardList drag={()=>{return;}} header={"취소 목록"}></CardList>
-                <ReservedList></ReservedList>
+        <div className="reserved_list_container">
+            <div className="reserved_list_header">
+                나는 헤더
             </div>
+            <table className="reserved_list_table">
+                <thead>
+                    <tr className="reserved_list_tr_head">
+                       <th>날짜</th>
+                       <th>이름</th>
+                       <th>타이틀</th>
+                       <th>이메일</th>
+                       <th></th>
+                    </tr>
+                </thead>
+                <tbody className="reserved_list_tbody">
+                    <ReservedListItem func={(event : any)=>{
+                        enterMeeting(event);
+                    }}></ReservedListItem>
+                </tbody>
+            </table>
         </div>
     )
 }
 
-export default ReservationContainer;
+export default ReservedList;

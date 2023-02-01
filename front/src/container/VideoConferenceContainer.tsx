@@ -40,16 +40,22 @@ function VideoConferenceContainer(props : any){
                 <div className="video_conference_footer">
                     <div className="video_conference_button_container">
                         <div className="video_conference_button">
-                            <img src="img/video-control.png" alt="recording"></img>
+                            <img src="img/camera-on.png" alt="camera"></img>
+                            <span>카메라</span>
+                            <img src="img/arrow-down.png" alt="arrow-donwn"></img>
                         </div>
                         <div className="video_conference_button">
-                        <img src="img/voice-control.png" alt="recording"></img>
+                            <img src="img/audio-microphone-on.png" alt="mic"></img>
+                            <span>마이크</span>
+                            <img src="img/arrow-down.png" alt="arrow-donwn"></img>
                         </div>
-                        <div className="video_conference_button">
-                        <img src="img/screen-sharing.png" alt="recording"></img>
-                        </div>
-                        <div className="video_conference_button">
-                        <img src="img/exit-button.png" alt="recording"></img>
+                        {/* 화면 공유는 구현이 쉽지 않을 것으로 보인다 */}
+                        {/* <div className="video_conference_button">
+                            <img src="img/share-screen.png" alt="recording"></img>
+                            <span></span>
+                        </div> */}
+                        <div className="video_conference_cancel">
+                            <img src="img/cancel.png" alt="recording"></img>
                         </div>
                     </div>
                 </div>
