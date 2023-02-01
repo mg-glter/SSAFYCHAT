@@ -1,4 +1,4 @@
-import "../../styles/components/common/sign_in_up.css";
+import "../../styles/components/user/sign_in_up.css";
 import TextBox from "../../widget/InputTextBox";
 import {Link} from 'react-router-dom';
 
