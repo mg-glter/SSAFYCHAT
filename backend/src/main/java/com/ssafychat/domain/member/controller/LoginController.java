@@ -9,6 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @CrossOrigin("*")
 public class LoginController {
@@ -24,23 +27,25 @@ public class LoginController {
     @PostMapping("/regist")
     public ResponseEntity<?> registUser(MemberDto member_info) {
         boolean success = memberService.registUser(member_info);
+        Map<String,String> response_data= new HashMap<>();
         if(success){
-            return new ResponseEntity<>(success, HttpStatus.OK);
+            response_data.put("message","success");
+            return new ResponseEntity<>(response_data, HttpStatus.OK);
         }
-        return new ResponseEntity<>(success, HttpStatus.BAD_REQUEST);
+        response_data.put("message","fail");
+        return new ResponseEntity<>(response_data, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> nomalLogin(MemberDto member_info) {
         //사용자가 전달한 email, password와 일치하는 사용자 찾기
-        Member member = memberService.loginUser(member_info);
-        if(member != null){//존재한다면 토큰생성
-            String access_token = memberService.createToken(member);
-            System.out.println(access_token);
-            return new ResponseEntity<>(member, HttpStatus.OK);
+        Map<String,String> info = memberService.loginUser(member_info);
+        if(info != null){//존재한다면 토큰생성
+            return new ResponseEntity<>(info,HttpStatus.OK);
         }
-
-        return new ResponseEntity<>("fail",HttpStatus.INTERNAL_SERVER_ERROR);
+        info = new HashMap<>();
+        info.put("message","fail");
+        return new ResponseEntity<>(info,HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 

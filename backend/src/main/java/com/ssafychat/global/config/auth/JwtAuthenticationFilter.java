@@ -1,5 +1,6 @@
 package com.ssafychat.global.config.auth;
 
+import com.ssafychat.domain.member.model.Member;
 import com.ssafychat.global.jwt.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -12,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.StringTokenizer;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -23,11 +25,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest servletRequest,
                                     HttpServletResponse servletResponse,
                                     FilterChain filterChain) throws ServletException, IOException {
-        String token = jwtService.resolveToken(servletRequest);
-        if (token != null && jwtService.validateToken(token)) {
-            Authentication authentication = jwtService.getAuthentication(token);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-            System.out.println(SecurityContextHolder.getContext().getAuthentication());
+        String header_auth = jwtService.resolveToken(servletRequest);
+        if (header_auth != null && header_auth.startsWith("Bearer ")) {
+            String token = header_auth.replace("Bearer ", "");
+            if(jwtService.validateToken(token)){
+                Authentication authentication = jwtService.getAuthentication(token);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+                servletRequest.setAttribute("USER",(Member)authentication.getPrincipal());
+            }else{
+                SecurityContextHolder.getContext().setAuthentication(null);
+            }
         }
 
         filterChain.doFilter(servletRequest, servletResponse);

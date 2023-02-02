@@ -35,7 +35,7 @@ public class JwtServiceImpl implements JwtService {
     @Value("${jwt-token}")
     private String JWT_TOKEN;
 
-    private static final int ACCESS_TOKEN_EXPIRE_MINUTES = 30; // 분단위
+    private static final int ACCESS_TOKEN_EXPIRE_MINUTES = 60; // 분단위
     private static final int REFRESH_TOKEN_EXPIRE_MINUTES = 2; // 주단위
 
     @Override
@@ -108,6 +108,6 @@ public class JwtServiceImpl implements JwtService {
     }
 
     public String resolveToken(HttpServletRequest request) {
-        return request.getHeader("authorization");
+        return request.getHeader("Authorization");
     }
 }
