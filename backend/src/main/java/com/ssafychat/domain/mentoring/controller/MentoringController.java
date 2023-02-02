@@ -1,6 +1,7 @@
 package com.ssafychat.domain.mentoring.controller;
 
 import com.ssafychat.domain.member.dto.PossibleMentoringDto;
+import com.ssafychat.domain.member.model.Member;
 import com.ssafychat.domain.mentoring.dto.*;
 import com.ssafychat.domain.mentoring.model.ApplyMentoring;
 import com.ssafychat.domain.mentoring.model.Mentoring;
@@ -14,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/mentoring")
@@ -32,10 +32,15 @@ public class MentoringController {
         return mentoringService.findMentoring();
     }
 
-    @GetMapping("/weekly-rankers")
+    @GetMapping("/weekly-rankers") // 최근 7일동안 멘토링 수가 가장 높은 3명의 정보를 반환한다.
     public ResponseEntity<?> weeklyRankers() {
-        return new ResponseEntity<String>("weekly-rankers", HttpStatus.OK);
+        // complete_mentoring에서 mentor_id로 검색한 count 상위 3명
+        mentoringService.ranking();
+
+
+        return new ResponseEntity<>("weekly-rankers", HttpStatus.OK);
     }
+
     @GetMapping("/main-info")
     public ResponseEntity<?> mainInfo() {
         return new ResponseEntity<String>("main-info", HttpStatus.OK);
@@ -59,12 +64,15 @@ public class MentoringController {
     public ResponseEntity<?> reservationMentoring() {
         return new ResponseEntity<String>("reservation", HttpStatus.OK);
     }
+
     @DeleteMapping("/cancel/appointment") // 멘토가 멘토링을 취소
     @Transactional
     public ResponseEntity<?> appointmentCancel(@RequestBody CancelReasonDto cancelReasonDto, HttpServletRequest request) {
         // 헤더에서 받은 userId가 mentoring의 mentorUid와 같을 때만 기능하게
-        int userId = 2; // 임시
+        Member user = (Member) request.getAttribute("USER");
         System.out.println(cancelReasonDto);
+        int userId = user.getUserId();
+        System.out.println(userId);
         // 멘토링 테이블에서 delete하면서 멘토링 정보 반환
         Mentoring mentoring = mentoringService.deleteMentoring(cancelReasonDto.getMentoringId());
         // 멘토링 취소 테이블에 insert (멘토링 테이블 정보 + reaseon, canceler)
@@ -77,15 +85,12 @@ public class MentoringController {
         return new ResponseEntity<String>("cancel/reservation", HttpStatus.OK);
     }
     @GetMapping("/appointment") // 멘토에게 들어온 멘토링 목록, 매칭된 멘토링 목록
-    public ResponseEntity<?> appointmentSearch(@RequestHeader Map<String, String> data, HttpServletRequest request) {
-        for (Map.Entry<String, String> entry : data.entrySet()) {
-            System.out.println("key: " + entry.getKey() +
-                    ", value: " + entry.getValue());
-        }
-        request.getHeader("Authorization");
+    public ResponseEntity<?> appointmentSearch(HttpServletRequest request) {
 
         // 로그인 정보에서 식별자를 받아와서
-        int userId = 1; // 임시
+        Member user = (Member) request.getAttribute("USER");
+        int userId = user.getUserId();
+        System.out.println(userId);
 
         // 예약 정보 받아오기
         List<ApplyMentoringForMentorDto> applyList = mentoringService.getApplyMentoringListForMentor(userId);
@@ -103,9 +108,11 @@ public class MentoringController {
     }
     @PostMapping("/appointment") // apply_mentoring_id에 해당하는 멘토링 요청을 수락처리
     @Transactional
-    public ResponseEntity<?> appointmentAccept(@RequestHeader Map<String, String> data, @RequestBody MentoringDateDto mentoringDateDto) {
+    public ResponseEntity<?> appointmentAccept(HttpServletRequest request, @RequestBody MentoringDateDto mentoringDateDto) {
         // 프론트 헤더로 userId 받아온다.
-        int userId = 1; // 임시
+        Member user = (Member) request.getAttribute("USER");
+        int userId = user.getUserId();
+        System.out.println(userId);
         // 프론트 body로 apply_mentoring_id 와 time 정보 받아온다. MentoringDateDto에 둘다 있음
         int applyMentoringId = mentoringDateDto.getApplyMentoringId();
         Timestamp time = mentoringDateDto.getTime();
