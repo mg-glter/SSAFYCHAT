@@ -59,8 +59,17 @@ public class MentoringController {
     public ResponseEntity<?> reservationMentoring() {
         return new ResponseEntity<String>("reservation", HttpStatus.OK);
     }
-    @DeleteMapping("/cancel/appointment")
-    public ResponseEntity<?> appointmentCancel() {
+    @DeleteMapping("/cancel/appointment") // 멘토가 멘토링을 취소
+    @Transactional
+    public ResponseEntity<?> appointmentCancel(@RequestBody CancelReasonDto cancelReasonDto, HttpServletRequest request) {
+        // 헤더에서 받은 userId가 mentoring의 mentorUid와 같을 때만 기능하게
+        int userId = 2; // 임시
+        System.out.println(cancelReasonDto);
+        // 멘토링 테이블에서 delete하면서 멘토링 정보 반환
+        Mentoring mentoring = mentoringService.deleteMentoring(cancelReasonDto.getMentoringId());
+        // 멘토링 취소 테이블에 insert (멘토링 테이블 정보 + reaseon, canceler)
+        mentoringService.insertCancelMentoring(userId, cancelReasonDto.getReason(), mentoring);
+
         return new ResponseEntity<String>("cancel/appointment", HttpStatus.OK);
     }
     @DeleteMapping("/cancel/reservation")
