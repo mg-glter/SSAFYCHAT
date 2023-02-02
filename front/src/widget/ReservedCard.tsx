@@ -12,7 +12,7 @@ function ReservedCard(props : any){
                     <ruby>2022.02.02<rt>멘토링</rt></ruby>
                 </div>
                 <div className="reserved_card_content_container">
-                    {}
+                    이름
                 </div>
                 <div className="reserved_card_content_container">
                     회사

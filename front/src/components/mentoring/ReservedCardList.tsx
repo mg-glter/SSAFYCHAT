@@ -13,7 +13,6 @@ function dragCard(event : any){
     // }
     
     if(elem.className === "reserved_card_button"){
-        console.log(123);
         return;
     }
 
@@ -106,10 +105,10 @@ function ReservedCardList(props : any){
             <ArrowButton text={"<"}></ArrowButton>
         </div>
         
-            {/* 카드리스트 */}
-            <div className="reserved_card_container">
-                <ReservedCard drag={dragCard} button={enterMeeting}></ReservedCard>
-            </div>
+        {/* 카드리스트 */}
+        <div className="reserved_card_container">
+            <ReservedCard drag={dragCard} button={enterMeeting}></ReservedCard>
+        </div>
 
             
         {/* 우측 화살표 */}
