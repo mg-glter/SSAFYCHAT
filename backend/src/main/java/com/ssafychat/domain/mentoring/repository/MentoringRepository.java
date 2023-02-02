@@ -13,4 +13,7 @@ public interface MentoringRepository extends JpaRepository<Mentoring, Integer> {
     List<Mentoring> findAll(Sort sort);
 
     List<Mentoring> findByMentor_UserId(int userId);
+
+    Mentoring findByMentoringId(int mentoringId);
+    void deleteMentoringByMentoringId(int mentoringId);
 }

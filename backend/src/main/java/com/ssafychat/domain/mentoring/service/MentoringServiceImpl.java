@@ -4,8 +4,10 @@ import com.ssafychat.domain.member.repository.MemberRepository;
 import com.ssafychat.domain.member.dto.PossibleMentoringDto;
 import com.ssafychat.domain.member.model.Member;
 import com.ssafychat.domain.mentoring.dto.*;
+import com.ssafychat.domain.mentoring.model.CancelMentoring;
 import com.ssafychat.domain.mentoring.model.MentoringDate;
 import com.ssafychat.domain.mentoring.repository.ApplyMentoringRepository;
+import com.ssafychat.domain.mentoring.repository.CancelMentoringRepository;
 import com.ssafychat.domain.mentoring.repository.MentoringDateRepository;
 import com.ssafychat.domain.mentoring.repository.MentoringRepository;
 import com.ssafychat.domain.mentoring.model.ApplyMentoring;
@@ -33,6 +35,8 @@ public class MentoringServiceImpl implements MentoringService {
 
     @Autowired
     private MentoringDateRepository mentoringDateRepository;
+    @Autowired
+    private CancelMentoringRepository cancelMentoringRepository;
 
     @Override
     public List<Mentoring> findMentoring(){
@@ -168,6 +172,30 @@ public class MentoringServiceImpl implements MentoringService {
         // insert!
         mentoringRepository.save(mentoring);
         return mentoring;
+    }
+
+    @Override
+    public Mentoring deleteMentoring(int mentoringId) {
+        System.out.println(mentoringId);
+        Mentoring mentoring = mentoringRepository.findByMentoringId(mentoringId);
+        System.out.println(mentoring);
+
+        mentoringRepository.deleteMentoringByMentoringId(mentoringId);
+        return mentoring;
+    }
+
+    @Override
+    public void insertCancelMentoring(int canceler, String reason, Mentoring mentoring) {
+        CancelMentoring cancelMentoring = CancelMentoring.builder()
+                .mentor(mentoring.getMentor())
+                .mentee(mentoring.getMentee())
+                .company(mentoring.getCompany())
+                .job(mentoring.getJob())
+                .time(mentoring.getTime())
+                .canceler(canceler)
+                .reason(reason)
+                .build();
+        cancelMentoringRepository.save(cancelMentoring);
     }
 
 }

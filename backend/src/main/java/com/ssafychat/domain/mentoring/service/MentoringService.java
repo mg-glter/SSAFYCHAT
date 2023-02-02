@@ -27,4 +27,7 @@ public interface MentoringService {
     ApplyMentoring deleteApplyMentoring(int applyMentoringId);
     Mentoring insertMentoring(int userId, ApplyMentoring applyMentoring, Timestamp time);
 
+    Mentoring deleteMentoring(int mentoringId);
+    void insertCancelMentoring(int canceler, String reason, Mentoring mentoring);
+
 }
