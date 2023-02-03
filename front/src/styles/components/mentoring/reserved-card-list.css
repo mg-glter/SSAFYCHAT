@@ -8,6 +8,8 @@
     
     border: dotted 1px #dadada;
     border-radius: 15px;
+
+    margin-top: 100px;
 }
 
 /* 카드리스트를 감싸는 컨테이너 */
