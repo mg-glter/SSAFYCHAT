@@ -12,7 +12,6 @@ import com.ssafychat.domain.mentoring.model.Mentoring;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -42,20 +41,19 @@ public class MentoringServiceImpl implements MentoringService {
     }
 
 
-    @Transactional
-    public ApplyMentoring toEntity(ApplyMentoringDto applyMentoringDto){
-
-        Optional<Member> memberOptional = memberRepository.findById(applyMentoringDto.getMenteeUid());
-        Member member = memberOptional.get();
-        return ApplyMentoring.builder()
-                .applyMentoringId(applyMentoringDto.getApplyMentoringId())
-                .mentee(member)
-                .job(applyMentoringDto.getJob())
-                .company(applyMentoringDto.getCompany())
-                .build();
-    }
+//    @Transactional
+//    public ApplyMentoring toEntity(ApplyMentoringDto applyMentoringDto){
+//
+//        Optional<Member> memberOptional = memberRepository.findById(applyMentoringDto.getMenteeUid());
+//        Member member = memberOptional.get();
+//        return ApplyMentoring.builder()
+//                .applyMentoringId(applyMentoringDto.getApplyMentoringId())
+//                .mentee(member)
+//                .job(applyMentoringDto.getJob())
+//                .company(applyMentoringDto.getCompany())
+//                .build();
+//    }
     @Override
-    @Transactional
     public void applyMentoring(ApplyMentoring applyMentoring) {
         this.applyMentoringRepository.save(applyMentoring);
 
@@ -217,6 +215,26 @@ public class MentoringServiceImpl implements MentoringService {
                 .build();
 
         return mainInfoDto;
+    }
+
+    @Override
+    public void insertApplyMentoringAndMentoringDate(Member mentee, ApplyMentoringDto applyMentoringDto) {
+        // applyMentoring 테이블에 job, company, mentee 빌딩해서 insert 후
+        ApplyMentoring applyMentoring = ApplyMentoring.builder()
+                .mentee(mentee)
+                .company(applyMentoringDto.getCompany())
+                .job(applyMentoringDto.getJob())
+                .build();
+        ApplyMentoring savedApplyMentoring = applyMentoringRepository.save(applyMentoring);
+        // applyMentoring id 반환 받아서
+        // date 테이블에 time과 applyMentoring id 배열 크기만큼 반복하면서 insert
+        for (Timestamp time : applyMentoringDto.getTimes()) {
+            MentoringDate mentoringDate = MentoringDate.builder()
+                    .applyMentoring(savedApplyMentoring)
+                    .time(time)
+                    .build();
+            mentoringDateRepository.save(mentoringDate);
+        }
     }
 
 }

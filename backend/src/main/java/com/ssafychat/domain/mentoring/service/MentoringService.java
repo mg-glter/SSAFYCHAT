@@ -16,7 +16,7 @@ public interface MentoringService {
 
     List<Mentoring> findMentoring();
 
-    ApplyMentoring toEntity(ApplyMentoringDto applyMentoringDto);
+//    ApplyMentoring toEntity(ApplyMentoringDto applyMentoringDto);
 
     void applyMentoring(ApplyMentoring applyMentoring);
 
@@ -35,5 +35,7 @@ public interface MentoringService {
     Member[] ranking();
 
     MainInfoDto mainInfo();
+
+    void insertApplyMentoringAndMentoringDate(Member mentee, ApplyMentoringDto applyMentoringDto);
 
 }

@@ -44,16 +44,24 @@ public class MentoringController {
         List<PossibleMentoringDto> possibleMentorings = mentoringService.getPossibleMentoringList(job, belong);
         return new ResponseEntity<>(possibleMentorings, HttpStatus.OK);
     }
+//    @PostMapping("/apply")
+//    public ResponseEntity<String> applyMentoring(ApplyMentoringDto applyMentoringDto, HttpServletRequest request) {
+//
+//        ApplyMentoring applyMentoring = mentoringService.toEntity(applyMentoringDto);
+//
+//        //applyMentoringRepository
+//        mentoringService.applyMentoring(applyMentoring);
+//        return new ResponseEntity<String>("apply", HttpStatus.CREATED);
+//    }
     @PostMapping("/apply")
-    public ResponseEntity<String> applyMentoring(ApplyMentoringDto applyMentoringDto, HttpServletRequest request) {
-
-        ApplyMentoring applyMentoring = mentoringService.toEntity(applyMentoringDto);
-
-        //applyMentoringRepository
-        mentoringService.applyMentoring(applyMentoring);
+    public ResponseEntity<String> applyMentoring(@RequestBody ApplyMentoringDto applyMentoringDto, HttpServletRequest request) {
+        Member mentee = (Member) request.getAttribute("USER");
+        // 서비스에 user와 applyMentoringDto(job, company, times) 넘긴다.
+        System.out.println(applyMentoringDto);
+        mentoringService.insertApplyMentoringAndMentoringDate(mentee, applyMentoringDto);
         return new ResponseEntity<String>("apply", HttpStatus.CREATED);
-
     }
+
     @GetMapping("/reservation")
     public ResponseEntity<?> reservationMentoring() {
         return new ResponseEntity<String>("reservation", HttpStatus.OK);
