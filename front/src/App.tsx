@@ -4,6 +4,7 @@ import RollingPaper from './components/rollingpaper/rollingpaper';
 import Join from './components/user/Join';
 import Login from './components/user/Login';
 import VideoConferenceContainer from './container/VideoConferenceContainer';
+import ApplyingPage from './pages/ApplyingPage';
 import MainPage from './pages/MainPage';
 import MyPage from './pages/MyPage';
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<Login></Login>}></Route>
         <Route path='/index' element={<MainPage></MainPage>}></Route>
         <Route path='/mypage' element={<MyPage></MyPage>}></Route>
+        <Route path='/apply' element={<ApplyingPage></ApplyingPage>}></Route>
         <Route path='/meeting' element={<VideoConferenceContainer></VideoConferenceContainer>}></Route>
         <Route path='/join' element={<Join></Join>}></Route>
         <Route path='/roll' element={<RollingPaper></RollingPaper>}></Route>
