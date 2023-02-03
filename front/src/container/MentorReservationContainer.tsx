@@ -9,9 +9,8 @@ function MentorReservationContainer(){
     return (
         <div className="reservation_page_container">
             <div className="reservation_page_inner_container">
-                <CardList drag={dragCard} header={"신청 목록"} cardList = {cardList}></CardList>
-                <CardList drag={()=>{return;}} header={"취소 목록"} cardList = {[]}></CardList>
                 <ReservedList></ReservedList>
+                <CardList drag={dragCard} header={"신청 목록"} cardList = {cardList}></CardList>
             </div>
         </div>
     )

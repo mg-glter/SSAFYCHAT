@@ -4,8 +4,8 @@
 }
 
 .video_conference_container{
-    width: 1920px;
-    height: 920px;
+    width: 100vw;
+    height: 100vh;
     background: #0d0d0d;
     display: grid;
     grid-template-columns: 70% 30%;
@@ -22,7 +22,7 @@
 }
 
 .video_conference_mine_screen{
-    width: calc(190px*1.5);
+    /* width: calc(190px*1.5); */
     height: Calc(100px*1.5);
     background: #1a1a1a;
     margin: auto;
@@ -35,7 +35,7 @@
 
 .video_conference_oppnent_screen{
     height: calc(100px*6.7);
-    width: calc(190px*6.7);
+    /* width: calc(190px*6.7); */
     background: #1a1a1a;
     margin: auto;
 }

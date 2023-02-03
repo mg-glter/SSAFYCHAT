@@ -207,7 +207,7 @@ function VideoConferenceContainer(props : any){
     let first = true;
     return(
         // 회의 컨테이너 전체를 담는 컨테이너
-        <div className="video_conference_container" onMouseEnter={()=>{
+        <div id="call" className="video_conference_container" onMouseEnter={()=>{
             if(first){
                 first = false;
                 test();
@@ -220,34 +220,34 @@ function VideoConferenceContainer(props : any){
                     <input placeholder="roomCode"></input><br></br>
                     <button>입력</button>
                 </form>
-            </div>
-            <div id="call">
-                <div id="myStream">
-                    <video id="myFace" height="400" width="400" autoPlay playsInline></video>
                     <button id="mute">Mute</button>
                     <button id="camera">Turn Camera Off</button>
                     <select id="cameras"></select>
-                    <video id="peerFace" height="400" width="400" autoPlay playsInline></video>
-                </div>
             </div>
+            {/* <div id="call"> */}
+                {/* <div id="myStream">
+                    <video id="myFace" height="400" width="400" autoPlay playsInline></video> */}
+                    {/* <video id="peerFace" height="400" width="400" autoPlay playsInline></video> */}
+                {/* </div> */}
+            {/* </div> */}
 
             {/* 비디오 화면과 버튼들을 담을 왼쪽 컨테이너 */}
-            <div className="video_conference_left">
+            <div className="video_conference_left" id="myStream">
 
                 {/* 내 비디오 화면을 담을 컨테이너 */}
                 <div className="video_conference_mine">
                     {/* 내 비디오 화면 */}
-                    <div className="video_conference_mine_screen">
+                    <video className="video_conference_mine_screen" id="myFace"  autoPlay playsInline>
 
-                    </div>
+                    </video>
                 </div>
 
                 {/* 상대의 비디오 화면을 담을 컨테이너 */}
                 <div className="video_conference_oppnent">
                     {/* 상대의 비디오 화면 */}
-                    <div className="video_conference_oppnent_screen">
+                    <video id="feerFace" className="video_conference_oppnent_screen" autoPlay playsInline>
 
-                    </div>
+                    </video>
                 </div>
 
                 {/* 각종 버튼을 담는 컨테이너 */}
