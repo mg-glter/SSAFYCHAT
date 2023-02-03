@@ -4,6 +4,7 @@ import Footer from "../layout/Footer"
 import Header from "../layout/Header"
 import { Route,Routes } from "react-router"
 import MyPageContainer from "../container/MyPageContainer"
+import ReservationContainer from "../container/ReservationContainer"
 
 function BannerPage (){
     return(
@@ -13,6 +14,7 @@ function BannerPage (){
             <Routes>
                 <Route path="/apply" element={<ApplyingContainer></ApplyingContainer>}></Route>
                 <Route path="/mypage" element={<MyPageContainer></MyPageContainer>}></Route>
+                <Route path="/mentoring" element={<ReservationContainer></ReservationContainer>}></Route>
             </Routes>
             <Footer></Footer>
         </div>
