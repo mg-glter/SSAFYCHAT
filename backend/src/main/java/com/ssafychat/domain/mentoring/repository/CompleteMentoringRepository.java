@@ -1,5 +1,6 @@
 package com.ssafychat.domain.mentoring.repository;
 
+import com.ssafychat.domain.member.model.Member;
 import com.ssafychat.domain.mentoring.model.CompleteMentoring;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -25,4 +26,6 @@ public interface CompleteMentoringRepository extends JpaRepository<CompleteMento
             "where completed = true")
     Long completeMentoringCount();
 
+    List<CompleteMentoring> findByMentee(Member member);
+    List<CompleteMentoring> findByMentor(Member member);
 }

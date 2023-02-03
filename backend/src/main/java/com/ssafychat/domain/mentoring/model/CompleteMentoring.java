@@ -44,10 +44,10 @@ public class CompleteMentoring {
     @Column(columnDefinition = "TEXT")
     private String reviewContent;
 
-    @Column
+    @Column(columnDefinition = "int default '0'")
     private int reviewWidth;
 
-    @Column
+    @Column(columnDefinition = "int default '0'")
     private int reviewHeight;
 
     @Column(columnDefinition = "BOOLEAN", nullable = false)
