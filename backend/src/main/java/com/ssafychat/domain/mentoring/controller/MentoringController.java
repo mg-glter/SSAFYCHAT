@@ -130,7 +130,15 @@ public class MentoringController {
         return new ResponseEntity<>(mentoring, HttpStatus.OK);
     }
     @GetMapping("/review")
-    public ResponseEntity<?> reviewRollingPaper() {
+    public ResponseEntity<?> getReviewRollingPaper() {
+        // 멤버 정보로 해당 후기 가져오기
+        //
+        return new ResponseEntity<String>("review", HttpStatus.OK);
+    }
+    @PatchMapping("/review")
+    public ResponseEntity<?> moveReviewRollingPaper() {
+        // 후기 좌표 변경 혹은 선택 여부 변경
+        //
         return new ResponseEntity<String>("review", HttpStatus.OK);
     }
 
