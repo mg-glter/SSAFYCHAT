@@ -6,10 +6,7 @@ import com.ssafychat.domain.member.model.Member;
 import com.ssafychat.domain.mentoring.dto.*;
 import com.ssafychat.domain.mentoring.model.CancelMentoring;
 import com.ssafychat.domain.mentoring.model.MentoringDate;
-import com.ssafychat.domain.mentoring.repository.ApplyMentoringRepository;
-import com.ssafychat.domain.mentoring.repository.CancelMentoringRepository;
-import com.ssafychat.domain.mentoring.repository.MentoringDateRepository;
-import com.ssafychat.domain.mentoring.repository.MentoringRepository;
+import com.ssafychat.domain.mentoring.repository.*;
 import com.ssafychat.domain.mentoring.model.ApplyMentoring;
 import com.ssafychat.domain.mentoring.model.Mentoring;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +14,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Service
 public class MentoringServiceImpl implements MentoringService {
@@ -37,6 +33,9 @@ public class MentoringServiceImpl implements MentoringService {
     private MentoringDateRepository mentoringDateRepository;
     @Autowired
     private CancelMentoringRepository cancelMentoringRepository;
+
+    @Autowired
+    private CompleteMentoringRepository completeMentoringRepository;
 
     @Override
     public List<Mentoring> findMentoring(){
@@ -196,6 +195,39 @@ public class MentoringServiceImpl implements MentoringService {
                 .reason(reason)
                 .build();
         cancelMentoringRepository.save(cancelMentoring);
+    }
+
+    @Override
+    public List<Integer> ranking() {
+        // 일주일 전 계산 로직
+        LocalDateTime localNow = LocalDateTime.now();
+        Timestamp now = Timestamp.valueOf(localNow);
+        System.out.println(now);
+        LocalDateTime localMinus7Days = localNow.minusDays(7);
+        Timestamp minus7Days = Timestamp.valueOf(localMinus7Days);
+        System.out.println(minus7Days);
+        return new ArrayList<>();
+    }
+
+    @Override
+    public MainInfoDto mainInfo() {
+        // completeMentoring 수
+        System.out.println(completeMentoringRepository.completeMentoringCount());
+//        System.out.println(completeMentoringRepository.countByCompleted(true));
+        // Member에서 role이 mentor인 수
+        System.out.println(memberRepository.countByRole("role_mentor"));
+        // Member에서 role이 mentee인 수
+        System.out.println(memberRepository.countByRole("role_mentee"));
+        // ranking 상위 3명 정보 : 미완
+        
+
+        MainInfoDto mainInfoDto = MainInfoDto.builder()
+                .completeMentoringNum(completeMentoringRepository.completeMentoringCount())
+                .mentorNum(memberRepository.countByRole("role_mentor"))
+                .menteeNum(memberRepository.countByRole("role_mentee"))
+                .build();
+
+        return mainInfoDto;
     }
 
 }

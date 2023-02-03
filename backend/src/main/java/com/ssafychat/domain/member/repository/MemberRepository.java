@@ -13,4 +13,5 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
     Optional<Member> findByEmail(String email);
     Optional<Member> findByUserId(int user_id);
     List<PossibleMentoringDto> findDistinctByJobAndBelong(String job, String belong);
+    Long countByRole(String role);
 }

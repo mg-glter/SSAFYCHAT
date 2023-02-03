@@ -3,6 +3,7 @@ package com.ssafychat.domain.mentoring.service;
 import com.ssafychat.domain.member.dto.PossibleMentoringDto;
 import com.ssafychat.domain.mentoring.dto.ApplyMentoringDto;
 import com.ssafychat.domain.mentoring.dto.ApplyMentoringForMentorDto;
+import com.ssafychat.domain.mentoring.dto.MainInfoDto;
 import com.ssafychat.domain.mentoring.dto.MatchMentoringForMentorDto;
 import com.ssafychat.domain.mentoring.model.ApplyMentoring;
 import com.ssafychat.domain.mentoring.model.Mentoring;
@@ -29,5 +30,9 @@ public interface MentoringService {
 
     Mentoring deleteMentoring(int mentoringId);
     void insertCancelMentoring(int canceler, String reason, Mentoring mentoring);
+
+    List<Integer> ranking();
+
+    MainInfoDto mainInfo();
 
 }

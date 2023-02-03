@@ -37,14 +37,14 @@ public class MentoringController {
         // complete_mentoring에서 mentor_id로 검색한 count 상위 3명
         mentoringService.ranking();
 
-
         return new ResponseEntity<>("weekly-rankers", HttpStatus.OK);
     }
-
     @GetMapping("/main-info")
     public ResponseEntity<?> mainInfo() {
-        return new ResponseEntity<String>("main-info", HttpStatus.OK);
+        MainInfoDto mainInfoDto = mentoringService.mainInfo();
+        return new ResponseEntity<>(mainInfoDto, HttpStatus.OK);
     }
+
     @GetMapping("/search")
     public ResponseEntity<?> SearchPossibleMentoring(@RequestParam(defaultValue = "") String job, @RequestParam(defaultValue = "") String belong) {
         List<PossibleMentoringDto> possibleMentorings = mentoringService.getPossibleMentoringList(job, belong);

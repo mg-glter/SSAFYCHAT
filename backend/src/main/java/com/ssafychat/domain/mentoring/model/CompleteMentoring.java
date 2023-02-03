@@ -4,7 +4,7 @@ import com.ssafychat.domain.member.model.Member;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Timestamp;
 
 @Getter
 @ToString
@@ -27,7 +27,7 @@ public class CompleteMentoring {
     private Member mentor;
 
     @Column(nullable = false)
-    private Date time;
+    private Timestamp time;
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String chatLog;
@@ -44,11 +44,15 @@ public class CompleteMentoring {
     @Column(columnDefinition = "TEXT")
     private String reviewContent;
 
+    @Column
     private int reviewWidth;
 
+    @Column
     private int reviewHeight;
 
     @Column(columnDefinition = "BOOLEAN", nullable = false)
     private int reviewSelected;
+
+    private boolean completed;
 
 }
