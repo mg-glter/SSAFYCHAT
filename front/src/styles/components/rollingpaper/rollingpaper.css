@@ -10,6 +10,8 @@
     width: 1225.26px;
     height: 1375px;
     /* left: 101px; */
+    margin-left: 0;
+    float: left;
 }
 
 .dashboard_header{
@@ -64,4 +66,23 @@
     border-radius: 20px;
 
     background: #FFF2B0;
+}
+
+.sticky_list_container{
+    position: absolute;
+    width: 390.13px;
+    height: 1432.73px;
+    left: 1428.87px;
+}
+
+.stickey_main{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 390.13px;
+    height: 1341px;
+    left: calc(50% - 390.13px/2 + 663.93px);
+
+    border: 1px dashed #7B61FF;
+    border-radius: 5px;
 }

@@ -1,4 +1,5 @@
 import "../../styles/components/rollingpaper/rollingpaper.css";
+import Sticky from "../../widget/Sticky";
 
 function RollingPaper() {
     const imgUrlStar = "/img/Star.png"
@@ -30,7 +31,7 @@ function RollingPaper() {
             <div className="sticky_list_container">
                 <div className="upper_arrow"></div>
                 <div className="sticky_main">
-
+                    <Sticky title="감사합니다." text="덕분에 도움이 많이 됐어요"></Sticky>
                 </div>
                 <div className="lower_arrow"></div>
             </div>

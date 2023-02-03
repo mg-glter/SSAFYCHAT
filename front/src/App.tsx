@@ -1,5 +1,6 @@
 import {Route, Routes} from 'react-router-dom';
 import './App.css';
+import RollingPaper from './components/rollingpaper/rollingpaper';
 import Join from './components/user/Join';
 import Login from './components/user/Login';
 import VideoConferenceContainer from './container/VideoConferenceContainer';
@@ -14,6 +15,7 @@ function App() {
         <Route path='/mypage' element={<MyPage></MyPage>}></Route>
         <Route path='/meeting' element={<VideoConferenceContainer></VideoConferenceContainer>}></Route>
         <Route path='/join' element={<Join></Join>}></Route>
+        <Route path='/roll' element={<RollingPaper></RollingPaper>}></Route>
       </Routes>
     </div>
   );
