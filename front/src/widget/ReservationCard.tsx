@@ -6,7 +6,7 @@ function ReservationCard(props : any){
     return(
         <div className="card_outer">
             <div className="reservation_card"  onMouseDown={(event)=>{
-                props.drag(event);            
+                props.drag(event,"reservation_card");            
         }}>
                 <div className="card_name">
                     {props.info[0]}

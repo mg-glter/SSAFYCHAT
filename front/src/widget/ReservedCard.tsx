@@ -6,13 +6,13 @@ function ReservedCard(props : any){
     return(
         <div className="reserved_card_outer">
             <div className="reserved_card" onMouseDown={(event)=>{
-                props.drag(event);
+                props.drag(event,"reserved_card");
             }}>
                 <div className="reserved_card_header">                
                     <ruby>2022.02.02<rt>멘토링</rt></ruby>
-                </div>
+                </div>                
                 <div className="reserved_card_content_container">
-                    {}
+                    이름
                 </div>
                 <div className="reserved_card_content_container">
                     회사
