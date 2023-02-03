@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 
 function MentoringSearchResult (){
-    const [count] = useState(3);
+    const [count] = useState(15);
     const [mentorings] = useState({
         item : [{
             belong : "카카오",
@@ -18,6 +18,54 @@ function MentoringSearchResult (){
             belong : "삼성",
             job : "백엔드 개발자"
         },
+        {
+            belong : "삼성",
+            job : "백엔드 개발자"
+        },
+        {
+            belong : "삼성",
+            job : "백엔드 개발자"
+        },
+        {
+            belong : "카카오",
+            job : "백엔드 개발자"
+        },
+        {
+            belong : "라인",
+            job : "백엔드 개발자"
+        },
+        {
+            belong : "삼성",
+            job : "백엔드 개발자"
+        },
+        {
+            belong : "삼성",
+            job : "백엔드 개발자"
+        },
+        {
+            belong : "삼성",
+            job : "백엔드 개발자"
+        },
+        {
+            belong : "카카오",
+            job : "백엔드 개발자"
+        },
+        {
+            belong : "라인",
+            job : "백엔드 개발자"
+        },
+        {
+            belong : "삼성",
+            job : "백엔드 개발자"
+        },
+        {
+            belong : "삼성",
+            job : "백엔드 개발자"
+        },
+        {
+            belong : "삼성",
+            job : "백엔드 개발자"
+        },
         ]
     });
 
@@ -25,7 +73,7 @@ function MentoringSearchResult (){
 
     for (let i = 0; i < count; i++) {
         cards.push(
-            <div className='result_component_card'>
+            <div key={i} className='result_component_card'>
                 <ApplyingCard mentoring={mentorings.item[i]}></ApplyingCard>
             </div>
         );

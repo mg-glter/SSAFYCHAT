@@ -44,7 +44,7 @@
     outline: none;
 }
 
-.search_dropdown {
+.search_icon {
     position: relative;
     display: grid;
 
@@ -61,10 +61,6 @@
     border-top: 10px solid #0D0D0D;
 }
 
-.button{
-    position: relative;
-    display: grid;
-
-    align-items: center;
-    justify-self: center;
+.search_button:hover{
+    cursor: pointer;
 }
