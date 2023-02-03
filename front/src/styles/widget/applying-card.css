@@ -13,6 +13,8 @@
     border-radius: 30px;
 
     background-color: #031059;
+
+    cursor: pointer;
 }
 
 .applying_card_text{
