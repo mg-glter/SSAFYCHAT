@@ -17,10 +17,10 @@ function RollingPaper() {
                     </div>
                     <div className="dashboard_controler">
                         <div className="clean">
-                            <img src={imgUrlclean} alt="Clean" />
+                            <img className="clean_name" src={imgUrlclean} alt="Clean" />
                         </div>
                         <div className="save">
-                            <img src={imgUrlsave} alt="Save" />
+                            <img className="save_img" src={imgUrlsave} alt="Save" />
                         </div>
                     </div>
                 </div>
@@ -30,7 +30,7 @@ function RollingPaper() {
             </div>
             <div className="sticky_list_container">
                 <div className="upper_arrow"></div>
-                <div className="sticky_main">
+                <div>
                     <Sticky title="감사합니다." text="덕분에 도움이 많이 됐어요"></Sticky>
                 </div>
                 <div className="lower_arrow"></div>
