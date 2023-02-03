@@ -7,6 +7,13 @@ function dragCard(event : any, elemClassName : string){
     //     return false;
     // }
 
+    const classList = elem.classList;
+    for(let i = 0; i < classList.length; i++){
+        if(classList[i] === "enter_meeting_button"){
+            return;
+        }
+    }
+
     // 드래그
     let onDrag = true;
 

@@ -1,6 +1,6 @@
 /* 카드 리스트 요소 전체를 감싸는 컨테이너 */
 .reserved_card_list_container{
-    width: 1600px;
+    width: 1200px;
     height: 620px;
     display: flex;
     flex-direction: column;
@@ -16,7 +16,7 @@
 .reserved_card_list_inner_container{
     /* box-sizing: border-box; */
     margin:0px;
-    width: 1600px;
+    width: 1200px;
     height: 560px;
 
     display: flex;
@@ -33,7 +33,7 @@
     text-align: center;
     color: #FFFFFF;
 
-    width: 1600px;
+    width: 1200px;
     height: 60px;
 
 

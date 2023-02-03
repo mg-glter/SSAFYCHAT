@@ -3,18 +3,19 @@ import ReservedCard from "../../widget/ReservedCard";
 import ArrowButton from "../../widget/ArrowButton";
 import { dragCard } from "../../utils/ts/move";
 import { useState } from "react";
-
-function enterMeeting(event : any){
-    alert('입장합니다.');
-}
+import { useNavigate } from "react-router";
 
 function ReservedCardList(props : any){
+    const navigate = useNavigate();
     const list = [];
     let [startIdx,setIdx] = useState(0);
 
     for(let i = startIdx; i < startIdx+4&&props.cardList.length; ++i){
         let info = props.cardList[i];
-        list.push(<ReservedCard key={i} drag={dragCard} button={enterMeeting} info={info}></ReservedCard>);
+        list.push(<ReservedCard key={i} drag={dragCard} button={()=>{
+            navigate("/meeting");
+            alert('입장합니다.');
+        }} info={info}></ReservedCard>);
     }
 
     return (
