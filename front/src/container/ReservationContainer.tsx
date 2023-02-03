@@ -1,6 +1,5 @@
 import CardList from "../components/common/CardList";
 import ReservedCardList from "../components/mentoring/ReservedCardList";
-import ReservedList from "../components/mentoring/ReservedList";
 import "../styles/container/reservation-container.css"
 import { dragCard } from "../utils/ts/move";
 

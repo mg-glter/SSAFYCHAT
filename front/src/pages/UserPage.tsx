@@ -1,5 +1,3 @@
-import Footer from "../layout/Footer"
-import Header from "../layout/Header"
 import { Route,Routes } from "react-router"
 import Login from "../components/user/Login"
 import Join from "../components/user/Join"

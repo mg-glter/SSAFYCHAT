@@ -1,7 +1,7 @@
 /* 카드 리스트 요소 전체를 감싸는 컨테이너 */
 .card_list_container{    
 
-    width: 1600px;
+    width: 1200px;
     height: 320px;
     display: flex;
     flex-direction: column;
@@ -15,7 +15,7 @@
 .card_list_inner_container{
     /* box-sizing: border-box; */
     margin:0px;
-    width: 1600px;
+    width: 1200px;
     height: 260px;
     border-radius: 15px;
     display: flex;
@@ -31,7 +31,7 @@
     color: #FFFFFF;
     gap: 1px;
 
-    width: 1600px;
+    width: 1200px;
     height: 60px;
 
 
