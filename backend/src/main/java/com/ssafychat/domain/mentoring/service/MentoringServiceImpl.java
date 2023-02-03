@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -198,33 +197,23 @@ public class MentoringServiceImpl implements MentoringService {
     }
 
     @Override
-    public List<Integer> ranking() {
-        // 일주일 전 계산 로직
-        LocalDateTime localNow = LocalDateTime.now();
-        Timestamp now = Timestamp.valueOf(localNow);
-        System.out.println(now);
-        LocalDateTime localMinus7Days = localNow.minusDays(7);
-        Timestamp minus7Days = Timestamp.valueOf(localMinus7Days);
-        System.out.println(minus7Days);
-        return new ArrayList<>();
+    public Member[] ranking() {
+
+        List<Integer> rankerIds = completeMentoringRepository.findRanking();
+        Member[] rankers = new Member[3];
+        for (int i = 0; i < 3; i++) {
+            rankers[i] = memberRepository.findByUserIdForRanker(rankerIds.get(i));
+        }
+        return rankers;
     }
 
     @Override
     public MainInfoDto mainInfo() {
-        // completeMentoring 수
-        System.out.println(completeMentoringRepository.completeMentoringCount());
-//        System.out.println(completeMentoringRepository.countByCompleted(true));
-        // Member에서 role이 mentor인 수
-        System.out.println(memberRepository.countByRole("role_mentor"));
-        // Member에서 role이 mentee인 수
-        System.out.println(memberRepository.countByRole("role_mentee"));
-        // ranking 상위 3명 정보 : 미완
-        
-
         MainInfoDto mainInfoDto = MainInfoDto.builder()
-                .completeMentoringNum(completeMentoringRepository.completeMentoringCount())
-                .mentorNum(memberRepository.countByRole("role_mentor"))
-                .menteeNum(memberRepository.countByRole("role_mentee"))
+                .completeMentoringCount(completeMentoringRepository.completeMentoringCount())
+                .mentorCount(memberRepository.countByRole("role_mentor"))
+                .menteeCount(memberRepository.countByRole("role_mentee"))
+                .rankers(ranking())
                 .build();
 
         return mainInfoDto;

@@ -32,13 +32,7 @@ public class MentoringController {
         return mentoringService.findMentoring();
     }
 
-    @GetMapping("/weekly-rankers") // 최근 7일동안 멘토링 수가 가장 높은 3명의 정보를 반환한다.
-    public ResponseEntity<?> weeklyRankers() {
-        // complete_mentoring에서 mentor_id로 검색한 count 상위 3명
-        mentoringService.ranking();
 
-        return new ResponseEntity<>("weekly-rankers", HttpStatus.OK);
-    }
     @GetMapping("/main-info")
     public ResponseEntity<?> mainInfo() {
         MainInfoDto mainInfoDto = mentoringService.mainInfo();
