@@ -5,7 +5,7 @@ function Header (){
         <div className="header">
             <div className="header_name">SSAFY CHAT</div>
             <nav className="navbar">
-              <span><a href="#!">Home</a></span>
+              <span><Link to="/">Home</Link></span>
               <span><Link to="/banner/apply">Mentoring</Link></span>
               <span>
                 <div className="dropdown">
@@ -19,9 +19,9 @@ function Header (){
                     </span>
                   </span>
                   <div className="dropdown_content">
-                    <a href="#!">로그아웃</a>
+                    <Link to="/user/login">로그아웃</Link>
                     <Link to="/banner/mypage">마이페이지</Link>
-                    <a href="#!">롤링페이퍼</a>
+                    <Link to="/banner/roll">롤링페이퍼</Link>
                   </div>
                 </div>
               </span>
