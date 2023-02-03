@@ -30,7 +30,6 @@ function CardList(props : any){
                     if(0 < startIdx){
                         setIdx(startIdx-1);
                     }
-                    console.log(startIdx);
                 }}>
                 <ArrowButton text="<"></ArrowButton>
             </div>
@@ -46,7 +45,6 @@ function CardList(props : any){
                     if(startIdx+4 < props.cardList.length){
                         setIdx(startIdx+1);
                     }
-                    console.log(startIdx);
                 }}>
                 <ArrowButton text=">"></ArrowButton>
             </div>
