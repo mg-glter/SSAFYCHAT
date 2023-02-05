@@ -1,7 +1,7 @@
 import "../styles/container/video-conference-container.css"
 import io from 'socket.io-client';
 function test(){
-const socket = io("ws://localhost:8000");
+const socket = io(process.env.REACT_APP_SOCKET as string);
 
 const myFace = document.getElementById("myFace") as HTMLMediaElement;
 const muteBtn = document.getElementById("mute") as HTMLButtonElement;

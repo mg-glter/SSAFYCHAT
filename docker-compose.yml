@@ -23,7 +23,7 @@ services:
       - '8080:8080'
     volumes:
       - ./backend:/srv/docker-server
-    command: java -jar /srv/docker-server/build/libs/backend-0.0.1-SNAPSHOT.jar
+       #&& java -jar /srv/docker-server/build/libs/backend-0.0.1-SNAPSHOT.jar
 
   backend_signaling_server:
     build: ./backend_chatting
@@ -36,7 +36,9 @@ services:
   front_node:
     build: ./front
     container_name: front_node
+    env_file:
+      - ./front/front.env
     ports:
-      - '3000:3000'
+      - '80:3000'
     volumes:
       - ./front:/srv/docker-server
