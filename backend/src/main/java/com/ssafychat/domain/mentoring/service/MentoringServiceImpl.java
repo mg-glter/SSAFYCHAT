@@ -177,6 +177,7 @@ public class MentoringServiceImpl implements MentoringService {
         // applyMentoring에서 job, company, mentee_uid를 가져온다.
         // time을 넣는다.
         Mentoring mentoring = Mentoring.builder()
+                .mentoringId(applyMentoring.getApplyMentoringId())
                 .mentor(memberRepository.findByUserId(userId).get())
                 .mentee(applyMentoring.getMentee())
                 .job(applyMentoring.getJob())
@@ -201,6 +202,7 @@ public class MentoringServiceImpl implements MentoringService {
     @Override
     public void insertCancelMentoring(int canceler, String reason, Mentoring mentoring) {
         CancelMentoring cancelMentoring = CancelMentoring.builder()
+                .cancelMentoringId(mentoring.getMentoringId())
                 .mentor(mentoring.getMentor())
                 .mentee(mentoring.getMentee())
                 .company(mentoring.getCompany())
