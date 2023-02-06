@@ -42,7 +42,8 @@
 
 .reservation_card:hover{
     box-shadow: 0px 0px 0px #FFFFFF;
-    background: #a6a6a6;
+    background: #0d0d0d;
+    opacity: 80%;
     cursor: pointer;
 }
 
