@@ -266,4 +266,13 @@ public class MentoringServiceImpl implements MentoringService {
         completeMentoringRepository.save(completeMentoring);
     }
 
+    @Override
+    public void addReviewAndScore(ReviewAndScoreDto reviewAndScoreDto) {
+        CompleteMentoring completeMentoring = completeMentoringRepository.findByCompleteMentoringId(reviewAndScoreDto.getCompleteMentoringId());
+        completeMentoring.setReviewTitle(reviewAndScoreDto.getReviewTitle());
+        completeMentoring.setReviewContent(reviewAndScoreDto.getReviewContent());
+        completeMentoring.setScore(reviewAndScoreDto.getScore());
+        completeMentoringRepository.save(completeMentoring);
+    }
+
 }

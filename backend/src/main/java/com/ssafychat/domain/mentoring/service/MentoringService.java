@@ -37,4 +37,6 @@ public interface MentoringService {
 
     List<RollingPaperDto> getRollingPaper(Member mentor);
     void updateRollingPaper(RollingPaperDto rollingPaperDto);
+
+    void addReviewAndScore(ReviewAndScoreDto reviewAndScoreDto);
 }

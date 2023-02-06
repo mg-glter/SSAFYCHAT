@@ -55,7 +55,7 @@ public class MentoringController {
 //    }
     @PostMapping("/apply")
     @Transactional
-    public ResponseEntity<String> applyMentoring(@RequestBody ApplyMentoringDto applyMentoringDto, HttpServletRequest request) {
+    public ResponseEntity<String> applyMentoring(ApplyMentoringDto applyMentoringDto, HttpServletRequest request) {
         Member mentee = (Member) request.getAttribute("USER");
         // 서비스에 user와 applyMentoringDto(job, company, times) 넘긴다.
         System.out.println(applyMentoringDto);
@@ -144,5 +144,16 @@ public class MentoringController {
         return new ResponseEntity<>("review", HttpStatus.OK);
     }
 
+    @PostMapping("/review")
+    public ResponseEntity<?> postReviewAndScore(ReviewAndScoreDto reviewAndScoreDto) {
+        // 후기 입력해서 completeMentoring update
+        mentoringService.addReviewAndScore(reviewAndScoreDto);
+        return new ResponseEntity<>("review and score", HttpStatus.OK);
+    }
+    @PostMapping("/report")
+    public ResponseEntity<?> postReport() {
+
+        return new ResponseEntity<>("report", HttpStatus.OK);
+    }
 
 }
