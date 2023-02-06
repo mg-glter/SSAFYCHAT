@@ -117,8 +117,14 @@ public class MentoringController {
         return new ResponseEntity<String>("cancel/matched-reservation", HttpStatus.OK);
     }
     @DeleteMapping("/cancel/reservation")
-    public ResponseEntity<?> reservationCancel() {
-
+    @Transactional
+    public ResponseEntity<?> reservationCancel(HttpServletRequest request, @RequestBody MentoringDateDto mentoringDateDto) {
+        Member user = (Member) request.getAttribute("USER");
+        int userId = user.getUserId();
+        int applyMentoringId = mentoringDateDto.getApplyMentoringId();
+        Timestamp time = mentoringDateDto.getTime();
+        int rowsDeleted = mentoringService.deleteMentoringDate(applyMentoringId);
+        ApplyMentoring applyMentoring = mentoringService.deleteApplyMentoring(applyMentoringId);
 
         return new ResponseEntity<String>("cancel/reservation", HttpStatus.OK);
     }
