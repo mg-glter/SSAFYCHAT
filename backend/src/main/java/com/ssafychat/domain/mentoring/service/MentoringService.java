@@ -40,6 +40,8 @@ public interface MentoringService {
 
     void addReviewAndScore(ReviewAndScoreDto reviewAndScoreDto);
 
+    void reportBadUser(Member reporter, int completeMentoringId, String reason);
+
     List<ApplyMentoringViewDto> getApplyMentoringList(int userId);
 
     List<MentoringListForMenteeDto> getMatchedMentoringList(int userId);

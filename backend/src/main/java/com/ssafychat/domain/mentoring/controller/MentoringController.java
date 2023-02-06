@@ -167,8 +167,10 @@ public class MentoringController {
         return new ResponseEntity<>("review and score", HttpStatus.OK);
     }
     @PostMapping("/report")
-    public ResponseEntity<?> postReport() {
+    public ResponseEntity<?> postReport(HttpServletRequest request, int completeMentoringId, String reason) {
+        Member reporter = (Member) request.getAttribute("USER");
 
+        mentoringService.reportBadUser(reporter, completeMentoringId, reason);
         return new ResponseEntity<>("report", HttpStatus.OK);
     }
 

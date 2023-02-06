@@ -33,6 +33,9 @@ public class MentoringServiceImpl implements MentoringService {
     @Autowired
     private CompleteMentoringRepository completeMentoringRepository;
 
+    @Autowired
+    private ReportRepository reportRepository;
+
     @Override
     public List<Mentoring> findMentoring(){
         return mentoringRepository.findAll();
@@ -355,6 +358,29 @@ public class MentoringServiceImpl implements MentoringService {
         }
 
         return canceledMentoringListForMentee;
+    }
+
+    @Override
+    public void reportBadUser(Member reporter, int completeMentoringId, String reason) {
+        // 완료 테이블 정보 불러와서
+        CompleteMentoring completeMentoring = completeMentoringRepository.findByCompleteMentoringId(completeMentoringId);
+        // reported = mentee와 mentor 중 member가 아닌 사람
+        Member reported = null;
+        if (completeMentoring.getMentor().getUserId() == reporter.getUserId()){
+            reported = completeMentoring.getMentee();
+        } else {
+            reported = completeMentoring.getMentor();
+        }
+        // insert
+        Report report = Report.builder()
+                .reporter(reporter.getUserId())
+                .reported(reported.getUserId())
+                .reason(reason)
+                .completeMentoring(completeMentoring)
+                .build();
+        reportRepository.save(report);
+        System.out.println(report);
+
     }
 
 }
