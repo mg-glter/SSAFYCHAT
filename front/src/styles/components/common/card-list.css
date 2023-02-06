@@ -2,7 +2,7 @@
 .card_list_container{    
 
     width: 1200px;
-    height: 320px;
+    height: 260px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -16,7 +16,7 @@
     /* box-sizing: border-box; */
     margin:0px;
     width: 1200px;
-    height: 260px;
+    height: 220px;
     border-radius: 15px;
     display: flex;
     justify-content: space-around;
@@ -32,7 +32,7 @@
     gap: 1px;
 
     width: 1200px;
-    height: 60px;
+    height: 40px;
 
 
     background: #031059;
@@ -51,7 +51,7 @@
 /* 좌 우 화살표를 담는 컨테이너 */
 .card_list_arrow{
     width: 80px;
-    height: 260px;
+    height: 220px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -88,7 +88,7 @@
 /* 카드들을 담는 컨테이너 */
 .card_container{
     width: 1480px;
-    height: 260px;
+    height: 220px;
     display: flex;
 }
 /* 카드 바깥 */

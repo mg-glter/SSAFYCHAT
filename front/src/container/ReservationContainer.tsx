@@ -44,7 +44,12 @@ function ReservationContainer(){
             <div className="reservation_page_inner_container">
                 <CardList drag={dragCard} header={"신청 목록"} cardList = {cardList}></CardList>
                 <ReservedCardList cardList={reCardList}></ReservedCardList>
-                <CardList drag={()=>{return;}} header={"취소 목록"} cardList = {[]}></CardList>
+                <CardList drag={(event : any, tmp : string)=>{
+                    return;
+                    }} 
+                    init={(event : any)=>{
+                        event.target.style.pointerEvents = "none";
+                    }}header={"취소 목록"} cardList = {cardList}></CardList>
             </div>
         </div>
     )

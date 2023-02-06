@@ -14,11 +14,12 @@ function dragItem(event : any){
     let onDrag = true;
 
     container.onmouseleave = function(){
-        if(onDrag){
-            // **********************
-            // 이 곳에 기능을 넣어야 함
-            // **********************
-            alert("삭제합니다");
+        if(onDrag){            
+            if(window.confirm("삭제합니까")){
+                // **********************
+                // 이 곳에 기능을 넣어야 함
+                // **********************
+            }
             onDrag = false;
         }
     }
