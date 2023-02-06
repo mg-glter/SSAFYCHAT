@@ -138,9 +138,9 @@ public class MentoringController {
         return new ResponseEntity<>(mentoringService.getRollingPaper(mentor), HttpStatus.OK);
     }
     @PatchMapping("/review")
-    public ResponseEntity<?> moveReviewRollingPaper(@RequestBody RollingPaperDto rollingPaperDto) {
+    public ResponseEntity<?> moveReviewRollingPaper(RollingPaperDto rollingPaperDto) {
         // 후기 좌표 변경 혹은 선택 여부 변경
-        // 서비스에서 rollingPaperDto 정보 completeMentoring 엔티티에 담아서 update
+        mentoringService.updateRollingPaper(rollingPaperDto);
         return new ResponseEntity<>("review", HttpStatus.OK);
     }
 

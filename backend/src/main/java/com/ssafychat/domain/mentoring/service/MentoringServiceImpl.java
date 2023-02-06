@@ -251,8 +251,19 @@ public class MentoringServiceImpl implements MentoringService {
                     .build();
             rollingPapers.add(rollingPaper);
         }
-//        List<RollingPaperDto> rollingPapers = completeMentoringRepository.findByMentorForRollingPaper(mentor);
         return rollingPapers;
+    }
+
+    @Override
+    public void updateRollingPaper(RollingPaperDto rollingPaperDto) {
+        // 서비스에서 rollingPaperDto 정보 completeMentoring 엔티티에 담아서 update
+        CompleteMentoring completeMentoring = completeMentoringRepository.findByCompleteMentoringId(rollingPaperDto.getCompleteMentoringId());
+        completeMentoring.setReviewTitle(rollingPaperDto.getReviewTitle());
+        completeMentoring.setReviewContent(rollingPaperDto.getReviewContent());
+        completeMentoring.setReviewSelected(rollingPaperDto.getReviewSelected());
+        completeMentoring.setReviewWidth(rollingPaperDto.getReviewWidth());
+        completeMentoring.setReviewHeight(rollingPaperDto.getReviewHeight());
+        completeMentoringRepository.save(completeMentoring);
     }
 
 }

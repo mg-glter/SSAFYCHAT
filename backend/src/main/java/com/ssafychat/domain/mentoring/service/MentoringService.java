@@ -36,4 +36,5 @@ public interface MentoringService {
     void insertApplyMentoringAndMentoringDate(Member mentee, ApplyMentoringDto applyMentoringDto);
 
     List<RollingPaperDto> getRollingPaper(Member mentor);
+    void updateRollingPaper(RollingPaperDto rollingPaperDto);
 }
