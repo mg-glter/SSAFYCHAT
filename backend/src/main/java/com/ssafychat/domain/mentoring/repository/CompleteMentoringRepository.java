@@ -26,6 +26,8 @@ public interface CompleteMentoringRepository extends JpaRepository<CompleteMento
             "where completed = true")
     Long completeMentoringCount();
 
-    List<CompleteMentoring> findByMentee(Member member);
-    List<CompleteMentoring> findByMentor(Member member);
+    List<CompleteMentoring> findByMentee(Member mentee);
+    List<CompleteMentoring> findByMentor(Member mentor);
+
+//    List<RollingPaperDto> findByMentorForRollingPaper(Member mentor);
 }

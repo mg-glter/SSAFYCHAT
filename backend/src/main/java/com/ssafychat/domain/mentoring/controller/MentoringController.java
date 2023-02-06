@@ -54,6 +54,7 @@ public class MentoringController {
 //        return new ResponseEntity<String>("apply", HttpStatus.CREATED);
 //    }
     @PostMapping("/apply")
+    @Transactional
     public ResponseEntity<String> applyMentoring(@RequestBody ApplyMentoringDto applyMentoringDto, HttpServletRequest request) {
         Member mentee = (Member) request.getAttribute("USER");
         // 서비스에 user와 applyMentoringDto(job, company, times) 넘긴다.
@@ -130,16 +131,17 @@ public class MentoringController {
         return new ResponseEntity<>(mentoring, HttpStatus.OK);
     }
     @GetMapping("/review")
-    public ResponseEntity<?> getReviewRollingPaper() {
+    public ResponseEntity<?> getReviewRollingPaper(HttpServletRequest request) {
         // 멤버 정보로 해당 후기 가져오기
-        //
-        return new ResponseEntity<String>("review", HttpStatus.OK);
+        Member mentor = (Member) request.getAttribute("USER");
+//        List<RollingPaperDto> rollingPapers = mentoringService.getRollingPaper(mentor);
+        return new ResponseEntity<>(mentoringService.getRollingPaper(mentor), HttpStatus.OK);
     }
     @PatchMapping("/review")
-    public ResponseEntity<?> moveReviewRollingPaper() {
+    public ResponseEntity<?> moveReviewRollingPaper(@RequestBody RollingPaperDto rollingPaperDto) {
         // 후기 좌표 변경 혹은 선택 여부 변경
-        //
-        return new ResponseEntity<String>("review", HttpStatus.OK);
+        // 서비스에서 rollingPaperDto 정보 completeMentoring 엔티티에 담아서 update
+        return new ResponseEntity<>("review", HttpStatus.OK);
     }
 
 

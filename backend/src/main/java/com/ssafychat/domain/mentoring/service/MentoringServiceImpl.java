@@ -4,11 +4,8 @@ import com.ssafychat.domain.member.repository.MemberRepository;
 import com.ssafychat.domain.member.dto.PossibleMentoringDto;
 import com.ssafychat.domain.member.model.Member;
 import com.ssafychat.domain.mentoring.dto.*;
-import com.ssafychat.domain.mentoring.model.CancelMentoring;
-import com.ssafychat.domain.mentoring.model.MentoringDate;
+import com.ssafychat.domain.mentoring.model.*;
 import com.ssafychat.domain.mentoring.repository.*;
-import com.ssafychat.domain.mentoring.model.ApplyMentoring;
-import com.ssafychat.domain.mentoring.model.Mentoring;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -235,6 +232,27 @@ public class MentoringServiceImpl implements MentoringService {
                     .build();
             mentoringDateRepository.save(mentoringDate);
         }
+    }
+
+    @Override
+    public List<RollingPaperDto> getRollingPaper(Member mentor) {
+        // completeMentoring에서 userId == mentor_uid인 데이터 조회
+        List<CompleteMentoring> completeMentorings = completeMentoringRepository.findByMentor(mentor);
+        // rollingPaperDto에 담아서 반환
+        List<RollingPaperDto> rollingPapers = new ArrayList<>();
+        for (CompleteMentoring completeMentoring : completeMentorings) {
+            RollingPaperDto rollingPaper = RollingPaperDto.builder()
+                    .completeMentoringId(completeMentoring.getCompleteMentoringId())
+                    .reviewTitle(completeMentoring.getReviewTitle())
+                    .reviewContent(completeMentoring.getReviewContent())
+                    .reviewHeight(completeMentoring.getReviewHeight())
+                    .reviewWidth(completeMentoring.getReviewWidth())
+                    .reviewSelected(completeMentoring.getReviewSelected())
+                    .build();
+            rollingPapers.add(rollingPaper);
+        }
+//        List<RollingPaperDto> rollingPapers = completeMentoringRepository.findByMentorForRollingPaper(mentor);
+        return rollingPapers;
     }
 
 }

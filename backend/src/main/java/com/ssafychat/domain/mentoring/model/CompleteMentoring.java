@@ -41,6 +41,8 @@ public class CompleteMentoring {
     @Column(nullable = false)
     private int score;
 
+    private String reviewTitle;
+
     @Column(columnDefinition = "TEXT")
     private String reviewContent;
 

@@ -2,10 +2,7 @@ package com.ssafychat.domain.mentoring.service;
 
 import com.ssafychat.domain.member.dto.PossibleMentoringDto;
 import com.ssafychat.domain.member.model.Member;
-import com.ssafychat.domain.mentoring.dto.ApplyMentoringDto;
-import com.ssafychat.domain.mentoring.dto.ApplyMentoringForMentorDto;
-import com.ssafychat.domain.mentoring.dto.MainInfoDto;
-import com.ssafychat.domain.mentoring.dto.MatchMentoringForMentorDto;
+import com.ssafychat.domain.mentoring.dto.*;
 import com.ssafychat.domain.mentoring.model.ApplyMentoring;
 import com.ssafychat.domain.mentoring.model.Mentoring;
 
@@ -38,4 +35,5 @@ public interface MentoringService {
 
     void insertApplyMentoringAndMentoringDate(Member mentee, ApplyMentoringDto applyMentoringDto);
 
+    List<RollingPaperDto> getRollingPaper(Member mentor);
 }
