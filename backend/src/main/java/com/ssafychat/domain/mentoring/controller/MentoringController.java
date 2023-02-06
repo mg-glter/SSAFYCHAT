@@ -99,8 +99,27 @@ public class MentoringController {
 
         return new ResponseEntity<String>("cancel/appointment", HttpStatus.OK);
     }
+
+    @DeleteMapping("/cancel/matched-reservation")
+    @Transactional
+    public ResponseEntity<?> matchedReservationCancel(@RequestBody CancelReasonDto cancelReasonDto, HttpServletRequest request) {
+        //멘토 멘티여부 검증 추가 필요
+        Member user = (Member) request.getAttribute("USER");
+        System.out.println(cancelReasonDto);
+        int userId = user.getUserId();
+        
+        Mentoring mentoring = mentoringService.deleteMentoring(cancelReasonDto.getMentoringId());
+
+        System.out.println(mentoring.getMentor());
+
+        mentoringService.insertCancelMentoring(userId, cancelReasonDto.getReason(), mentoring);
+                
+        return new ResponseEntity<String>("cancel/matched-reservation", HttpStatus.OK);
+    }
     @DeleteMapping("/cancel/reservation")
     public ResponseEntity<?> reservationCancel() {
+
+
         return new ResponseEntity<String>("cancel/reservation", HttpStatus.OK);
     }
     @GetMapping("/appointment") // 멘토에게 들어온 멘토링 목록, 매칭된 멘토링 목록
