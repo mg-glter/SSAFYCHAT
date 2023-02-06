@@ -210,7 +210,7 @@ function VideoConferenceContainer(props : any){
     let first = true;
     return(
         // 회의 컨테이너 전체를 담는 컨테이너
-        <div className="video_conference_container" onMouseEnter={()=>{
+        <div id="call" className="video_conference_container" onMouseEnter={()=>{
             if(first){
                 first = false;
                 test();
@@ -227,30 +227,26 @@ function VideoConferenceContainer(props : any){
                     <button id="camera">Turn Camera Off</button>
                     <select id="cameras"></select> */}
             </div>
-             <div id="call"> 
+             {/* <div id="call"> 
                  <div id="myStream">
                     <video id="myFace" height="400" width="400" autoPlay playsInline></video>
                      <video id="peerFace" height="400" width="400" autoPlay playsInline></video> 
                  </div> 
-             </div> 
+             </div>  */}
 
             {/* 비디오 화면과 버튼들을 담을 왼쪽 컨테이너 */}
-            <div className="video_conference_left" >
+            <div id="myStream" className="video_conference_left" >
 
                 {/* 내 비디오 화면을 담을 컨테이너 */}
                 <div className="video_conference_mine">
                     {/* 내 비디오 화면 */}
-                    <video className="video_conference_mine_screen"  autoPlay playsInline>
+                    <video  id="myFace" className="video_conference_mine_screen"  autoPlay playsInline>
 
                     </video>
                 </div>
 
                 {/* 상대의 비디오 화면을 담을 컨테이너 */}
                 <div className="video_conference_oppnent">
-                    {/* 
-                        여기 id 이름 이상해
-                    */}
-
                     {/* 상대의 비디오 화면 */}
                     <video id="peerFace" className="video_conference_oppnent_screen" autoPlay playsInline>
 
