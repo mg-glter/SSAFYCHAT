@@ -1,7 +1,7 @@
 /* 카드 바깥 */
 .reserved_card_outer{
     width: 30%;
-    height: 560px;
+    height: 460px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -9,7 +9,7 @@
 /* 카드 본체 */
 .reserved_card{
     width: 244px;
-    height: 400px;
+    height: 340px;
     margin: 10px;
     background-color: #ffffff;
     border: solid black 1px;
