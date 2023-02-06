@@ -39,7 +39,7 @@ public class CompleteMentoring {
     @Column(columnDefinition = "VARCHAR(30)", nullable = false)
     private String company;
 
-    @Column(nullable = false)
+    @Column(columnDefinition = "int default '3'")
     private int score;
 
     private String reviewTitle;
@@ -56,6 +56,7 @@ public class CompleteMentoring {
     @Column(columnDefinition = "BOOLEAN", nullable = false)
     private int reviewSelected;
 
-    private boolean completed;
+    @Column(columnDefinition = "BOOLEAN", nullable = false)
+    private int completed;
 
 }
