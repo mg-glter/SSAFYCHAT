@@ -16,7 +16,6 @@ import java.sql.Timestamp;
 public class CompleteMentoring {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int completeMentoringId;
 
     @ManyToOne
