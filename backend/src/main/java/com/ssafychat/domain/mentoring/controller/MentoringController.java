@@ -64,8 +64,24 @@ public class MentoringController {
     }
 
     @GetMapping("/reservation")
-    public ResponseEntity<?> reservationMentoring() {
-        return new ResponseEntity<String>("reservation", HttpStatus.OK);
+    public ResponseEntity<?> reservationMentoring(HttpServletRequest request) {
+
+        Member user = (Member) request.getAttribute("USER");
+        int userId = user.getUserId();
+
+        List<ApplyMentoringViewDto> appliedMentoringList = mentoringService.getApplyMentoringList(userId);
+
+        List<MentoringListForMenteeDto> matchedMentoringList = mentoringService.getMatchedMentoringList(userId);
+
+        List<CanceledMentoringListDto> canceledMentoringListForMentee = mentoringService.getCancledMentoringList(userId);
+
+        CheckMentoringReservationForMenteeDto checkMentoringListForMentee =
+                CheckMentoringReservationForMenteeDto.builder()
+                        .appliedList(appliedMentoringList).matchedList(matchedMentoringList)
+                                .cancledList(canceledMentoringListForMentee).build();
+
+
+        return new ResponseEntity<>(checkMentoringListForMentee, HttpStatus.OK);
     }
 
     @DeleteMapping("/cancel/appointment") // 멘토가 멘토링을 취소
@@ -155,5 +171,8 @@ public class MentoringController {
 
         return new ResponseEntity<>("report", HttpStatus.OK);
     }
+
+
+
 
 }

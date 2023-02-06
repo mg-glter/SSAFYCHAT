@@ -20,4 +20,6 @@ public interface MentoringRepository extends JpaRepository<Mentoring, Integer> {
 
     List<Mentoring> findByMentee(Member member);
     List<Mentoring> findByMentor(Member member);
+
+    List<Mentoring> findByMentee_UserId(int userId);
 }

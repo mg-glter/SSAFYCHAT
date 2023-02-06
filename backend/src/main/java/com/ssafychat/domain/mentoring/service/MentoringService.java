@@ -39,4 +39,14 @@ public interface MentoringService {
     void updateRollingPaper(RollingPaperDto rollingPaperDto);
 
     void addReviewAndScore(ReviewAndScoreDto reviewAndScoreDto);
+
+    List<ApplyMentoringViewDto> getApplyMentoringList(int userId);
+
+    List<MentoringListForMenteeDto> getMatchedMentoringList(int userId);
+
+    List<CanceledMentoringListDto> getCancledMentoringList(int userId);
+
+
+
+
 }

@@ -9,6 +9,7 @@ import com.ssafychat.domain.mentoring.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -51,6 +52,7 @@ public class MentoringServiceImpl implements MentoringService {
 //                .build();
 //    }
     @Override
+    @Transactional
     public void applyMentoring(ApplyMentoring applyMentoring) {
         this.applyMentoringRepository.save(applyMentoring);
 
@@ -215,6 +217,7 @@ public class MentoringServiceImpl implements MentoringService {
     }
 
     @Override
+    @Transactional
     public void insertApplyMentoringAndMentoringDate(Member mentee, ApplyMentoringDto applyMentoringDto) {
         // applyMentoring 테이블에 job, company, mentee 빌딩해서 insert 후
         ApplyMentoring applyMentoring = ApplyMentoring.builder()
@@ -273,6 +276,85 @@ public class MentoringServiceImpl implements MentoringService {
         completeMentoring.setReviewContent(reviewAndScoreDto.getReviewContent());
         completeMentoring.setScore(reviewAndScoreDto.getScore());
         completeMentoringRepository.save(completeMentoring);
+    }
+
+    @Override
+    public List<ApplyMentoringViewDto> getApplyMentoringList(int userId) {
+        List<ApplyMentoringViewDto> appliedMentoringList = new ArrayList<>();
+        List<ApplyMentoring> applyMentoringList = applyMentoringRepository.findByMentee_UserId(userId);
+
+        for(int i=0; i< applyMentoringList.size(); i++){
+
+            ApplyMentoring applyMentoring = applyMentoringList.get(i);
+            MentoringDateDto mentoringDateDto = MentoringDateDto.builder().
+                    applyMentoringId(applyMentoring.getApplyMentoringId()).build();
+
+            List<MentoringDate> mentoringDateList = mentoringDateRepository.
+                    findByApplyMentoring_ApplyMentoringId(mentoringDateDto.getApplyMentoringId());
+            List<Timestamp> mentoringDateTimes = new ArrayList<>();
+
+            for (MentoringDate mentoringDate : mentoringDateList) {
+                mentoringDateTimes.add(mentoringDate.getTime());
+            }
+            appliedMentoringList.add(
+                    ApplyMentoringViewDto.builder()
+                            .applyMentoringId(applyMentoring.getApplyMentoringId())
+                            .menteeUid(applyMentoring.getMentee().getUserId())
+                            .job(applyMentoring.getJob())
+                            .company(applyMentoring.getCompany())
+                            .times(mentoringDateTimes)
+                            .build()
+            );
+        }
+
+
+        return appliedMentoringList;
+    }
+
+    @Override
+    public List<MentoringListForMenteeDto> getMatchedMentoringList(int userId) {
+        //멘토 정보 가져오기 고려
+        List<MentoringListForMenteeDto> matchedMentoringList =  new ArrayList<>();
+        List<Mentoring> mentoringList = mentoringRepository.findByMentee_UserId(userId);
+
+        for (int i = 0; i < mentoringList.size(); i++) {
+            Mentoring mentoring = mentoringList.get(i);
+            Member mentor = mentoring.getMentor();
+
+            matchedMentoringList.add(
+                    MentoringListForMenteeDto.builder()
+                            .mentoringId(mentoring.getMentoringId())
+                            .name(mentor.getName())
+                            .job(mentoring.getJob())
+                            .company(mentoring.getCompany())
+                            .time(mentoring.getTime())
+                            .build()
+            );
+        }
+
+        return matchedMentoringList;
+    }
+
+    @Override
+    public List<CanceledMentoringListDto> getCancledMentoringList(int userId) {
+
+        List<CanceledMentoringListDto> canceledMentoringListForMentee = new ArrayList<>();
+        List<CancelMentoring> cancelMentoringList = cancelMentoringRepository.findByMentee_UserId(userId);
+
+        for(int i=0; i<cancelMentoringList.size(); i++){
+            CancelMentoring cancelMentoring = cancelMentoringList.get(i);
+
+            canceledMentoringListForMentee.add(
+                    CanceledMentoringListDto.builder()
+                            .cancelMentoringId(cancelMentoring.getCancelMentoringId())
+                            .job(cancelMentoring.getJob())
+                            .company(cancelMentoring.getCompany())
+                            .time(cancelMentoring.getTime())
+                            .build()
+            );
+        }
+
+        return canceledMentoringListForMentee;
     }
 
 }
