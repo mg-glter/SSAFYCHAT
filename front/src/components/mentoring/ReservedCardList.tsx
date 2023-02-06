@@ -41,7 +41,7 @@ function ReservedCardList(props : any){
         
         {/* 카드리스트 */}
         <div className="reserved_card_container">
-            {list};
+            {list}
         </div>
 
             

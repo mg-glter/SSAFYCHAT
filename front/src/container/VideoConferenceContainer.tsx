@@ -247,8 +247,12 @@ function VideoConferenceContainer(props : any){
 
                 {/* 상대의 비디오 화면을 담을 컨테이너 */}
                 <div className="video_conference_oppnent">
+                    {/* 
+                        여기 id 이름 이상해
+                    */}
+
                     {/* 상대의 비디오 화면 */}
-                    <video  className="video_conference_oppnent_screen" autoPlay playsInline>
+                    <video id="peerFace" className="video_conference_oppnent_screen" autoPlay playsInline>
 
                     </video>
                 </div>
@@ -267,11 +271,7 @@ function VideoConferenceContainer(props : any){
                             <img src="img/arrow-down.png" alt="arrow-donwn"></img>
                         </div>
                         <select id="cameras"></select>
-                        {/* 화면 공유는 구현이 쉽지 않을 것으로 보인다 */}
-                        {/* <div className="video_conference_button">
-                            <img src="img/share-screen.png" alt="recording"></img>
-                            <span></span>
-                        </div> */}
+                        
                         <div className="video_conference_cancel">
                             <img src="img/cancel.png" alt="recording"></img>
                         </div>

@@ -1,7 +1,7 @@
 /* 카드 리스트 요소 전체를 감싸는 컨테이너 */
 .reserved_card_list_container{
     width: 1200px;
-    height: 620px;
+    height: 500px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -17,7 +17,7 @@
     /* box-sizing: border-box; */
     margin:0px;
     width: 1200px;
-    height: 560px;
+    height: 460px;
 
     display: flex;
     justify-content: space-around;
@@ -34,7 +34,7 @@
     color: #FFFFFF;
 
     width: 1200px;
-    height: 60px;
+    height: 40px;
 
 
     background: #031059;
@@ -52,7 +52,7 @@
 /* 좌 우 화살표를 담는 컨테이너 */
 .reserved_card_list_arrow{
     width: 80px;
-    height: 560px;
+    height: 460px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -68,6 +68,6 @@
 /* 카드들을 담는 컨테이너 */
 .reserved_card_container{
     width: 1480px;
-    height: 560px;
+    height: 460px;
     display: flex;
 }

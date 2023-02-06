@@ -58,11 +58,12 @@ function dragCard(event : any, elemClassName : string){
     document.addEventListener('mousemove', onMouseMove);
 
     container.onmouseleave = function(){
-        if(onDrag){
-            alert("삭제합니다");
-            // **********************
-            // 이 곳에 기능을 넣어야 함
-            // **********************
+        if(onDrag){            
+            if(window.confirm("삭제합니까")){
+                // **********************
+                // 이 곳에 기능을 넣어야 함
+                // **********************
+            }
             onDrag = false;
         }
     }
