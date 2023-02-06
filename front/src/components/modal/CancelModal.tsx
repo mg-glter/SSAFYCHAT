@@ -17,7 +17,7 @@ function CancelModal (props:any){
                 </div>
                 <form className='cancel_modal_content'>
                     <textarea className='cancel_modal_textarea' placeholder='취소사유를 적어주세요'>
-
+                        
                     </textarea>
                     <button className='cancel_modal_submit_button'>제출</button>
                 </form>
