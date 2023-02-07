@@ -4,7 +4,7 @@ import axios from "axios";
 // localServer 통신
 function localServer() {
   const instance = axios.create({
-    baseURL: "https://ssafychat.shop/",
+    baseURL: "https://ssafychat.shop/api",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
     },
