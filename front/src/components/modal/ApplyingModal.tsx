@@ -1,7 +1,11 @@
 import '../../styles/components/modal/applying-modal.css';
+import Calendar from 'react-calendar';
+import { useState } from 'react';
+import '../../styles/widget/calendar.css';
 
 function ApplyingModal (props:any){
 
+    const [value, onChange] = useState(new Date());
     function closeModal() {
         props.closeModal();
     }
@@ -16,7 +20,9 @@ function ApplyingModal (props:any){
                 </div>
                 <div className='modal_content'>
                     <div className='modal_content_calendar_box'>
-                        <div className='modal_content_calendar'></div>
+                        <div className='modal_content_calendar'>
+                            <Calendar onChange={onChange} value={value} calendarType='US'></Calendar>
+                        </div>
                     </div>
                     <div className='modal_content_select'>
                         <div className='modal_content_selected_date'>
