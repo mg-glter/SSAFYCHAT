@@ -2,7 +2,6 @@ import "../../styles/components/user/sign_in_up.css";
 import TextBox from "../../widget/InputTextBox";
 import {Link} from 'react-router-dom';
 import {useState} from 'react';
-// const regexr = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 
 function emailRegexr(data: string){
     const regexr = /^[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
@@ -43,7 +42,7 @@ function Login(props: any){
                     <form className="login_text_box">
                         {/* 로그인 입력 박스 두개 */}
                         <TextBox item="id" sItem={handleStateId}></TextBox>
-                        {!check_email ? <span className="checkEmail">이메일 형식이 맞지 않습니다.</span> : null}
+                        {!check_email && userId !== '' ? <span className="checkEmail">이메일 형식이 맞지 않습니다.</span> : null}
                         <TextBox item="pwd" sItem={handleStatePwd}></TextBox>
                         {/* 아이디 기억 */}
                         <div className="b_side">
