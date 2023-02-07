@@ -24,6 +24,7 @@
     height: 35%;
     line-height: 88px;
     transform: translate(5%);
+    color: #031059;
 }
 
 .card_info{
@@ -73,4 +74,20 @@
     -moz-user-select:none;
     -ms-user-select:none;
     user-select:none
+}
+
+.draggble_false:hover{
+    width: 244px;
+    height: 180px;
+    margin: 10px;
+    background-color: #d9d9d9;
+    border-radius: 20px;
+    box-shadow:  5px 5px 5px gray;
+
+    font-family: 'Do Hyeon', sans-serif;
+    cursor:default;
+}
+
+.draggble_false:hover > .cancel_description{
+    display: none;
 }

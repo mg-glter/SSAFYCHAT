@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router";
 import "../../styles/components/mentoring/reserved-list.css"
-
 function dragItem(event : any){
     let elem = event.target;
     if(elem.className === "reserved_list_enter_button"){
@@ -53,8 +52,9 @@ function ReservedListItem(props : any){
     )
 }
 
-function enterMeeting(event : any){
+function enterMeeting(event : any, navigate : any){
     alert('입장합니다.');
+    navigate("/meeting");
 }
 
 function ReservedList(props : any){
@@ -76,17 +76,14 @@ function ReservedList(props : any){
                     </tr>
                 </thead>
                 <tbody className="reserved_list_tbody">
-                    <ReservedListItem func={()=>{
-                        navigate("/meeting");
-                        alert('입장합니다.');
+                    <ReservedListItem func={(event : any)=>{
+                         enterMeeting(event, navigate);
                     }}></ReservedListItem>
-                    <ReservedListItem func={()=>{
-                        navigate("/meeting");
-                        alert('입장합니다.');
+                    <ReservedListItem func={(event : any)=>{
+                         enterMeeting(event, navigate);
                     }}></ReservedListItem>
-                    <ReservedListItem func={()=>{
-                        navigate("/meeting");
-                        alert('입장합니다.');
+                    <ReservedListItem func={(event : any)=>{
+                         enterMeeting(event, navigate);
                     }}></ReservedListItem>
                 </tbody>
             </table>
