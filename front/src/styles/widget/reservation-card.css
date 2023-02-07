@@ -6,6 +6,7 @@
     flex-direction: column;
     justify-content: center;
 }
+
 /* 카드 본체 */
 .reservation_card{
     width: 244px;
@@ -67,4 +68,9 @@
 .reservation_card:hover > .cancel_description{
     background-color: #ffffff13;
     display: block;
+    
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none
 }

@@ -63,8 +63,7 @@
     margin-top: 15px;
 }
 
-.cancel_modal_textarea{
-    
+.cancel_modal_textarea{    
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 4px;
@@ -74,8 +73,28 @@
     height: 90%;
 }
 
+
+
 .cancel_modal_submit_button{
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+    width: 100px;
+    height: 30px;
+
+    line-height: 35px;
+    font-size: 25px;
+    color: #FFFFFF;
+
+    background-color: #023E73;
+    
+    border-radius: 8px;
+
+    margin: auto;    
+}
+
+.cancel_modal_submit_button{
+  cursor: pointer;
+}
+
+.cancel_modal_submit_button_container{
+  display: flex;
+
 }
