@@ -54,11 +54,11 @@ function Login(props: any){
                             <a className="find_pwd draggable" href="#!">Forgot ID or Password?</a>
                         </div>
                         {/* 로그인 버튼 */}
-                        <Link to="/"><input className="submit_btn_upper draggable" type="submit" value="Sign In" /></Link>
+                        <Link to="/" className="link-tag-none"><input className="submit_btn_upper draggable" type="submit" value="Sign In" /></Link>
                         {/* <input className="submit_btn_upper draggable" type="submit" value="Sign In" /> */}
                         <hr className="hr_tag" />
                         {/* 회원가입 버튼 */}
-                        <Link to="/user/join"><button className="submit_btn_lower draggable" type="submit">Sing Up</button></Link>
+                        <Link to="/user/join" className="link-tag-none"><button className="submit_btn_lower draggable" type="submit">Sing Up</button></Link>
                     </form>
                 </div>
             </div>
