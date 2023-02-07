@@ -54,8 +54,7 @@
   background-color: transparent;
   font-size: 20px;
 }
-  
-#cancel_modal-close-btn:hover {
+#cancel_modal_close_btn:hover {
   cursor: pointer;
 }
 
@@ -79,7 +78,7 @@
     width: 100px;
     height: 30px;
 
-    line-height: 35px;
+    line-height: 30px;
     font-size: 25px;
     color: #FFFFFF;
 

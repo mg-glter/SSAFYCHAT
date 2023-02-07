@@ -11,8 +11,11 @@ function ReservedCard(props : any){
         <div className="reserved_card_outer">
             {/* 카드 본체 드래그 이벤트를 프롭스로 받아와 드래그 사용 */}
             <div className="reserved_card"  onClick={()=>setClickCancel(true)}>
-                <div className="reserved_card_header">                
-                    <ruby>{props.info.time}<rt>멘토링</rt></ruby>
+                <div className="reserved_card_header">
+                    <div className="reserved_card_header_inner">
+                        <div className="reserved_rt">멘토링</div>                
+                        <div className="reserved_card_time">{props.info.time}</div>
+                    </div>
                 </div>                
                 <div className="reserved_card_content_container">
                     {props.info.name}
@@ -35,7 +38,7 @@ function ReservedCard(props : any){
                     </div>                                       
                 </div>
             </div>
-
+            
             {clickCancel && (
                 <CancelModal closeModal={()=> setClickCancel(!clickCancel)}></CancelModal>
             )}  
