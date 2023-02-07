@@ -8,7 +8,13 @@ function emailRegexr(data: string){
     return data.match(regexr);
 }
 
+
 function Login(props: any){
+    function signInBtn(){
+        if(userId!=='' && check_email && userPwd!==''){
+            
+        }
+    }
     const imgUrlGithub = "/img/Github.png"
     const imgUrlGoogle = "/img/Google.png"
     const imgUrlkakao = "/img/kakao.png"
@@ -54,7 +60,7 @@ function Login(props: any){
                             <a className="find_pwd draggable" href="#!">Forgot ID or Password?</a>
                         </div>
                         {/* 로그인 버튼 */}
-                        <Link to="/" className="link-tag-none"><input className="submit_btn_upper draggable" type="submit" value="Sign In" /></Link>
+                        <Link to="/" className="link-tag-none"><button className="submit_btn_upper draggable" type="submit" onClick={signInBtn}>Sign In</button></Link>
                         {/* <input className="submit_btn_upper draggable" type="submit" value="Sign In" /> */}
                         <hr className="hr_tag" />
                         {/* 회원가입 버튼 */}
