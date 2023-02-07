@@ -1,6 +1,13 @@
 import "../../styles/components/user/sign_in_up.css";
 import TextBox from "../../widget/InputTextBox";
 import {Link} from 'react-router-dom';
+import {useState} from 'react';
+// const regexr = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+
+function emailRegexr(data: string){
+    const regexr = /^[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+    return data.match(regexr);
+}
 
 function Login(props: any){
     const imgUrlGithub = "/img/Github.png"
@@ -9,6 +16,25 @@ function Login(props: any){
     const footer_text = {
         key: process.env.REACT_APP_FOOTER,
     }
+
+    let check_email: boolean = true;
+
+    const [userId, setUserId] = useState('');
+    const [userPwd, setUserPwd] = useState('');
+
+    const handleStateId = (data: any) => {
+        setUserId(data.target.value);
+    }
+    const handleStatePwd = (data: any) => {
+        setUserPwd(data.target.value);
+    }
+
+    if(!emailRegexr(userId)){
+        check_email = false;
+    }else{
+        check_email = true;
+    }
+
     return(
         <div className="login_join_container">
             <div className="login_join_logo_name draggable">SSAFY CHAT</div>
@@ -16,12 +42,13 @@ function Login(props: any){
                 <div className="nomal_area">
                     <form className="login_text_box">
                         {/* 로그인 입력 박스 두개 */}
-                        <TextBox item="id"></TextBox>
-                        <TextBox item="pwd"></TextBox>
+                        <TextBox item="id" sItem={handleStateId}></TextBox>
+                        {!check_email ? <span className="checkEmail">이메일 형식이 맞지 않습니다.</span> : null}
+                        <TextBox item="pwd" sItem={handleStatePwd}></TextBox>
                         {/* 아이디 기억 */}
                         <div className="b_side">
                             <div className="save_id draggable">
-                                <input type="checkbox" name="save_id" id="save_id" />
+                                <input type="checkbox" className="save_id_input" name="save_id" id="save_id" />
                                 Remember Me
                             </div>
                             {/* 아이디 비밀번호 찾기 */}
