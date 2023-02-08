@@ -2,6 +2,7 @@ import "../../styles/components/user/sign_in_up.css";
 import TextBox from "../../widget/InputTextBox";
 import {Link} from 'react-router-dom';
 import {useState} from 'react';
+import { login } from "../../api/user";
 
 function emailRegexr(data: string){
     const regexr = /^[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
@@ -10,9 +11,27 @@ function emailRegexr(data: string){
 
 
 function Login(props: any){
-    function signInBtn(){
+    async function signInBtn(){
         if(userId!=='' && check_email && userPwd!==''){
-            
+            const userInfo = {
+                email: userId,
+                password: userPwd,
+            }
+            await login(
+                userInfo,
+                (data: any) => {
+                    console.log(data);
+                    if(data.status === 200){
+                        const accessToken = data.data["accessToken"];
+                        const refreshToken = data.data["refreshToken"];
+                        sessionStorage.setItem("access-token", accessToken);
+                        sessionStorage.setItem("refresh-token", refreshToken);
+                    }
+                },
+                (error: any) => {
+                    console.log(error);
+                }
+            )
         }
     }
     const imgUrlGithub = "/img/Github.png"
