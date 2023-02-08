@@ -61,6 +61,12 @@
 
     position: absolute;
     z-index: 2;
+    
+    
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
 
     display: none;
 }
@@ -69,25 +75,26 @@
 .reservation_card:hover > .cancel_description{
     background-color: #ffffff13;
     display: block;
-    
-    -webkit-user-select:none;
-    -moz-user-select:none;
-    -ms-user-select:none;
-    user-select:none
 }
 
-.draggble_false:hover{
+.isNotAbleDrag:hover{
     width: 244px;
     height: 180px;
     margin: 10px;
     background-color: #d9d9d9;
     border-radius: 20px;
-    box-shadow:  5px 5px 5px gray;
+    box-shadow:  5px 5px 5px gray;    
 
     font-family: 'Do Hyeon', sans-serif;
     cursor:default;
+    
+    
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
 }
 
-.draggble_false:hover > .cancel_description{
+.isNotAbleDrag:hover > .cancel_description{
     display: none;
 }

@@ -9,7 +9,6 @@ function dragItem(event : any){
         elem = elem.parentElement;
     }
     let container = elem.parentElement.parentElement.parentElement;
-    console.log(container);
     let onDrag = true;
 
     container.onmouseleave = function(){
