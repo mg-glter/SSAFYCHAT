@@ -16,8 +16,13 @@ export const ApplyingSlice = createSlice({
   name: 'applying',
   initialState,
   reducers: {
-    searchMentoring: (state, payload: PayloadAction<[]>) => {
-      state.applyingMentorings
+    searchMentoring: (state, action: PayloadAction<{}>) => {
+      console.log(action.payload);
+      search(
+        action.payload,
+        (data:any)=>{console.log(data);},
+        (err:any)=>{console.log(err);}
+      );
     }
   }
 })
