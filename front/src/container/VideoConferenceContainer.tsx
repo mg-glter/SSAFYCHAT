@@ -1,16 +1,10 @@
 import "../styles/container/video-conference-container.css"
 import io from 'socket.io-client';
 import { useNavigate } from "react-router";
+import { useAppSelector } from "../hooks/hooks";
 
-function handleAddStream(data : any) {
-    console.log("peer가 보낸 이벤트(스트림)-> 이걸로 나랑 연락할 수 있어", data);
-    const peerFace = document.getElementById("peerFace") as HTMLVideoElement;
-    if(peerFace != null){
-        peerFace.srcObject = data.stream;
-    }
-}
+function test(userinfo:any){
 
-function test(){
 const socket = io(process.env.REACT_APP_SOCKET as string,{path: "/socket.io",transports:["websocket"]});
 
 const myFace = document.getElementById("myFace") as HTMLMediaElement;
@@ -18,6 +12,21 @@ const muteBtn = document.getElementById("mute") as HTMLButtonElement;
 const cameraBtn = document.getElementById("camera") as HTMLVideoElement;
 const camerasSelect = document.getElementById("cameras") as HTMLSelectElement;
 const call = document.getElementById("call") as HTMLDivElement;
+const chattinginput = document.getElementById("video_conference_chat_input") as HTMLInputElement;
+let chattinglog: { user_id: any; message: string; Date: number; }[] = [];
+chattinginput.addEventListener("keyup",function (event) {
+    if (event.keyCode === 13) {
+        const senddata = {"user_id":userinfo,"message":this.value,"Date": Date.now()};
+        myDataChannel.send(senddata);
+        chattinglog.push(senddata);
+        console.log(`${JSON.stringify(senddata)}
+            ${JSON.stringify(chattinglog)}`);
+        this.value = "";
+
+        //몽고DB에 senddata + chat_id를 추가해서 전달
+    }
+    
+});
 
 if(call != null){
     call.hidden = true;
@@ -167,8 +176,11 @@ socket.on("offer", async (offer) => {
     //데이터채널 두번째 들어온사람
     myPeerConnection.addEventListener("datachannel", (event : any) => {
         myDataChannel = event.channel;
-        myDataChannel.addEventListener("message", (event : any) =>
-            console.log(event.data)
+        myDataChannel.addEventListener("message", (event : any) =>{
+            chattinglog.push(event.data);
+            console.log(`${JSON.stringify(event.data)}
+            ${JSON.stringify(chattinglog)}`);
+            }
         );
     });
 
@@ -207,13 +219,13 @@ function handleIce(data : any) {
     socket.emit("ice", data.candidate, roomName);
 }
 
-// function handleAddStream(data : any) {
-//     console.log("peer가 보낸 이벤트(스트림)-> 이걸로 나랑 연락할 수 있어", data);
-//     const peerFace = document.getElementById("peerFace") as HTMLVideoElement;
-//     if(peerFace != null){
-//         peerFace.srcObject = data.stream;
-//     }
-// }
+function handleAddStream(data : any) {
+    console.log("peer가 보낸 이벤트(스트림)-> 이걸로 나랑 연락할 수 있어", data);
+    const peerFace = document.getElementById("peerFace") as HTMLVideoElement;
+    if(peerFace != null){
+        peerFace.srcObject = data.stream;
+    }
+}
 }
 
 function exit(navigate : any){
@@ -221,6 +233,8 @@ function exit(navigate : any){
 }
 
 function VideoConferenceContainer(props : any){
+    const userinfo = useAppSelector(state => state.user.isLogin);
+
     const navigate = useNavigate();
     let first = true;
     return(
@@ -228,7 +242,7 @@ function VideoConferenceContainer(props : any){
         <div id="call" className="video_conference_container" onMouseEnter={()=>{
             if(first){
                 first = false;
-                test();
+                test(userinfo);
             }
         }}>
 
@@ -294,12 +308,8 @@ function VideoConferenceContainer(props : any){
 
             {/* 채팅창을 담을 오른쪽 컨테이너 */}
             <div className="video_conference_right">
-               <div className="tmpButton" onClick={()=>{
-                    console.log("클릭됨");
-                    
-                    handleAddStream('s');
-               }}>
-                나는 임시버튼
+               <div className="tmpButton" id="tmpButton">
+                    나는 임시버튼
                </div>
                 {/* 채팅 내용을 보여줄 리스트 요소 */}
                 <ul className="video_conference_chat_content_ul">
@@ -311,7 +321,7 @@ function VideoConferenceContainer(props : any){
                 {/*  */}
                 <div className="video_conference_chat_container">
                     {/* 채팅 입력 input */}
-                    <input className="video_conference_chat_input">
+                    <input className="video_conference_chat_input" id="video_conference_chat_input">
 
                     </input>
                 </div>
