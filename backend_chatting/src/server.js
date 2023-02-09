@@ -7,7 +7,9 @@ const {chatting} = require('../mongoose/model');
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
+app.get("/chat",(request,response)=>{
+    response.send("8000 alive");
+});
 app.post("/chat", async(request, response)=>{
         const chat_id = request.body.chat_id;
         const user_id = request.body.user_id;
