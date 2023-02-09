@@ -262,7 +262,7 @@ public class MentoringServiceImpl implements MentoringService {
     @Override
     public List<RollingPaperDto> getRollingPaper(Member mentor) {
         // completeMentoring에서 userId == mentor_uid인 데이터 조회
-        List<CompleteMentoring> completeMentorings = completeMentoringRepository.findByMentor(mentor);
+        List<CompleteMentoring> completeMentorings = completeMentoringRepository.getRollingPaper(mentor.getUserId());
         // rollingPaperDto에 담아서 반환
         List<RollingPaperDto> rollingPapers = new ArrayList<>();
         for (CompleteMentoring completeMentoring : completeMentorings) {
