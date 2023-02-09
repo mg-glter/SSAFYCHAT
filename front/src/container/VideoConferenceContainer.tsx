@@ -17,7 +17,7 @@ let chattinglog: { user_id: any; message: string; Date: number; }[] = [];
 chattinginput.addEventListener("keyup",function (event) {
     if (event.keyCode === 13) {
         const senddata = {"user_id":userinfo,"message":this.value,"Date": Date.now()};
-        myDataChannel.send(senddata);
+        myDataChannel.send(JSON.stringify(senddata));
         chattinglog.push(senddata);
         console.log(`${JSON.stringify(senddata)}
             ${JSON.stringify(chattinglog)}`);
@@ -177,7 +177,7 @@ socket.on("offer", async (offer) => {
     myPeerConnection.addEventListener("datachannel", (event : any) => {
         myDataChannel = event.channel;
         myDataChannel.addEventListener("message", (event : any) =>{
-            chattinglog.push(event.data);
+            chattinglog.push(JSON.parse(event.data));
             console.log(`${JSON.stringify(event.data)}
             ${JSON.stringify(chattinglog)}`);
             }
