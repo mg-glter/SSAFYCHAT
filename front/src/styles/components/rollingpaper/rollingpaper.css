@@ -3,9 +3,8 @@
     display: flex;
     width: auto;
     height: auto;
-    left: 120px;
-    right: 101px;
     margin-top: 50px;
+    justify-content: center;
 }
 
 .dashboard{

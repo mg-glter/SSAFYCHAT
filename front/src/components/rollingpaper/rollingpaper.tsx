@@ -19,7 +19,9 @@ function RollingPaper() {
                         <div className="clean">
                             <img className="clean_name" src={imgUrlclean} alt="Clean" />
                         </div>
-                        <div className="save">
+                        <div className="save" onClick={()=>{
+                            
+                        }}>
                             <img className="save_img" src={imgUrlsave} alt="Save" />
                         </div>
                     </div>
