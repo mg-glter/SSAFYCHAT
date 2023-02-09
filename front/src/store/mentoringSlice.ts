@@ -33,6 +33,9 @@ export const MentoringSlice = createSlice({
       }
       state.reservedMentorings.push(reservedInfo);
     },
+    getReservation: ()=>{
+        
+    }
   }
 })
 
