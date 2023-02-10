@@ -4,7 +4,7 @@ const api = localServer();
 
 async function search(mentoring:any, success:any, fail:any) {
     api.defaults.headers["Authorization"] = "Bearer " + sessionStorage.getItem("access-token");
-    await api.get(`/mentoring/search?job=${mentoring.job}&company=${mentoring.belong}`)
+    await api.get(`/mentoring/search?job=${mentoring.job}&company=${mentoring.company}`)
     .then(success)
     .catch(fail);
 }
