@@ -66,10 +66,15 @@ public class MemberServiceImpl implements MemberService {
                     password(bcryptPasswordEncoder.encode(memberInfo.getPassword())).
                     studentNumber(memberInfo.getStudent_number()).
                     social("싸피").
-                    role("role_mentee").
                     build();
             List<String> roleArray = registUser.getRoles();
-            roleArray.add("role_mentee");
+            if (registUser.getJob().equals("")) {
+                roleArray.add("role_mentor");
+                registUser.setRole("role_mentor");
+            } else {
+                roleArray.add("role_mentee");
+                registUser.setRole("role_mentee");
+            }
             registUser.setRoles(roleArray);
             memberRepository.save(registUser);
             return true;
