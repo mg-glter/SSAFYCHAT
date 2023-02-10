@@ -57,7 +57,6 @@ public class MemberServiceImpl implements MemberService {
     public boolean registUser(MemberDto memberInfo) {
         Member checkMember = memberRepository.findByEmail(memberInfo.getEmail());
 
-//        if(checkMember.isEmpty()){
         if(checkMember == null){
             Member registUser = Member.builder().
                     job(memberInfo.getJob()).
