@@ -16,4 +16,9 @@ async function join(user:any, success:any, fail:any) {
     await api.post('/regist', JSON.stringify(user)).then(success).catch(fail);      
 }
 
-export {login, logout, join};
+async function userinfo(success: any, fail: any) {
+    api.defaults.headers["Authorization"] = "Bearer " + sessionStorage.getItem("access-token");
+    await api.get('/user/user-info').then(success).catch(fail);
+}
+
+export {login, logout, join, userinfo};

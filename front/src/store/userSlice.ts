@@ -1,6 +1,27 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "./store";
 
+interface UserInfo{
+    belong: string,
+    social: string,
+    studentNumber: string,
+    job: string,
+    totalScore: number,
+}
+
+interface No{
+    '01': string,
+    '02': string,
+    '03': string,
+    '04': string,
+    '05': string,
+    '06': string,
+    '07': string,
+    '08': string,
+    '09': string,
+    '10': string,
+}
+
 interface UserState{
     email: string,
     name: string,
@@ -8,7 +29,8 @@ interface UserState{
     role: string,
     isLogin: boolean,
     banner: string,
-    userInfo: any,
+    no: No,
+    userInfo: UserInfo,
 }
 
 const initialState: UserState = {
@@ -18,7 +40,25 @@ const initialState: UserState = {
     role: "",
     isLogin: false,
     banner: "",
-    userInfo: null,
+    no: {
+        '01': '1기 입니다.',
+        '02': '2기 입니다.',
+        '03': '3기 입니다.',
+        '04': '4기 입니다.',
+        '05': '5기로 극복',
+        '06': '열정 핫식스',
+        '07': '럭키세븐',
+        '08': '7전8기',
+        '09': "9뤠이트",
+        '10': "10기 입니다.",
+    },
+    userInfo: {
+        belong: "",
+        social: "",
+        studentNumber: "",
+        job: "",
+        totalScore: 0,
+    },
 }
 
 export const UserSlice = createSlice({
@@ -42,11 +82,14 @@ export const UserSlice = createSlice({
         },
         changeBanner: (state, action: PayloadAction<string>) => {
             state.banner = action.payload;
-        }
+        },
+        appendUserInfo: (state, action: PayloadAction<UserInfo>) => {
+            state.userInfo = action.payload;
+        },
     }
 })
 
-export const { changeIsLogin, appendEmail, appendName, appendUserId, appendRole, changeBanner } = UserSlice.actions;
+export const { changeIsLogin, appendEmail, appendName, appendUserId, appendRole, changeBanner, appendUserInfo } = UserSlice.actions;
 
 export const selectCount = (state: RootState) => state.user
 
