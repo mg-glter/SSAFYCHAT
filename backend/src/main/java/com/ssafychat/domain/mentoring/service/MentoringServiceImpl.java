@@ -81,7 +81,7 @@ public class MentoringServiceImpl implements MentoringService {
             MentoringDateDto mentoringDateDto = MentoringDateDto.builder().applyMentoringId(applyMentoring.getApplyMentoringId()).build();
 
             List<MentoringDate> dates = mentoringDateRepository.findByApplyMentoring_ApplyMentoringId(mentoringDateDto.getApplyMentoringId());
-            Timestamp[] times = new Timestamp[dates.size()];
+            Date[] times = new Timestamp[dates.size()];
             for (int j = 0; j < times.length; j++) {
                 times[j] = dates.get(j).getTime();
             }
@@ -270,7 +270,7 @@ public class MentoringServiceImpl implements MentoringService {
 
             List<MentoringDate> mentoringDateList = mentoringDateRepository.
                     findByApplyMentoring_ApplyMentoringId(mentoringDateDto.getApplyMentoringId());
-            List<Timestamp> mentoringDateTimes = new ArrayList<>();
+            List<Date> mentoringDateTimes = new ArrayList<>();
 
             for (MentoringDate mentoringDate : mentoringDateList) {
                 mentoringDateTimes.add(mentoringDate.getTime());
