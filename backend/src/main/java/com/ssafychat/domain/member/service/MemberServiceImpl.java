@@ -112,6 +112,7 @@ public class MemberServiceImpl implements MemberService {
         info.put("accessToken", tokenInfo.getAccessToken());
         info.put("refreshToken", tokenInfo.getRefreshToken());
         info.put("name", loginMember.getName());
+        info.put("role", loginMember.getRole());
         return info;
     }
 
