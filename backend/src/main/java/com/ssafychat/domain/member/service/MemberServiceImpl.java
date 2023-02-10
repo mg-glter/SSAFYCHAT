@@ -68,12 +68,12 @@ public class MemberServiceImpl implements MemberService {
                     social("싸피").
                     build();
             List<String> roleArray = registUser.getRoles();
-            if (registUser.getJob().equals("")) {
-                roleArray.add("role_mentor");
-                registUser.setRole("role_mentor");
-            } else {
+            if (registUser.getJob().equals("")) { // 직무 없으면 멘티
                 roleArray.add("role_mentee");
                 registUser.setRole("role_mentee");
+            } else {
+                roleArray.add("role_mentor");
+                registUser.setRole("role_mentor");
             }
             registUser.setRoles(roleArray);
             memberRepository.save(registUser);
