@@ -12,4 +12,8 @@ async function logout(user: string, success:any, fail:any) {
     await api.get('/user/logout').then(success).catch(fail);
 }
 
-export {login, logout};
+async function join(user:any, success:any, fail:any) { 
+    await api.post('/regist', JSON.stringify(user)).then(success).catch(fail);      
+}
+
+export {login, logout, join};
