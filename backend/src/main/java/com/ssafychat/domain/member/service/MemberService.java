@@ -17,6 +17,6 @@ public interface MemberService {
 
     Map<String, String> reissue(TokenInfoDto reissue);
 
-    Map<String, String> logout(TokenInfoDto logout);
+    Map<String, String> logout(String accessToken);
 
 }

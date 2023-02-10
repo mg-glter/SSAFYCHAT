@@ -26,7 +26,7 @@ public class LoginController {
 
     @GetMapping("")
     public ResponseEntity<?> aliveCheck() {
-        return new ResponseEntity<String>("Alive", HttpStatus.OK);
+        return new ResponseEntity<>("Alive", HttpStatus.OK);
     }
 
     @PostMapping("/regist")
@@ -63,5 +63,10 @@ public class LoginController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @PostMapping("/user/logout")
+    public ResponseEntity logout(@RequestBody TokenInfoDto tokenInfo) {
+        Map<String, String> response = memberService.logout(tokenInfo.getAccessToken());
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
 }
