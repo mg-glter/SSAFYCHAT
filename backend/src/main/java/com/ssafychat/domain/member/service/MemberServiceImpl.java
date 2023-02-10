@@ -21,7 +21,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -148,7 +150,14 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public Map<String, String> logout(String accessToken) {
+    public Map<String, String> logout(HttpServletRequest request) {
+        String bearerToken = request.getHeader("Authorization");
+        if (!StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer")) {
+            log.error("토큰 없음");
+            return null;
+        }
+        String accessToken = bearerToken.substring(7);
+
         // 1. Access Token 검증
         if (!jwtTokenProvider.validateToken(accessToken)) {
             log.error("잘못된 요청입니다.");
