@@ -5,6 +5,7 @@ import { useState } from "react";
 import Sticky from "../../widget/Sticky";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { tempAddRolling } from "../../store/rollingSlice";
+import { changeBanner } from "../../store/userSlice"
 
 
 
@@ -13,6 +14,8 @@ function RollingPaper() {
     const imgUrlclean = "/img/clean.png"
     const imgUrlsave = "/img/save.png"
     const dispatch = useAppDispatch();
+    dispatch(changeBanner("롤링페이퍼"));
+
     const[clickBtn, setClickBtn] = useState(false);
     const colorClassList =["sticky_purple","sticky_green","sticky_red","sticky_yellow","sticky_blue"];
     const rollingList = useAppSelector(state=>state.rolling.rollings);
