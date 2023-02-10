@@ -337,6 +337,20 @@ public class MentoringServiceImpl implements MentoringService {
     }
 
     @Override
+    public void insertCompleteMentoring(Mentoring mentoring) {
+        CompleteMentoring completeMentoring = CompleteMentoring.builder()
+                .completeMentoringId(mentoring.getMentoringId())
+                .mentor(mentoring.getMentor())
+                .mentee(mentoring.getMentee())
+                .company(mentoring.getCompany())
+                .job(mentoring.getJob())
+                .time(mentoring.getTime())
+                .completed(1)
+                .build();
+        completeMentoringRepository.save(completeMentoring);
+    }
+
+    @Override
     public void reportBadUser(Member reporter, int completeMentoringId, String reason) {
         // 완료 테이블 정보 불러와서
         CompleteMentoring completeMentoring = completeMentoringRepository.findByCompleteMentoringId(completeMentoringId);
