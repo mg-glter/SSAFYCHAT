@@ -12,7 +12,8 @@ function ApplyingModal (props:any){
     const [hour, setHour] = useState((date.getHours()<10?'0':'') + date.getHours());
     const [minute, setMinute] = useState("00");
     const [beforeOrAfter, setBeforeOrAfter] = useState("AM");
-    const selectedTimes:any = [];
+    let selectedTimes:Array<Date> = new Array<Date>();
+
     
     /** 월별 숫자를 영어로 바꾸는 함수 */
     function numToName(month : number){
