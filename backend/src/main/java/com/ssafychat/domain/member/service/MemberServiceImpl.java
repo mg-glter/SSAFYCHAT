@@ -118,10 +118,14 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Map<String, String> reissue(TokenInfoDto reissue) {
+
+        Map<String, String> response = new HashMap<>();
+
         // 1. Refresh Token 검증
         if (!jwtTokenProvider.validateToken(reissue.getRefreshToken())) {
             log.error("Refresh Token 정보가 유효하지 않습니다.");
-            return null;
+            response.put("message", "fail");
+            return response;
         }
 
         // 2. Access Token 에서 userId 을 가져옵니다.
@@ -129,26 +133,22 @@ public class MemberServiceImpl implements MemberService {
 
         // 3. Redis 에서 userId 을 기반으로 저장된 Refresh Token 값을 가져옵니다.
         String refreshToken = (String)redisTemplate.opsForValue().get("RT:" + authentication.getName());
-        // (추가) 로그아웃되어 Redis 에 RefreshToken 이 존재하지 않는 경우 처리
+        // 로그아웃되어 Redis 에 RefreshToken 이 존재하지 않는 경우 처리
         if(ObjectUtils.isEmpty(refreshToken)) {
-            log.error("잘못된 요청입니다.");
-            return null;
+            log.error("Refresh Token 정보가 유효하지 않습니다.");
+            response.put("message", "fail");
+            return response;
         }
         if(!refreshToken.equals(reissue.getRefreshToken())) {
             log.error("Refresh Token 정보가 일치하지 않습니다.");
-            return null;
+            response.put("message", "fail");
+            return response;
         }
 
         // 4. 새로운 토큰 생성
         TokenInfoDto tokenInfo = jwtTokenProvider.generateToken(authentication);
 
-        // 5. RefreshToken Redis 업데이트
-        redisTemplate.opsForValue()
-                .set("RT:" + authentication.getName(), tokenInfo.getRefreshToken(), tokenInfo.getRefreshTokenExpirationTime(), TimeUnit.MILLISECONDS);
-
-        Map<String, String> response = new HashMap<>();
         response.put("accessToken", tokenInfo.getAccessToken());
-        response.put("refreshToken", tokenInfo.getRefreshToken());
         response.put("message", "accessToken 재발급 성공");
 
         return response;

@@ -59,7 +59,7 @@ public class LoginController {
     }
 
     @PostMapping("/reissue")
-    public ResponseEntity<?> refreshToken(@RequestBody TokenInfoDto tokenInfo) {
+    public ResponseEntity<?> reissueToken(@RequestBody TokenInfoDto tokenInfo) {
         Map<String, String> response = memberService.reissue(tokenInfo);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
