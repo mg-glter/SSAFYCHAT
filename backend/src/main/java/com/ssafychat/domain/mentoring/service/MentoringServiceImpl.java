@@ -52,10 +52,10 @@ public class MentoringServiceImpl implements MentoringService {
         if (job.equals("") && belong.equals("")){
             // 전체 목록 조회
             return memberRepository.getAllJobAndBelong("싸피", "");
-        } else if (job.equals("") && !belong.equals("")) {
+        } else if (job.equals("")) {
             // belong으로 조회
             return memberRepository.findDistinctByBelong(belong);
-        } else if (!job.equals("") && belong.equals("")) {
+        } else if (belong.equals("")) {
             // job으로 조회
             return memberRepository.findDistinctByJob(job);
         } else {
@@ -176,9 +176,10 @@ public class MentoringServiceImpl implements MentoringService {
     public Member[] ranking() {
 
         List<Integer> rankerIds = completeMentoringRepository.findRanking();
-        Member[] rankers = new Member[3];
-        for (int i = 0; i < 3; i++) {
-            rankers[i] = memberRepository.findByUserIdForRanker(rankerIds.get(i));
+        Member[] rankers = new Member[rankerIds.size()];
+        int i = 0;
+        for (Member ranker : rankers) {
+            ranker = memberRepository.findByUserIdForRanker(rankerIds.get(i++));
         }
         return rankers;
     }
