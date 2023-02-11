@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.sql.Timestamp;
 import java.util.*;
 
 @Service
@@ -39,13 +38,6 @@ public class MentoringServiceImpl implements MentoringService {
     @Override
     public List<Mentoring> findMentoring(){
         return mentoringRepository.findAll();
-    }
-
-    @Override
-    @Transactional
-    public void applyMentoring(ApplyMentoring applyMentoring) {
-        this.applyMentoringRepository.save(applyMentoring);
-
     }
 
     public List<PossibleMentoringDto> getPossibleMentoringList(String job, String belong) {
@@ -135,7 +127,7 @@ public class MentoringServiceImpl implements MentoringService {
     }
 
     @Override
-    public Mentoring insertMentoring(int userId, ApplyMentoring applyMentoring, Timestamp time) {
+    public Mentoring insertMentoring(int userId, ApplyMentoring applyMentoring, Date time) {
         Mentoring mentoring = Mentoring.builder()
                 .mentoringId(applyMentoring.getApplyMentoringId())
                 .mentor(memberRepository.findByUserId(userId))
@@ -236,8 +228,6 @@ public class MentoringServiceImpl implements MentoringService {
     public void updateRollingPaper(RollingPaperDto rollingPaperDto) {
         // 서비스에서 rollingPaperDto 정보 completeMentoring 엔티티에 담아서 update
         CompleteMentoring completeMentoring = completeMentoringRepository.findByCompleteMentoringId(rollingPaperDto.getCompleteMentoringId());
-        completeMentoring.setReviewTitle(rollingPaperDto.getReviewTitle());
-        completeMentoring.setReviewContent(rollingPaperDto.getReviewContent());
         completeMentoring.setReviewSelected(rollingPaperDto.getReviewSelected());
         completeMentoring.setReviewWidth(rollingPaperDto.getReviewWidth());
         completeMentoring.setReviewHeight(rollingPaperDto.getReviewHeight());
