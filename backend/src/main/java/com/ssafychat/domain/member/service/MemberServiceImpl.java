@@ -124,7 +124,7 @@ public class MemberServiceImpl implements MemberService {
         // 1. Refresh Token 검증
         if (!jwtTokenProvider.validateToken(reissue.getRefreshToken())) {
             log.error("Refresh Token 정보가 유효하지 않습니다.");
-            response.put("message", "fail");
+            response.put("message", "Refresh Token 정보가 유효하지 않습니다.");
             return response;
         }
 
@@ -136,12 +136,12 @@ public class MemberServiceImpl implements MemberService {
         // 로그아웃되어 Redis 에 RefreshToken 이 존재하지 않는 경우 처리
         if(ObjectUtils.isEmpty(refreshToken)) {
             log.error("Refresh Token 정보가 유효하지 않습니다.");
-            response.put("message", "fail");
+            response.put("message", "Refresh Token 정보가 유효하지 않습니다.");
             return response;
         }
         if(!refreshToken.equals(reissue.getRefreshToken())) {
             log.error("Refresh Token 정보가 일치하지 않습니다.");
-            response.put("message", "fail");
+            response.put("message", "Refresh Token 정보가 일치하지 않습니다.");
             return response;
         }
 
