@@ -1,11 +1,9 @@
 import { useAppDispatch } from "../hooks/hooks";
 import "../styles/widget/sticky-style.css"
 import { dragRoll } from "../utils/ts/move";
-import { useNavigate } from "react-router";
 
 function Sticky(props: any){
     const dispacth = useAppDispatch();
-    const navigate = useNavigate();
     return(
         <div>
         <div style={{

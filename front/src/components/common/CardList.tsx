@@ -24,9 +24,7 @@ function CardList(props : any){
            </div>
 
         {/* 카드리스트와 헤더를 감싸는 컨테이너 */}
-        <div className="card_list_inner_container" onClick={()=>{
-            reservation((success : any)=>{console.log(success)},(fail : any)=>{console.log(fail)});
-        }}>
+        <div className="card_list_inner_container">
             {/* 좌 화살표 */}
             <div className="card_list_arrow"  onMouseDown={()=>{
                     if(0 < startIdx){

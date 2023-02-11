@@ -1,8 +1,6 @@
 import { useNavigate } from "react-router";
 import "../../styles/components/mentoring/reserved-list.css"
-import { useState } from "react";
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
-import { tempAddReserved } from '../../store/mentoringSlice';
+import { useAppSelector } from '../../hooks/hooks'
 
 function dragItem(event : any){
     let elem = event.target;
@@ -36,9 +34,6 @@ function dragItem(event : any){
 function ReservedListItem(props : any){
     return(
         <tr className="reserved_list_tr_body" 
-        // onMouseDown={(event)=>{
-        //     dragItem(event);
-        // }}
         draggable='true'
         onMouseDown={(event)=>{
             dragItem(event);
@@ -62,7 +57,6 @@ function enterMeeting(event : any, navigate : any){
 
 function ReservedList(props : any){
     const navigate = useNavigate();
-    const dispatch = useAppDispatch();
     const reservedList = useAppSelector((state)=>state.mentoring.reservedMentorings);
     const list = [];
     console.log(reservedList.length);
@@ -75,9 +69,7 @@ function ReservedList(props : any){
 
     return (
         <div className="reserved_list_container">
-            <div className="reserved_list_header" onClick={()=>{
-                dispatch(tempAddReserved());
-            }}>
+            <div className="reserved_list_header">
                 예약된 멘토링
             </div>
             <table className="reserved_list_table">

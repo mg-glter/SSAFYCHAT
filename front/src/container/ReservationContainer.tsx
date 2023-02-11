@@ -4,10 +4,17 @@ import "../styles/container/reservation-container.css"
 import { dragCard } from "../utils/ts/move";
 import { useAppDispatch } from "../hooks/hooks"
 import { changeBanner } from "../store/userSlice"
+import { reservation } from "../api/mentoring";
+import { useEffect } from "react";
 
 function ReservationContainer(){
     const dispatch = useAppDispatch();
     dispatch(changeBanner("예약확인"));
+    // 예약 리스트들 호출
+    useEffect(()=>{
+        console.log("reservation");
+        reservation((success : any)=>{console.log(success)},(fail : any)=>{console.log(fail)});
+    })
     const cardList = [["김도원","네이버","백엔드 개발자","2023-01-01"],["김겨울","SMENT","가수","2023-01-01"],["3","SMENT","가수","2023-01-01"],["4","SMENT","가수","2023-01-01"],["5","SMENT","가수","2023-01-01"],["6","SMENT","가수","2023-01-01"]];
     const reCardList = [
         {

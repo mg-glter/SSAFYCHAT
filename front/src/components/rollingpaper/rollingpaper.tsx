@@ -1,15 +1,27 @@
 import "../../styles/components/rollingpaper/rollingpaper.css";
 // import Sticky from "../../widget/Sticky";
 import RollingCardList from "./RollingCardList";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { tempAddRolling } from "../../store/rollingSlice";
 import { changeBanner } from "../../store/userSlice"
+import { getReview } from "../../api/review";
 import Sticky from "../../widget/Sticky";
 
+function getRollings(){
+    console.log("getRollings");
+    getReview((success : any)=>{
+        console.log(success)
+        
+    },(fail : any)=>{
+        console.log(fail)
+    })
+}
 
 
 function RollingPaper() {
+    useEffect(()=>{
+        getRollings();
+    })
     const imgUrlStar = "/img/Star.png"
     const imgUrlclean = "/img/clean.png"
     const imgUrlsave = "/img/save.png"

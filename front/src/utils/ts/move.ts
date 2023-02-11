@@ -1,4 +1,4 @@
-import { attachRolling, removeRolling, tempAddRolling } from "../../store/rollingSlice";
+import { attachRolling, removeRolling } from "../../store/rollingSlice";
 
 
 function dragCard(event : any, elemClassName : string, containerClassName : string, isEnterCheck : boolean){
@@ -200,7 +200,7 @@ async function dragRoll(event : any, elemClassName : string, containerClassName 
                 container.append(elem);
                 elem.style.left = mX - conLeft - 174  + "px";
                 elem.style.top = mY - conTop - 48 + "px";        
-                {
+                if("나중에 사용"){
                 // const elemTop = elem.getBoundingClientRect().top;
                 // const elemLeft = elem.getBoundingClientRect().left;
 

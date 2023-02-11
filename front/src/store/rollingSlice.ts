@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { rootCertificates } from 'tls'
 import type { RootState } from './store'
 
 interface RollingInfo{
@@ -48,22 +47,8 @@ export const RollingSlice = createSlice({
   name: 'rolling',
   initialState,
   reducers: {
-    tempAddRolling: (state, action: PayloadAction<AttachingInfo>)=>{
-      const rollingInfo: RollingInfo = {
-        id: Math.floor(Math.random()*100000),
-        color: "sticky_red",
-        content: "길지 않은 멘토링 시간 동안, 좋은 정보들을 제공해주신 멘토님 감사드립니다. 이번 채용 공고에 지원해서 꼭 같은 부서에서 만날 수 있었으면 좋겠습니다. 연락드리겠습니다!",
-        attached: 1,
-        posX: Math.random()*1000,
-        posY: Math.random()*1000,
-      }
-    
-      state.rollings.push(rollingInfo);
-      for(let i = 0; i < state.rollings.length; ++i){
-        if(state.rollings[i].id === action.payload.id){
-            state.rollings.splice(i,1);
-        }
-      }
+    getRollings:(state)=>{
+      
     },
     attachRolling:(state, action: PayloadAction<AttachingInfo>)=>{
       for(let i = 0; i < state.rollings.length; ++i){
@@ -86,7 +71,7 @@ export const RollingSlice = createSlice({
   }
 })
 
-export const { tempAddRolling, attachRolling, removeRolling} = RollingSlice.actions
+export const { attachRolling, removeRolling} = RollingSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCount = (state: RootState) => state.rolling
