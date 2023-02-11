@@ -2,10 +2,10 @@ import "../../styles/components/rollingpaper/rollingpaper.css";
 // import Sticky from "../../widget/Sticky";
 import RollingCardList from "./RollingCardList";
 import { useState } from "react";
-import Sticky from "../../widget/Sticky";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { tempAddRolling } from "../../store/rollingSlice";
 import { changeBanner } from "../../store/userSlice"
+import Sticky from "../../widget/Sticky";
 
 
 
@@ -18,24 +18,24 @@ function RollingPaper() {
 
     const[clickBtn, setClickBtn] = useState(false);
     const colorClassList =["sticky_purple","sticky_green","sticky_red","sticky_yellow","sticky_blue"];
-    const rollingList = useAppSelector(state=>state.rolling.rollings);
-    // for(let i = 0; i < cardList.length; ++i){
-    //     console.log(rollingList[i]);        
-    //     cardList.push(<Sticky key={i} colorClass = {rollingList[i].color} closeList={()=>setClickBtn(false)} text={rollingList[i].content}></Sticky>);
-    // }
-    // setCardList(rollingList);
-    
 
+    // let [attachedList, setAttachedList] = useState([<></>]);
+    let attachedList = []
+    const cardList = useAppSelector(state=>state.rolling.rollings);
+    // console.log(cardList + "RP");
+    let newList = [];
+    for(let i = 0; i < cardList.length; i++){
+        if(cardList[i].attached === 1){
+            newList.push(<Sticky rolling={cardList[i]}  key={i} colorClass = {cardList[i].color} closeList={()=>{return;}}></Sticky>)
+        }
+    }
+    attachedList = newList;
+    // setAttachedList(newList);
     return (
         <div className="rcontainer">
             <div className="dashboard">
-                <div className="dashboard_header"onClick={()=>{
-                    console.log(1);
-                    dispatch(tempAddRolling());
-                }}>
+                <div className="dashboard_header">
 
-
-            {/* 충전합시다 */}
                     <div className="dashboard_header_icon">
                         <img src={imgUrlStar} alt="Star" />
                     </div>
@@ -47,7 +47,6 @@ function RollingPaper() {
                             <img className="clean_name" src={imgUrlclean} alt="Clean" />
                         </div>
                         <div className="save" onClick={()=>{
-                            console.log("리스트 나와라");
                             setClickBtn(!clickBtn);
                         }}>
                             <img className="save_img" src={imgUrlsave} alt="Save" />
@@ -57,9 +56,10 @@ function RollingPaper() {
                 <div className="dashboard_main">
                 {/* 버튼을 클릭하면 */}
                 {clickBtn && (
-                    <RollingCardList cardList={rollingList} closeList={()=>setClickBtn(false)}></RollingCardList>
-                )}  
+                    <RollingCardList closeList={()=>setClickBtn(false)}></RollingCardList>
+                    )}  
                     {/* 롤링페이퍼 컨텐츠가 올 공간 입니다. */}
+                    {attachedList}
                 </div>
             </div>
             {/* <div className="sticky_list_container">
