@@ -156,17 +156,22 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Map<String, String> logout(HttpServletRequest request) {
+
+        Map<String, String> response = new HashMap<>();
+
         String bearerToken = request.getHeader("Authorization");
-        if (!StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer")) {
+        if (!StringUtils.hasText(bearerToken)) {
             log.error("토큰 없음");
-            return null;
+            response.put("message", "토큰이 없습니다.");
+            return response;
         }
         String accessToken = bearerToken.substring(7);
 
         // 1. Access Token 검증
         if (!jwtTokenProvider.validateToken(accessToken)) {
             log.error("잘못된 요청입니다.");
-            return null;
+            response.put("message", "잘못된 요청입니다.");
+            return response;
         }
 
         // 2. Access Token 에서 User id을 가져옵니다.
@@ -178,12 +183,11 @@ public class MemberServiceImpl implements MemberService {
             redisTemplate.delete("RT:" + authentication.getName());
         }
 
-        // 4. 해당 Access Token 유효시간 가지고 와서 BlackList 로 저장하기
+        // 4. 해당 Access Token 유효시간 가지고 와서 BlackList 로 저장
         Long expiration = jwtTokenProvider.getExpiration(accessToken);
         redisTemplate.opsForValue()
                 .set(accessToken, "logout", expiration, TimeUnit.MILLISECONDS);
 
-        Map<String, String> response = new HashMap<>();
         response.put("message", "로그아웃 되었습니다.");
 
         return response;
