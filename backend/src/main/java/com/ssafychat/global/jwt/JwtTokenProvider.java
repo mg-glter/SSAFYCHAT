@@ -118,6 +118,8 @@ public class JwtTokenProvider {
             log.info("Unsupported JWT Token", e);
         } catch (IllegalArgumentException e) {
             log.info("JWT claims string is empty.", e);
+        } catch (Exception e) {
+            log.info("유효하지 않음", e);
         }
         return false;
     }
