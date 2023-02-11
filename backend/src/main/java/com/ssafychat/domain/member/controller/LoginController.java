@@ -50,11 +50,6 @@ public class LoginController {
         //아이디 체크는 Authentication 에 사용자 입력 아이디, 비번을 넣어줘야지 작동
 
         Map<String, String> info = memberService.loginUser(email, password);
-        if(info != null){ // 존재한다면 토큰생성
-            return new ResponseEntity<>(info, HttpStatus.OK);
-        }
-        info = new HashMap<>();
-        info.put("message","fail");
         return new ResponseEntity<>(info,HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

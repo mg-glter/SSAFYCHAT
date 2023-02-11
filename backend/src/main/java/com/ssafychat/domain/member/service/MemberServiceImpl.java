@@ -17,6 +17,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -86,33 +87,37 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Map<String,String> loginUser(String email, String password) {
 
+        Map<String,String> info = new HashMap<>();
+
         Member loginMember = memberRepository.findByEmail(email);
 
         if (loginMember == null) {
             log.error("해당하는 유저가 존재하지 않습니다.");
-            return null;
+            info.put("message", "해당하는 유저가 존재하지 않습니다.");
+            return info;
         }
 
         // 1. Login ID/PW 를 기반으로 Authentication 객체 생성
         // 이때 authentication 는 인증 여부를 확인하는 authenticated 값이 false
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email, password);
 
-        // 2. 실제 검증 (사용자 비밀번호 체크)이 이루어지는 부분
-        // authenticate 매서드가 실행될 때 CustomUserDetailsService 에서 만든 loadUserByUsername 메서드가 실행
-        Authentication authentication = authenticationManager.authenticate(authenticationToken);
-
-        // 3. 인증 정보를 기반으로 JWT 토큰 생성
-        TokenInfoDto tokenInfo = jwtTokenProvider.generateToken(authentication);
-
-        // 4. RefreshToken Redis 저장 (expirationTime 설정을 통해 자동 삭제 처리)
-        redisTemplate.opsForValue()
-                .set("RT:" + authentication.getName(), tokenInfo.getRefreshToken(), tokenInfo.getRefreshTokenExpirationTime(), TimeUnit.MILLISECONDS);
-
-        Map<String,String> info = new HashMap<>();
-        info.put("accessToken", tokenInfo.getAccessToken());
-        info.put("refreshToken", tokenInfo.getRefreshToken());
-        info.put("name", loginMember.getName());
-        info.put("role", loginMember.getRole());
+        try {
+            // 2. 실제 검증 (사용자 비밀번호 체크)이 이루어지는 부분
+            // authenticate 매서드가 실행될 때 CustomUserDetailsService 에서 만든 loadUserByUsername 메서드가 실행
+            Authentication authentication = authenticationManager.authenticate(authenticationToken);
+            // 3. 인증 정보를 기반으로 JWT 토큰 생성
+            TokenInfoDto tokenInfo = jwtTokenProvider.generateToken(authentication);
+            // 4. RefreshToken Redis 저장 (expirationTime 설정을 통해 자동 삭제 처리)
+            redisTemplate.opsForValue()
+                    .set("RT:" + authentication.getName(), tokenInfo.getRefreshToken(), tokenInfo.getRefreshTokenExpirationTime(), TimeUnit.MILLISECONDS);
+            info.put("accessToken", tokenInfo.getAccessToken());
+            info.put("refreshToken", tokenInfo.getRefreshToken());
+            info.put("name", loginMember.getName());
+            info.put("role", loginMember.getRole());
+        } catch (AuthenticationException e) {
+            info.put("message", "비밀번호를 확인해주십시오.");
+            return info;
+        }
         return info;
     }
 
