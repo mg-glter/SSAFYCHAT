@@ -53,7 +53,6 @@ public class MemberServiceImpl implements MemberService {
     private final RedisTemplate<String, Object> redisTemplate;
 
 
-    //유효성 검사 적용안함, 기능구현까지 -> 나중에 검사하는 로직도 필요
     @Override
     public boolean registUser(MemberDto memberInfo) {
         Member checkMember = memberRepository.findByEmail(memberInfo.getEmail());
@@ -82,7 +81,6 @@ public class MemberServiceImpl implements MemberService {
         }
         return false;
     }
-
 
     @Override
     public Map<String,String> loginUser(String email, String password) {
@@ -220,15 +218,14 @@ public class MemberServiceImpl implements MemberService {
     public MyPageDto getMypage(Member member) {
         // user 정보에서 role 확인해서 서비스 호출
         String role = member.getRole();
-        System.out.println("member " + member);
         List<Mentoring> matchMentorings = new ArrayList<>();
         List<CompleteMentoring> completeMentorings = new ArrayList<>();
 
         // 멘티라면 mentee_uid로 조회 : mentoring 테이블, completeMentoring 테이블
-        // 멘토라면 mentor_uid로 조회 : mentoring 테이블, completeMentoring 테이블
         if (role.equals("role_mentee")){
             matchMentorings = mentoringRepository.findByMentee(member);
             completeMentorings = completeMentoringRepository.findByMentee(member);
+        // 멘토라면 mentor_uid로 조회 : mentoring 테이블, completeMentoring 테이블
         } else if (role.equals("role_mentor")) {
             matchMentorings = mentoringRepository.findByMentor(member);
             completeMentorings = completeMentoringRepository.findByMentor(member);
