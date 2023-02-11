@@ -27,12 +27,20 @@
     font-size: 15px;
 }
 
+.reserved_list_table_container{
+    height: 400px;
+    overflow: auto;
+}
+
+.reserved_list_table_container::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
+
 .reserved_list_thead{
     
 }
 
 .reserved_list_tbody{
-    
 }
 .reserved_list_tr_head{
     text-align: center;

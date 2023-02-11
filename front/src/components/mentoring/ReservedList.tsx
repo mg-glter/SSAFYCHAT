@@ -85,6 +85,7 @@ function ReservedList(props : any){
             <div className="reserved_list_header">
                 예약된 멘토링
             </div>
+            <div className="reserved_list_table_container">
             <table className="reserved_list_table">
                 <thead>
                     <tr className="reserved_list_tr_head">
@@ -99,6 +100,7 @@ function ReservedList(props : any){
                     {list}              
                 </tbody>
             </table>
+            </div>
         </div>
         
     )
