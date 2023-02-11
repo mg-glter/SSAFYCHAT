@@ -13,7 +13,7 @@ const api = localServer();
 
 // param, success, fail 을 받아 함수 호출
 async function reservation(success : any, fail : any){
-    api.defaults.headers["Authorization"] = "Bearer " + sessionStorage.getItem("refresh-token");
+    api.defaults.headers["Authorization"] = "Bearer " + sessionStorage.getItem("access-token");
     await api.get(`/mentoring/reservation`)
     .then(success)
     .catch(fail);
