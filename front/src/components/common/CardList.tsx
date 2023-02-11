@@ -2,15 +2,14 @@ import "../../styles/components/common/card-list.css";
 import {useState} from 'react';
 import ArrowButton from "../../widget/ArrowButton";
 import ReservationCard from "../../widget/ReservationCard";
-import { reservation } from "../../api/mentoring";
 function CardList(props : any){
 
     let cards = [];
     let [startIdx,setIdx] = useState(0);
 
     for(let i = startIdx; i < startIdx+4&&props.cardList.length; ++i){
-        let t = props.cardList[i];
-        cards.push(<ReservationCard key={i} drag={props.drag} info={[t[0],t[1],t[2],t[3]]} isAbleDrag={props.isAbleDrag} container={props.container} isEnterable={props.isEnterable} hoverText={props.hoverText}></ReservationCard>)
+        let info = props.cardList[i];
+        cards.push(<ReservationCard key={i} drag={props.drag} info={[info[0],info[1],info[2],info[3]]} isAbleDrag={props.isAbleDrag} container={props.container} isEnterable={props.isEnterable} hoverText={props.hoverText}></ReservationCard>)
     }
 
     return (
