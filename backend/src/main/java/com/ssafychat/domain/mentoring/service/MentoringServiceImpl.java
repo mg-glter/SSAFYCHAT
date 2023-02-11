@@ -75,13 +75,13 @@ public class MentoringServiceImpl implements MentoringService {
         // applymentoring 테이블에서 본인 직무, 회사에 맞는 목록 불러오기
         List<ApplyMentoring> applyMentoringsForMentor = applyMentoringRepository.findByJobAndCompany(job, belong);
 
-        for (int i = 0; i < applyMentoringsForMentor.size(); i++) {
-            ApplyMentoring applyMentoring = applyMentoringsForMentor.get(i);
+        for (ApplyMentoring applyMentoring: applyMentoringsForMentor) {
             Member mentee = applyMentoring.getMentee();
-            MentoringDateDto mentoringDateDto = MentoringDateDto.builder().applyMentoringId(applyMentoring.getApplyMentoringId()).build();
-
+            MentoringDateDto mentoringDateDto = MentoringDateDto.builder()
+                    .applyMentoringId(applyMentoring.getApplyMentoringId())
+                    .build();
             List<MentoringDate> dates = mentoringDateRepository.findByApplyMentoring_ApplyMentoringId(mentoringDateDto.getApplyMentoringId());
-            Date[] times = new Timestamp[dates.size()];
+            Date[] times = new Date[dates.size()];
             for (int j = 0; j < times.length; j++) {
                 times[j] = dates.get(j).getTime();
             }
@@ -106,8 +106,7 @@ public class MentoringServiceImpl implements MentoringService {
         // 본인 식별자로 mentoring(멘토링) 테이블 조회
         List<Mentoring> mathcMentoringsForMentor = mentoringRepository.findByMentor_UserId(userId);
 
-        for (int i = 0; i < mathcMentoringsForMentor.size(); i++) {
-            Mentoring mentoring = mathcMentoringsForMentor.get(i);
+        for (Mentoring mentoring : mathcMentoringsForMentor) {
             Member mentee = mentoring.getMentee();
             matchList.add(
                     MatchMentoringForMentorDto.builder()
@@ -137,7 +136,6 @@ public class MentoringServiceImpl implements MentoringService {
 
     @Override
     public Mentoring insertMentoring(int userId, ApplyMentoring applyMentoring, Timestamp time) {
-        System.out.println(applyMentoring);
         Mentoring mentoring = Mentoring.builder()
                 .mentoringId(applyMentoring.getApplyMentoringId())
                 .mentor(memberRepository.findByUserId(userId))
@@ -177,23 +175,20 @@ public class MentoringServiceImpl implements MentoringService {
 
         List<Integer> rankerIds = completeMentoringRepository.findRanking();
         Member[] rankers = new Member[rankerIds.size()];
-        int i = 0;
-        for (Member ranker : rankers) {
-            ranker = memberRepository.findByUserIdForRanker(rankerIds.get(i++));
+        for (int i = 0; i < rankers.length; i++) {
+            rankers[i] = memberRepository.findByUserIdForRanker(rankerIds.get(i));
         }
         return rankers;
     }
 
     @Override
     public MainInfoDto mainInfo() {
-        MainInfoDto mainInfoDto = MainInfoDto.builder()
+        return MainInfoDto.builder()
                 .completeMentoringCount(completeMentoringRepository.completeMentoringCount())
                 .mentorCount(memberRepository.countByRole("role_mentor"))
                 .menteeCount(memberRepository.countByRole("role_mentee"))
                 .rankers(ranking())
                 .build();
-
-        return mainInfoDto;
     }
 
     @Override
@@ -208,7 +203,7 @@ public class MentoringServiceImpl implements MentoringService {
         ApplyMentoring savedApplyMentoring = applyMentoringRepository.save(applyMentoring);
         // applyMentoring id 반환 받아서
         // date 테이블에 time과 applyMentoring id 배열 크기만큼 반복하면서 insert
-        for (Timestamp time : applyMentoringDto.getTimes()) {
+        for (Date time : applyMentoringDto.getTimes()) {
             MentoringDate mentoringDate = MentoringDate.builder()
                     .applyMentoring(savedApplyMentoring)
                     .time(time)
@@ -263,9 +258,7 @@ public class MentoringServiceImpl implements MentoringService {
         List<ApplyMentoringViewDto> appliedMentoringList = new ArrayList<>();
         List<ApplyMentoring> applyMentoringList = applyMentoringRepository.findByMentee_UserId(userId);
 
-        for(int i=0; i< applyMentoringList.size(); i++){
-
-            ApplyMentoring applyMentoring = applyMentoringList.get(i);
+        for (ApplyMentoring applyMentoring : applyMentoringList) {
             MentoringDateDto mentoringDateDto = MentoringDateDto.builder().
                     applyMentoringId(applyMentoring.getApplyMentoringId()).build();
 
@@ -286,8 +279,6 @@ public class MentoringServiceImpl implements MentoringService {
                             .build()
             );
         }
-
-
         return appliedMentoringList;
     }
 
@@ -297,8 +288,7 @@ public class MentoringServiceImpl implements MentoringService {
         List<MentoringListForMenteeDto> matchedMentoringList =  new ArrayList<>();
         List<Mentoring> mentoringList = mentoringRepository.findByMentee_UserId(userId);
 
-        for (int i = 0; i < mentoringList.size(); i++) {
-            Mentoring mentoring = mentoringList.get(i);
+        for (Mentoring mentoring: mentoringList) {
             Member mentor = mentoring.getMentor();
 
             matchedMentoringList.add(
@@ -311,7 +301,6 @@ public class MentoringServiceImpl implements MentoringService {
                             .build()
             );
         }
-
         return matchedMentoringList;
     }
 
@@ -321,9 +310,7 @@ public class MentoringServiceImpl implements MentoringService {
         List<CanceledMentoringListDto> canceledMentoringListForMentee = new ArrayList<>();
         List<CancelMentoring> cancelMentoringList = cancelMentoringRepository.findByMentee_UserId(userId);
 
-        for(int i=0; i<cancelMentoringList.size(); i++){
-            CancelMentoring cancelMentoring = cancelMentoringList.get(i);
-
+        for (CancelMentoring cancelMentoring : cancelMentoringList){
             canceledMentoringListForMentee.add(
                     CanceledMentoringListDto.builder()
                             .cancelMentoringId(cancelMentoring.getCancelMentoringId())
@@ -333,7 +320,6 @@ public class MentoringServiceImpl implements MentoringService {
                             .build()
             );
         }
-
         return canceledMentoringListForMentee;
     }
 
@@ -356,13 +342,12 @@ public class MentoringServiceImpl implements MentoringService {
         // 완료 테이블 정보 불러와서
         CompleteMentoring completeMentoring = completeMentoringRepository.findByCompleteMentoringId(completeMentoringId);
         // reported = mentee와 mentor 중 member가 아닌 사람
-        Member reported = null;
+        Member reported;
         if (completeMentoring.getMentor().getUserId() == reporter.getUserId()){
             reported = completeMentoring.getMentee();
         } else {
             reported = completeMentoring.getMentor();
         }
-        // insert
         Report report = Report.builder()
                 .reporter(reporter.getUserId())
                 .reported(reported.getUserId())
@@ -370,8 +355,6 @@ public class MentoringServiceImpl implements MentoringService {
                 .completeMentoring(completeMentoring)
                 .build();
         reportRepository.save(report);
-        System.out.println(report);
-
     }
 
 }
