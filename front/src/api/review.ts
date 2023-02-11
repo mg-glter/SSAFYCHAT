@@ -9,7 +9,7 @@ async function getReview(success : any, fail : any){
     .then(success)
     .catch(fail);
 }
-async function setReview(review:{completeMentoringId: number, reviewContent: string, reviewTitle: string, score: number},
+async function setReview(review:{completeMentoringId: number, reviewContent: string, score: number},
     success : any, fail : any){
     api.defaults.headers["Authorization"] = "Bearer " + sessionStorage.getItem("access-token");
     await api.post(`/mentoring/review`, JSON.stringify(review))

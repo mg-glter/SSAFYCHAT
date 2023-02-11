@@ -47,7 +47,6 @@ function ReviewModal(props : any){
                                     // 멘토링 아이디 받아서 써야함
                                     completeMentoringId: 0,
                                     reviewContent:content,
-                                    reviewTitle:"sticky_red",
                                     score:rate,
                                 },
                                 (success : any)=>{
