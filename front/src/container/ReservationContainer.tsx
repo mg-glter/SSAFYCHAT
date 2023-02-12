@@ -7,8 +7,8 @@ import { changeBanner } from "../store/userSlice"
 import { reservation } from "../api/mentoring";
 import { useEffect } from "react";
 import { useAppSelector } from "../hooks/hooks";
-import { resourceLimits } from "worker_threads";
-import { changeForm } from "../utils/ts/time";
+import { getReservation } from "../store/mentoringSlice";
+import ReservedList from "../components/mentoring/ReservedList";
 function ReservationContainer(){
     const dispatch = useAppDispatch();
     dispatch(changeBanner("예약확인"));
@@ -17,24 +17,23 @@ function ReservationContainer(){
         console.log("reservation");
         reservation((success : any)=>{
             console.log(success);
-            dispatch(success.data);
+            dispatch(getReservation(success.data));
         },(fail : any)=>{console.log(fail)});
     })
     const reservationList = useAppSelector(state => state.mentoring.reservationList);
-    // [["김도원","네이버","백엔드 개발자","2023-01-01"]
     let appliedList : any = [];  
-    // {        time:"2022.02.02 AM 09:10",        name:"김겨울",        belong: "SMENT",        job:"아이돌",        num: "7전8기",    },  
-    let matchedList : any= [];
+    let matchedList : any= reservationList.matchedList;
     let canceledList : any = [];
     for(let i = 0; i < reservationList.appliedList.length; ++i){
-        appliedList.push(["신청카드",reservationList.appliedList[i].company,reservationList.appliedList[i].job,reservationList.appliedList[i].times[0]]);
+        appliedList.push(["신청카드",reservationList.appliedList[i].company,reservationList.appliedList[i].job,reservationList.appliedList[i].times[0],reservationList.appliedList[i].applyMentoringId]);
     }
-    for(let i = 0; i < reservationList.matchedList.length; ++i){
-        matchedList.push(reservationList.matchedList[i]);
-    }
+    // for(let i = 0; i < reservationList.matchedList.length; ++i){
+    //     matchedList.push(reservationList.matchedList[i]);
+    // }
     for(let i = 0; i < reservationList.canceledList.length; ++i){
-        canceledList.push(reservationList.canceledList[i]);
+        canceledList.push(reservationList.canceledList[i].company,reservationList.canceledList[i].job,reservationList.canceledList[i].time);
     }
+
     return (
         <div className="reservation_page_container">
             <div className="reservation_page_inner_container">

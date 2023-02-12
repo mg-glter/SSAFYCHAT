@@ -1,7 +1,7 @@
 import { attachRolling, removeRolling } from "../../store/rollingSlice";
 
 
-function dragCard(event : any, elemClassName : string, containerClassName : string, isEnterCheck : boolean){
+function dragCard(event : any, elemClassName : string, containerClassName : string, isEnterCheck : boolean, resultFunc : any){
     // 요소 가져오기
     let elem = event.target;
     // 기존의 드래그를 없애기
@@ -73,6 +73,9 @@ function dragCard(event : any, elemClassName : string, containerClassName : stri
                     // **********************
                     // 이 곳에 기능을 넣어야 함
                     // **********************
+
+                    // resultFunc에 원하는 행동을 넣어서 실행
+                    resultFunc();
                 }
                 onDrag = false;
             }
@@ -102,6 +105,9 @@ function dragCard(event : any, elemClassName : string, containerClassName : stri
                     // **********************
                     // 이 곳에 기능을 넣어야 함
                     // **********************
+
+                    // resultFunc에 원하는 행동을 넣어서 실행
+                    resultFunc();
                 }
                 onDrag = false;
             }
