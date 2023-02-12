@@ -13,7 +13,10 @@ function ReservationContainer(){
     // 예약 리스트들 호출
     useEffect(()=>{
         console.log("reservation");
-        reservation((success : any)=>{console.log(success)},(fail : any)=>{console.log(fail)});
+        reservation((success : any)=>{
+            console.log(success);
+            dispatch(success.data);
+        },(fail : any)=>{console.log(fail)});
     })
     const cardList = [["김도원","네이버","백엔드 개발자","2023-01-01"],["김겨울","SMENT","가수","2023-01-01"],["3","SMENT","가수","2023-01-01"],["4","SMENT","가수","2023-01-01"],["5","SMENT","가수","2023-01-01"],["6","SMENT","가수","2023-01-01"]];
     const reCardList = [
