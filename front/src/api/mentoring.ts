@@ -18,6 +18,36 @@ async function reservation(success : any, fail : any){
     .then(success)
     .catch(fail);
 }
+// 신청한 멘토링 취소
+async function cancelReservation(info:{applyMentoringId: number,
+        time:{
+            data:number,
+            hours:number,
+            minutes:number,
+            month:number,
+            nanos:number,
+            seconds:number,
+            time:number,
+            year:number,
+        }        
+    },success: any, fail : any){
+
+        api.defaults.headers["Authorization"] = "Bearer " + sessionStorage.getItem("access-token");
+        await api.delete(`/mentoring/cancel/reservation`,{data:JSON.stringify(info)})
+        .then(success)
+        .catch(fail);
+}
+// 예약된 멘토링 취소
+async function cancelMenteeMentoring(info:{mentoringId:number,reason:string},
+    success:any,fail:any) {
+
+        api.defaults.headers["Authorization"] = "Bearer " + sessionStorage.getItem("access-token");
+        await api.delete(`/mentoring/cancel/matched-reservation`,{data:JSON.stringify(info)})
+        .then(success)
+        .catch(fail);
+
+}
+
 // 확정된 멘토링리스트와 요청멘토링리트를 받아온다.
 async function getAppointmentApi(success : any, fail : any){
     api.defaults.headers["Authorization"] = "Bearer " + sessionStorage.getItem("access-token");
@@ -34,4 +64,4 @@ async function setAppointment(appointment:{applyMentoringId:number, time:Date,},
 }
 
 
-export {reservation,getAppointmentApi,setAppointment};
+export {reservation,getAppointmentApi,setAppointment,cancelReservation,cancelMenteeMentoring};
