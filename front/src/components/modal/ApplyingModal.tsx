@@ -114,8 +114,8 @@ function ApplyingModal(props: any) {
   /** 신청하는 api 호출*/
   function applyMentoring() {
     const applying = {
-      job: mentoringInfo.belong,
-      company: mentoringInfo.job,
+      job: mentoringInfo.job,
+      company: mentoringInfo.belong,
       times: [selectedTimes],
     };
 
