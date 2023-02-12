@@ -83,6 +83,10 @@ export const MentoringSlice = createSlice({
         state.reservationList.canceledList = action.payload.canceledList;
         state.reservationList.matchedList = action.payload.matchedList;
     },
+    getAppointment: (state, action: PayloadAction<AppointmentState>)=>{
+        state.appointmentList.applys = action.payload.applys;
+        state.appointmentList.matches = action.payload.matches;
+    }
   }
 })
 
