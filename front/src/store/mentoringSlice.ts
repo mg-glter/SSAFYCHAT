@@ -37,7 +37,7 @@ interface applyInfo{
 
 interface matchInfo{
   name:string,
-  studentNumber:number,
+  studentNumber:string,
   numberth:number,
   email:string,
   time:string,
@@ -90,7 +90,7 @@ export const MentoringSlice = createSlice({
   }
 })
 
-export const { getReservation } = MentoringSlice.actions
+export const { getReservation, getAppointment } = MentoringSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCount = (state: RootState) => state.mentoring
