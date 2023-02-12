@@ -35,7 +35,7 @@ function localServer() {
     try {
       const refreshToken = sessionStorage.getItem('refresh-token');
       const accessToken = sessionStorage.getItem('access-token');
-      console.log('getrefreshToken : ' + refreshToken);
+      // console.log('getrefreshToken : ' + refreshToken);
       const { data } = await axios.post(
         "https://ssafychat.shop/api/reissue",
         {
@@ -66,11 +66,15 @@ function localServer() {
       // console.log(error);
       // console.log(config.url);
 
-      if (config.url === "/reissue" || status !== 401 || config.sent) {
+      // if (config.url === "/reissue" || status !== 401 || config.sent) {
+      //   return Promise.reject(error);
+      // }
+
+      if (status !== 401){
         return Promise.reject(error);
       }
 
-      config.sent = true;
+      // config.sent = true;
       const accessToken = await getRefreshToken();
 
       if (accessToken) {
