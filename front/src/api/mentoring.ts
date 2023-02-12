@@ -19,7 +19,7 @@ async function reservation(success : any, fail : any){
     .catch(fail);
 }
 // 확정된 멘토링리스트와 요청멘토링리트를 받아온다.
-async function getAppointment(success : any, fail : any){
+async function getAppointmentApi(success : any, fail : any){
     api.defaults.headers["Authorization"] = "Bearer " + sessionStorage.getItem("access-token");
     await api.get(`/mentoring/appointment`)
     .then(success)
@@ -34,4 +34,4 @@ async function setAppointment(appointment:{applyMentoringId:number, time:Date,},
 }
 
 
-export {reservation,getAppointment,setAppointment};
+export {reservation,getAppointmentApi,setAppointment};
