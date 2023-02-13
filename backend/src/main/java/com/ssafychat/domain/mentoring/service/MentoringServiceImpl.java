@@ -46,10 +46,10 @@ public class MentoringServiceImpl implements MentoringService {
             return memberRepository.getAllJobAndBelong("SSAFY", "");
         } else if (job.equals("")) {
             // belong으로 조회
-            return memberRepository.findDistinctByBelong(belong);
+            return memberRepository.findDistinctByBelongOrderByJob(belong);
         } else if (belong.equals("")) {
             // job으로 조회
-            return memberRepository.findDistinctByJob(job);
+            return memberRepository.findDistinctByJobOrderByBelong(job);
         } else {
             // job & belong으로 조회
             return memberRepository.findDistinctByJobAndBelong(job, belong);
@@ -302,6 +302,7 @@ public class MentoringServiceImpl implements MentoringService {
             canceledMentoringListForMentee.add(
                     CanceledMentoringListDto.builder()
                             .cancelMentoringId(cancelMentoring.getCancelMentoringId())
+                            .name(cancelMentoring.getMentor().getName())
                             .job(cancelMentoring.getJob())
                             .company(cancelMentoring.getCompany())
                             .time(cancelMentoring.getTime())

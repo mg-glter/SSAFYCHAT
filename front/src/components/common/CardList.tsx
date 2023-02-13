@@ -1,25 +1,16 @@
 import "../../styles/components/common/card-list.css";
 import { useState } from 'react';
-import { useAppSelector } from "../../hooks/hooks";
 import ArrowButton from "../../widget/ArrowButton";
 import ReservationCard from "../../widget/ReservationCard";
 function CardList(props : any){
-    const applyData = useAppSelector(state => state.mentoring.appointmentList.applys);
-
-    let cards: any[] = [];
+    let cards: any = [];
     let [startIdx, setIdx] = useState(0);
-    
-    applyData.map((item) => {
-        item.times.map((data) => {
-            cards.push(<ReservationCard drag={props.drag} info={[item.name, item.numberth, item.email, data]} isAbleDrag={props.isAbleDrag} container={props.container} isEnterable={props.isEnterable} hoverText={props.hoverText}></ReservationCard>)
-        });
-    });
 
     for(let i = startIdx; i < startIdx+4&&props.cardList.length; ++i){
         let info = props.cardList[i];
         cards.push(<ReservationCard key={i} drag={props.drag} info={[info[0],info[1],info[2],info[3],info[4]]} isAbleDrag={props.isAbleDrag} container={props.container} isEnterable={props.isEnterable} hoverText={props.hoverText}></ReservationCard>)
     }
-
+    console.log(props.cardList);
     return (
     // 카드리스트 전체를 감싸는 컨테이너
     <div className="card_list_container">
