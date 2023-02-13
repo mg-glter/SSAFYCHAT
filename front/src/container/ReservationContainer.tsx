@@ -46,8 +46,10 @@ function ReservationContainer(){
             canceledList.push(["취소카드",item.company,item.job,new Date(item.time).toISOString(),item.cancelMentoringId]);
     });
     console.log("applied :"+appliedList);
+    console.log(+appliedList);
     console.log("match :" + matchedList);
     console.log("cancel :" + canceledList);
+    console.log(canceledList);
     return (
         <div className="reservation_page_container">
             <div className="reservation_page_inner_container">
