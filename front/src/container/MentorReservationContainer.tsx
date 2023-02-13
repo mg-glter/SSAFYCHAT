@@ -110,6 +110,7 @@ function MentorReservationContainer(){
     const cardList: any = [];
     apply.map((item: any) => {
         item.times.map((data: any) => {
+            console.log(data);
             cardList.push([item.name, whatMyNick(item.numberth), item.email, data, item.applyMentoringId]);
         });
     });
