@@ -47,9 +47,14 @@ function ReservationCard(props : any){
     if(props.isEnterable){
         funcAfterDrag = ()=>{
             for(let i = 0; i < appointmentList.applys.length; ++i){
+                console.log("infoId "+ props.info[4]);
+                console.log("listId " + appointmentList.applys[i].applyMentoringId );
+                
                 if(appointmentList.applys[i].applyMentoringId === props.info[4]){
-                    setAppointmentApi({applyMentoringId:props.info[4],time:new Date(appointmentList.applys[i].times[0]).toISOString()},(success : any)=>{
+                    console.log(props.info[3]);
+                    setAppointmentApi({applyMentoringId:props.info[4],time:props.info[3]},(success : any)=>{
                         console.log(success);
+                        
                         appointmentList.matches.push({
                             name:appointmentList.applys[i].name,
                             studentNumber:appointmentList.applys[i].studentNumber,
@@ -62,6 +67,7 @@ function ReservationCard(props : any){
                         dispatch(getAppointment(appointmentList));
                     },(fail : any)=>{
                         console.log(fail);
+                        console.log(props.info[4]);
                     });
                     // 이곳에 api호출
                 }
