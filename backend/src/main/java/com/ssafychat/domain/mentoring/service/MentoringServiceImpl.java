@@ -279,7 +279,6 @@ public class MentoringServiceImpl implements MentoringService {
 
     @Override
     public List<MentoringListForMenteeDto> getMatchedMentoringList(int userId) {
-        //멘토 정보 가져오기 고려
         List<MentoringListForMenteeDto> matchedMentoringList =  new ArrayList<>();
         List<Mentoring> mentoringList = mentoringRepository.findByMentee_UserId(userId);
 
@@ -292,6 +291,7 @@ public class MentoringServiceImpl implements MentoringService {
                             .name(mentor.getName())
                             .job(mentoring.getJob())
                             .company(mentoring.getCompany())
+                            .numberth(Integer.parseInt(mentor.getStudentNumber().substring(0,2)))
                             .time(mentoring.getTime())
                             .build()
             );
