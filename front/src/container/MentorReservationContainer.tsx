@@ -95,14 +95,14 @@ function MentorReservationContainer(){
     const cardList: any[] = [];
     apply.map((item: any) => {
         item.times.map((data: any) => {
-            cardList.push(item.name, item.numberth, item.email, data, item.applyMentoringId);
+            cardList.push([item.name, item.numberth, item.email, data, item.applyMentoringId]);
         });
     });
     // const rcardList: any[] = [];
     // match.map((item: any) => {
     //     rcardList.push([item.data, item.])
     // })
-
+    console.log(cardList);
     return (
         <div className="mentor_reservation_page_container">
             <div className="mentor_reservation_page_inner_container">
