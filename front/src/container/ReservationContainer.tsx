@@ -14,34 +14,42 @@ function ReservationContainer(){
     dispatch(changeBanner("예약확인"));
     // 예약 리스트들 호출
     useEffect(()=>{
-        console.log("reservation");
+        // console.log("reservation");
         reservation((success : any)=>{
             console.log(success);
             dispatch(getReservation(success.data));
         },(fail : any)=>{console.log(fail)});
-    })
+    },[])
     const reservationList = useAppSelector(state => state.mentoring.reservationList);
 
-    let app: any[] = useAppSelector(state => state.mentoring.reservationList.appliedList);
-    let can: any[] = useAppSelector(state => state.mentoring.reservationList.canceledList);
+    let app: any = useAppSelector(state => state.mentoring.reservationList.appliedList);
+    let can: any = useAppSelector(state => state.mentoring.reservationList.canceledList);
     let appliedList : any = [];
     let matchedList : any = useAppSelector(state => state.mentoring.reservationList.matchedList);
     let canceledList : any = [];
 
-    console.log(app);
-    console.log(can);
-    for(let i = 0; i < app.length; ++i){
-        appliedList.push(["신청카드",app[i].company,app[i].job,new Date(app[i].times[0]),app[i].applyMentoringId]);
-    }
+    // console.log(app);
+    // console.log(can);
+    app.map((item: any) => {
+            appliedList.push(["신청카드",item.company,item.job,new Date(item.times[0]).toISOString(),item.applyMentoringId]);
+    });
+    // for(let i = 0; i < app.length; ++i){
+    //     appliedList.push(["신청카드",app[i].company,app[i].job,new Date(app[i].times[0]).toISOString(),app[i].applyMentoringId]);
+    // }
     // for(let i = 0; i < reservationList.matchedList.length; ++i){
     //     matchedList.push(reservationList.matchedList[i]);
     // }
-    for(let i = 0; i < can.length; ++i){
-        canceledList.push([can[i].company,can[i].job,new Date(can[i].time)]);
-    }
-    console.log("applied :"+appliedList);
-    console.log("match :" + matchedList);
-    console.log("cancel :" + canceledList);
+    // for(let i = 0; i < can.length; ++i){
+    //     canceledList.push(["취소카드",can[i].company,can[i].job,new Date(can[i].time).toISOString(),can[i].cancelMentoringId]);
+    // }
+    can.map((item: any) => {
+            canceledList.push(["취소카드",item.company,item.job,new Date(item.time).toISOString(),item.cancelMentoringId]);
+    });
+    // console.log("applied :"+appliedList);
+    // console.log(+appliedList);
+    // console.log("match :" + matchedList);
+    // console.log("cancel :" + canceledList);
+    // console.log(canceledList);
     return (
         <div className="reservation_page_container">
             <div className="reservation_page_inner_container">
