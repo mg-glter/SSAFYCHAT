@@ -25,13 +25,13 @@ function ReservationContainer(){
     let matchedList : any= reservationList.matchedList;
     let canceledList : any = [];
     for(let i = 0; i < reservationList.appliedList.length; ++i){
-        appliedList.push(["신청카드",reservationList.appliedList[i].company,reservationList.appliedList[i].job,reservationList.appliedList[i].times[0],reservationList.appliedList[i].applyMentoringId]);
+        appliedList.push(["신청카드",reservationList.appliedList[i].company,reservationList.appliedList[i].job,new Date(reservationList.appliedList[i].times[0]),reservationList.appliedList[i].applyMentoringId]);
     }
     // for(let i = 0; i < reservationList.matchedList.length; ++i){
     //     matchedList.push(reservationList.matchedList[i]);
     // }
     for(let i = 0; i < reservationList.canceledList.length; ++i){
-        canceledList.push(reservationList.canceledList[i].company,reservationList.canceledList[i].job,reservationList.canceledList[i].time);
+        canceledList.push(reservationList.canceledList[i].company,reservationList.canceledList[i].job,new Date(reservationList.canceledList[i].time));
     }
 
     return (
