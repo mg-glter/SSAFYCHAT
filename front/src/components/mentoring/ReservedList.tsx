@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router";
 import "../../styles/components/mentoring/reserved-list.css"
-import { useAppSelector } from '../../hooks/hooks'
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks'
 import { useState } from "react";
+import { setMentoringId } from "../../store/mentoringSlice";
 import CancelModal from "../modal/CancelModal";
 import DATE_TO_STRING from "../../utils/ts/date_to_string";
 
@@ -62,6 +63,9 @@ function dragItem(event : any){
 
 
 function ReservedListItem(props : any){
+    
+    console.log(useAppSelector(state => state.mentoring.mentoringId));
+    let dispatch = useAppDispatch();
     const[clickCancel, setClickCancel] = useState(false);
     return(
         <tr className="reserved_list_tr_body" 
@@ -76,7 +80,8 @@ function ReservedListItem(props : any){
             <td>{props.reserved.email}</td>
             <td className="reserved_list_btn_container">
                 <div className="reserved_list_enter_button enter_meeting_button" onClick={(event)=>{
-                props.func(event);
+                    dispatch(setMentoringId(props.reserved.mentoringId));
+                    props.func(event);
                 }} >입장</div>
                 <div className="reserved_list_cancel_btn">
                     <img src="/img/trash_shape_red.png" alt="취소" onClick={()=>{setClickCancel(!clickCancel)}}>
@@ -84,7 +89,7 @@ function ReservedListItem(props : any){
                 </div>
             </td>
             {clickCancel && (
-                <CancelModal closeModal={()=> setClickCancel(!clickCancel)}></CancelModal>
+                <CancelModal info={props.info} closeModal={()=> setClickCancel(!clickCancel)}></CancelModal>
             )}  
         </tr>
     )

@@ -4,31 +4,7 @@ import { getAppointment, getReservation } from "../store/mentoringSlice";
 import { cancelReservation } from "../api/mentoring";
 import { setAppointmentApi } from "../api/mentoring";
 import DATE_TO_STRING from "../utils/ts/date_to_string";
-function whatMyNick(nick: number){
-    console.log(nick);
-    switch (nick){
-        case 1:
-            return '1기';
-        case 2:
-            return '2기';
-        case 3:
-            return '3기';
-        case 4:
-            return '4기';
-        case 5:
-            return '5기로 극복';
-        case 6:
-            return '열정 핫식스';
-        case 7:
-            return '럭키세븐';
-        case 8:
-            return '7전8기';
-        case 9:
-            return '9뤠이트';
-        case 10:
-            return '10기';
-    }
-}
+
 
 function ReservationCard(props : any){
 
@@ -68,7 +44,8 @@ function ReservationCard(props : any){
                         return true;
                     },(fail : any)=>{
                         console.log(fail);
-                        console.log(props.info[4]);
+                        console.log("실패 아이디 " + props.info[4]);
+                        console.log("실패 시간 " + props.info[3]);
                         return false;
                     });
                     // 이곳에 api호출
@@ -106,7 +83,7 @@ function ReservationCard(props : any){
                     {props.info[0]}
                 </div>
                 <div className="card_info">
-                    {whatMyNick(props.info[1])}
+                    {props.info[1]}
                 </div>
                 <div className="card_info">
                     {props.info[2]}
