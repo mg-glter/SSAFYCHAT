@@ -1,7 +1,7 @@
 import "../styles/widget/reservation-card.css"
 import { useAppDispatch,useAppSelector } from "../hooks/hooks";
 import { getReservation } from "../store/mentoringSlice";
-
+import { cancelReservation } from "../api/mentoring";
 function whatMyNick(nick: number){
     console.log(nick);
     switch (nick){
@@ -47,6 +47,11 @@ function ReservationCard(props : any){
         funcAfterDrag = ()=>{
             for(let i = 0; i < reservationList.appliedList.length; ++i){
                 if(reservationList.appliedList[i].applyMentoringId === props.info[4]){
+                    cancelReservation({applyMentoringId:props.info[4]},(success : any)=>{
+                        console.log(success)
+                    },(fail:any)=>{
+                        console.log(fail)
+                    })
                     reservationList.appliedList.splice(i,1);
                     dispatch(getReservation(reservationList));
                     return true;

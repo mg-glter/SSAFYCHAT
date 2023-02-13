@@ -19,18 +19,7 @@ async function reservation(success : any, fail : any){
     .catch(fail);
 }
 // 신청한 멘토링 취소
-async function cancelReservation(info:{applyMentoringId: number,
-        time:{
-            data:number,
-            hours:number,
-            minutes:number,
-            month:number,
-            nanos:number,
-            seconds:number,
-            time:number,
-            year:number,
-        }        
-    },success: any, fail : any){
+async function cancelReservation(info:{applyMentoringId: number},success: any, fail : any){
 
         api.defaults.headers["Authorization"] = "Bearer " + sessionStorage.getItem("access-token");
         await api.delete(`/mentoring/cancel/reservation`,{data:JSON.stringify(info)})
