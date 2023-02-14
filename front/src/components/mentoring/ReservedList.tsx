@@ -89,7 +89,7 @@ function ReservedListItem(props : any){
                 </div>
             </td>
             {clickCancel && (
-                <CancelModal info={props.info} closeModal={()=> setClickCancel(!clickCancel)}></CancelModal>
+                <CancelModal info={props.reserved} closeModal={()=> setClickCancel(!clickCancel)}></CancelModal>
             )}  
         </tr>
     )
