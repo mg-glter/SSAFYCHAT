@@ -11,16 +11,17 @@ import { useEffect } from "react";
 
 interface UserInfo{
     belong: string,
-    social: string,
     studentNumber: string,
     job: string,
     totalScore: number,
 }
 
+
+
 function MyPageContainer(){
     const dispatch = useAppDispatch();
     dispatch(changeBanner("마이페이지"));
-    const [pagedata,setPagedata] = useState<{ member: Object; matchMentorings: Array<Object>; completeMentorings: Array<Object>; }[]>({member: {},matchMentorings: [],completeMentorings: [],});
+    //const [pagedata,setPagedata] = useState<{ member: Object; matchMentorings: Array<Object>; completeMentorings: Array<Object>; }[]>({member: Object,matchMentorings: Array<Object>,completeMentorings: Array<Object>,});
     async function init() {
         let userInfo: UserInfo = {
             belong: "",
@@ -33,12 +34,12 @@ function MyPageContainer(){
             (data: any) => {
                 console.log(data.data.matchMentorings);
                 console.log(data.data.completeMentorings);
-                setPagedata(data.data);
+                //setPagedata(data.data);
                 userInfo.belong = data.data.member.belong;
                 userInfo.studentNumber = "0404444";//data.data.member.studentNumber;
                 userInfo.job = data.data.member.job;
                 userInfo.totalScore = 10//parseInt(data.data.member.totalScore);
-                dispatch(appendUserInfo(userInfo));
+                //dispatch(appendUserInfo(userInfo));
             },
             (error: any) => {
                 console.log(error);
@@ -50,7 +51,6 @@ function MyPageContainer(){
     },[]);
     return (
         <div className="mypage_container">
-            <span>{JSON.stringify(pagedata.member)}</span>
             <div className='profile'>
                 <div className='my_image'>
                     <img className='image' src={require('../assets/smith.png')} alt="profile"></img>
@@ -65,7 +65,7 @@ function MyPageContainer(){
                 </div>
                 <div className='my_schedule'>
                     {/* 여기 수정 6 */}
-                    <MentoringList matchMentorings={pagedata.matchMentorings} completeMentorings={pagedata.completeMentorings}></MentoringList>
+                    {/* <MentoringList matchMentorings={pagedata.matchMentorings} completeMentorings={pagedata.completeMentorings}></MentoringList> */}
                 </div>
             </div>
         </div>
