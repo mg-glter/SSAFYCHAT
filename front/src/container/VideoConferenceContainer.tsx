@@ -16,14 +16,15 @@ function VideoConferenceContainer(props : any){
 
     const imgUrlEmoji = "/img/emoji.png";
     const imgUrlSend = "/img/send.png";
-    const userinfo = useAppSelector(state => state.user.userId);
+    const userinfo = useAppSelector(state => state.user);
+    const mentoringId = useAppSelector(state=>state.mentoring.mentoringId);
     let tmplog : { chat_id: number; user_id: number; message: string; Date: number; }[] = []; 
     const [logmsg,setLogmsg] = useState<{ chat_id: number; user_id: number; message: string; Date: number; }[]>([]);
     const navigate = useNavigate();
 
     useEffect(()=>{
         init(userinfo);
-    },[]);
+    },[mentoringId,userinfo]);
     return(
         // 회의 컨테이너 전체를 담는 컨테이너
 
