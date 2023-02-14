@@ -26,7 +26,7 @@ function VideoConferenceContainer(props : any){
     const [logmsg,setLogmsg] = useState<{ chat_id: number; user_id: number; message: string; Date: number; }[]>([]);
     const navigate = useNavigate();
     let first = true;
-    let myDataChannel : any; //데이터채널 1:1 
+    
 
     useEffect(()=>{
         if( userinfo !== undefined && mentoringId !== -1 && first){
@@ -83,17 +83,7 @@ function VideoConferenceContainer(props : any){
                         </div>
                         <select id="cameras"></select>
                         
-                        <div className="video_conference_cancel" onClick={()=>{
-                            myDataChannel.close();
-                            console.log("마칠때 멘토링 아이디 " +  mentoringId);
-                            completeMentoring(mentoringId,(success:any)=>{
-                                console.log(success);
-                                setClickCancel(true);
-                            },(fail:any)=>{
-                                console.log(fail);
-                                alert("다시시도해주세요");
-                            })
-                        }}>
+                        <div className="video_conference_cancel" id="video_conference_cancel">
                             <img src="/img/cancel.png" alt="recording"></img>
                         </div>
                     </div>
@@ -133,8 +123,7 @@ function VideoConferenceContainer(props : any){
     )
 
     function init(userinfo:any, mentoringId : number){
-
-        const mentoringid= mentoringId;
+        const mentoringid : number = mentoringId;
         const userid = userinfo;
         const socket = io(process.env.REACT_APP_SOCKET as string,{path: "/socket.io",transports:["websocket"]});
         const myFace = document.getElementById("myFace") as HTMLMediaElement;
@@ -143,7 +132,8 @@ function VideoConferenceContainer(props : any){
         const camerasSelect = document.getElementById("cameras") as HTMLSelectElement;
         const call = document.getElementById("call") as HTMLDivElement;
         const chattinginput = document.getElementById("video_conference_chat_input") as HTMLInputElement;
-        
+        const videoconferencecanceldiv = document.getElementById("video_conference_cancel") as HTMLDivElement;
+        let myDataChannel : RTCDataChannel; //데이터채널 1:1 
         chatLog(mentoringid,(chatlog:any)=>{
             tmplog = chatlog.data.log;
             setLogmsg(JSON.parse(JSON.stringify(tmplog)));
@@ -268,7 +258,18 @@ function VideoConferenceContainer(props : any){
                 }
             }
         }
-        
+        async function handleCloseBtn(){
+            console.log(myDataChannel);
+            console.log("마칠때 멘토링 아이디 " +  mentoringid);
+            completeMentoring({mentoringId},(success:any)=>{
+                console.log(success);
+                setClickCancel(true);
+            },(fail:any)=>{
+                console.log(fail);
+                alert("다시시도해주세요");
+            })
+        }
+
         async function handleCameraChange() {
             await getMedia(camerasSelect.value);
             if (myPeerConnection) { //peer통신가능하다면
@@ -283,7 +284,7 @@ function VideoConferenceContainer(props : any){
         muteBtn.addEventListener("click", handleMuteClick);
         cameraBtn.addEventListener("click", handleCameraClick);
         camerasSelect.addEventListener("input", handleCameraChange);
-        
+        videoconferencecanceldiv.addEventListener("click",handleCloseBtn);
         //-아래코드는 방과 관련한 코드--------------------------------------------
         
         async function initCall() { //startMedia() -> initCall
