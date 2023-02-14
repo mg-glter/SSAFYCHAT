@@ -2,7 +2,6 @@ import '../../styles/components/common/profile.css'
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks'
 
 function whatMyNick(nick: string){
-    console.log(nick);
     switch (nick){
         case '01':
             return '1기';

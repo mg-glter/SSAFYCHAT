@@ -20,12 +20,10 @@ interface UserInfo{
 function MyPageContainer(){
     const dispatch = useAppDispatch();
     dispatch(changeBanner("마이페이지"));
-    // 여기 수정4
-    // const [pagedata,setPagedata] = useState<{ member: Object; matchMentorings: Array<Object>; completeMentorings: Array<Object>; }[]>({member: {},matchMentorings: [],completeMentorings: [],});
+    const [pagedata,setPagedata] = useState<{ member: Object; matchMentorings: Array<Object>; completeMentorings: Array<Object>; }[]>({member: {},matchMentorings: [],completeMentorings: [],});
     async function init() {
         let userInfo: UserInfo = {
             belong: "",
-            social: "",
             studentNumber: "",
             job: "",
             totalScore: 0,
@@ -35,10 +33,8 @@ function MyPageContainer(){
             (data: any) => {
                 console.log(data.data.matchMentorings);
                 console.log(data.data.completeMentorings);
-                // 여기수정 5
-                // setPagedata(data.data);
+                setPagedata(data.data);
                 userInfo.belong = data.data.member.belong;
-                userInfo.social = data.data.member.social;
                 userInfo.studentNumber = data.data.member.studentNumber;
                 userInfo.job = data.data.member.job;
                 userInfo.totalScore = parseInt(data.data.member.totalScore);
@@ -54,12 +50,13 @@ function MyPageContainer(){
     },[]);
     return (
         <div className="mypage_container">
+            <span>{JSON.stringify(pagedata.member)}</span>
             <div className='profile'>
                 <div className='my_image'>
                     <img className='image' src={require('../assets/smith.png')} alt="profile"></img>
                 </div>
                 <div className='my_info'>
-                    <Profile></Profile>
+                    {/* <Profile></Profile> */}
                 </div>
             </div>
             <div className='schedule'>
