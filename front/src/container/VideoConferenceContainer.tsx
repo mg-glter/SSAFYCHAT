@@ -125,7 +125,7 @@ function VideoConferenceContainer(props : any){
     function init(userinfo:any, mentoringId : number){
         const mentoringid : number = mentoringId;
         const userid = userinfo;
-        const socket = io(process.env.REACT_APP_SOCKET as string,{path: "/socket.io",transports:["websocket"]});
+        let socket = io(process.env.REACT_APP_SOCKET as string,{path: "/socket.io",transports:["websocket"]});
         const myFace = document.getElementById("myFace") as HTMLMediaElement;
         const muteBtn = document.getElementById("mute") as HTMLButtonElement;
         const cameraBtn = document.getElementById("camera") as HTMLVideoElement;
@@ -259,7 +259,7 @@ function VideoConferenceContainer(props : any){
             }
         }
         async function handleCloseBtn(){
-            console.log(myDataChannel);
+            //socket = undefined;
             console.log("마칠때 멘토링 아이디 " +  mentoringid);
             completeMentoring({mentoringId},(success:any)=>{
                 console.log(success);
@@ -307,6 +307,12 @@ function VideoConferenceContainer(props : any){
         socket.on("welcome", async () => {
             //데이터채널 생성 최초생성자
             myDataChannel = myPeerConnection.createDataChannel("chat");
+            myDataChannel.onclose = handleCloseBtn;
+            myPeerConnection.ondatachannel = (event : any) => {
+                myDataChannel = event.channel;
+                myDataChannel.onclose = handleCloseBtn;
+              };
+
             myDataChannel.addEventListener("message", (event : any) =>{
                     tmplog.push(JSON.parse(event.data));
                     setLogmsg(JSON.parse(JSON.stringify(tmplog)));
