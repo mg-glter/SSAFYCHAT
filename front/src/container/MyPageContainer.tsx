@@ -35,9 +35,9 @@ function MyPageContainer(){
                 console.log(data.data.completeMentorings);
                 setPagedata(data.data);
                 userInfo.belong = data.data.member.belong;
-                userInfo.studentNumber = data.data.member.studentNumber;
+                userInfo.studentNumber = "0404444";//data.data.member.studentNumber;
                 userInfo.job = data.data.member.job;
-                userInfo.totalScore = parseInt(data.data.member.totalScore);
+                userInfo.totalScore = 10//parseInt(data.data.member.totalScore);
                 dispatch(appendUserInfo(userInfo));
             },
             (error: any) => {
@@ -56,7 +56,7 @@ function MyPageContainer(){
                     <img className='image' src={require('../assets/smith.png')} alt="profile"></img>
                 </div>
                 <div className='my_info'>
-                    {/* <Profile></Profile> */}
+                    <Profile></Profile>
                 </div>
             </div>
             <div className='schedule'>
@@ -65,7 +65,7 @@ function MyPageContainer(){
                 </div>
                 <div className='my_schedule'>
                     {/* 여기 수정 6 */}
-                    {/* <MentoringList matchMentorings={pagedata.matchMentorings} completeMentorings={pagedata.completeMentorings}></MentoringList> */}
+                    <MentoringList matchMentorings={pagedata.matchMentorings} completeMentorings={pagedata.completeMentorings}></MentoringList>
                 </div>
             </div>
         </div>
