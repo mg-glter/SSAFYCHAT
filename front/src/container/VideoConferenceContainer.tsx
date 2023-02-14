@@ -82,6 +82,7 @@ function VideoConferenceContainer(props : any){
                         <select id="cameras"></select>
                         
                         <div className="video_conference_cancel" onClick={()=>{
+                            console.log("마칠때 멘토링 아이디 " +  mentoringId);
                             completeMentoring(mentoringId,(success:any)=>{
                                 console.log(success);
                                 setClickCancel(true);
