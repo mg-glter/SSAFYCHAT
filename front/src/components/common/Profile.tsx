@@ -25,7 +25,9 @@ function whatMyNick(nick: string){
             return '10기';
     }
 }
-
+function changeLevel(score: number){
+    return score/10;
+}
 function studentNumberSplit(num: string){
     const no = num.substring(0, 2);
     return whatMyNick(no);
@@ -43,7 +45,7 @@ function Profile(){
                 <span>{userInfo.job}</span>
                 <span>{userInfo.belong}</span>
             </div>
-            <div className='profile_component_total_score'>Lv. {userInfo.totalScore}</div>
+            <div className='profile_component_total_score'>Lv. {changeLevel(userInfo.totalScore)}</div>
             <div className='profile_component_student_id'>{nick}</div>
             <div className='profile_component_email'>{email}</div>
             <div className='profile_component_edit'>수정</div>
