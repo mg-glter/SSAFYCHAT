@@ -106,7 +106,9 @@ function VideoConferenceContainer(props : any){
             </div>
             {clickCancel && (
                 <ReviewModal closeModal={()=> {
-                    setClickCancel(!clickCancel);
+                    if(userR === 'role_mentee'){
+                        setClickCancel(!clickCancel);
+                    }
                     exit(navigate); 
                 }}></ReviewModal>
             )}  

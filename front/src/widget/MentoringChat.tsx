@@ -26,7 +26,7 @@ function Messages(props: any){
     const imgUrlSend = "/img/send.png";
     let checkdate = Array();
     return(
-        <div>
+        <div className="chat_content_container">
             <div className="content">
                 
                     
