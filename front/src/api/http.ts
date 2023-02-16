@@ -4,7 +4,7 @@ import axios, { AxiosRequestConfig } from "axios";
 // localServer 통신
 function localServer() {
   const axiosConfig: AxiosRequestConfig = {
-    baseURL: "https://ssafychat.shop/api",
+    baseURL: process.env.REACT_APP_SOCKET+"/api",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
     },

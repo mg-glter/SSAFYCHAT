@@ -1,7 +1,7 @@
 import http from "http";
 import express from "express"; //node서버 express사용
 import { Server } from "socket.io"; // npm i socket.io
-const handleListen = () => console.log(`Listening on http://localhost:8000`);
+const handleListen = () => console.log(`mongoDB start`);
 const {chatting} = require('../mongoose/model');
 
 const app = express();

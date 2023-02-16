@@ -28,6 +28,8 @@ services:
   backend_signaling_server:
     build: ./backend_chatting
     container_name: backend_signaling_server
+    env_file:
+      - ./backend_chatting/node.env
     ports:
       - '8000:8000'
     volumes:
@@ -79,5 +81,6 @@ services:
 
   redis:
     image: redis
+    container_name: redis
     ports:
       - 6379:6379

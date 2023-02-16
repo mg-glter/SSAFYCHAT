@@ -11,7 +11,7 @@ const model = (()=>{
 
     //Atlas mongodb cluster와 연결
     mongoose.connect(
-        `mongodb://blueberrypie:blueberrypie@3.38.253.200:27017/ssafychat?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.6.2`
+        `mongodb://${process.env.MONGO_INITDB_USERNAME}:${process.env.MONGO_INITDB_PASSWORD}@${process.env.MONGO_INITDB_DOMAIN_PORT}/${process.env.MONGO_INITDB_SETTING}`
         ,{useNewUrlParser:true, useUnifiedTopology:true}
         )
 
