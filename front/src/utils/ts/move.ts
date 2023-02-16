@@ -136,9 +136,8 @@ async function dragRoll(event : any, elemClassName : string, containerClassName 
     let elem = event.target;
     
     // 마우스 위치 저장할 변수
-    let mY = 0;
-    let mX = 0;
-    
+    let mY =  event.pageY;
+    let mX =  event.pageX;
     // 대상 요소 가리키게 하기
     while(elem.className !== elemClassName){
         elem = elem.parentElement;        

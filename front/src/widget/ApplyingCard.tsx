@@ -13,7 +13,7 @@ function ApplyingCard (props: any){
             case "삼성전자": setImage(require('../assets/samsung_logo.png')); break;
             default: setImage(require('../assets/SSAFY_CHAT.png'));
         }
-    },[])
+    })
 
     return(
         <div className="applying_card_widget">

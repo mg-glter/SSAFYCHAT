@@ -273,7 +273,7 @@ function VideoConferenceContainer(props : any){
                 })
                 setClickCancel(!clickCancel);
             } else {
-                navigate("/banner/mentoring");
+                navigate("/banner/confirm");
             }
         }
         //getMedia(); 이제 ui에서 불러오므로 생략
@@ -347,6 +347,9 @@ function VideoConferenceContainer(props : any){
             });
             myPeerConnection.close();
             myDataChannel.close();
+            alert("상대가 멘토링을 종료하였습니다.");
+            socket.disconnect();
+            
         });
         // RTC Code
         

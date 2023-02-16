@@ -1,20 +1,21 @@
 import "../styles/widget/ranking-card.css"
 
-function RankingCard(){
+function RankingCard(props : any){
+
     return (
         <div className="ranking_card">
             <div className="ranking_card_header">
-                <div className="ranker_image"></div>
+                <div ><img className="ranker_image" src={props.img}></img></div>
                 <div className="ranker_detail">
                     <div className="ranker_name">
-                        김겨울
+                        {props.info.name}
                     </div>
                     <div className="ranker_job_detail">
                         <div className="ranker_belong">
-                            SM Ent.
+                            {props.info.com}
                         </div>
                         <div className="ranker_job">
-                            백엔드 
+                            {props.info.job} 
                         </div>
                     </div>
                 </div>
@@ -22,11 +23,11 @@ function RankingCard(){
             <div className="ranking_card_main">
                 <div className="ranker_level">
                     <div className="ranker_text">레벨</div>
-                    <div className="ranker_item">10</div>
+                    <div className="ranker_item">{props.info.level}</div>
                 </div>
                 <div className="ranker_mentorings">
                     <div className="ranker_text">멘토링</div>
-                    <div className="ranker_item">45</div>
+                    <div className="ranker_item">{props.info.menCnt}</div>
                 </div>
             </div>
         </div>

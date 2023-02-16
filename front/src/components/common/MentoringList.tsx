@@ -56,7 +56,7 @@ function MentoringList(props: any) {
                 <td>{mentoring.mentoringId}</td>
                 <td>{mentoring.mentee.name}</td>
                 <td>{mentoring.mentor.name}</td>
-                <td>{mentoring.time}</td>
+                <td>{dateToString(mentoring.time)}</td>
                 <td>{mentoring.job}</td>
                 <td>{mentoring.company}</td>
               </tr>
