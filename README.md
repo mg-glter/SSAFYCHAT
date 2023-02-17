@@ -12,7 +12,7 @@
 ## SSAFY CHAT 바로가기 : [https://ssafychat.shop/](https://ssafychat.shop/)
 
 
-## UCC 보러가기 : [https://www.youtube.com/live/SMPDFbruars](UCC!!)
+## UCC 보러가기 : [UCC!!](https://www.youtube.com/live/SMPDFbruars)
 
 
 ## 프로젝트 진행 기간
