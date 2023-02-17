@@ -1,11 +1,9 @@
 
 # SSAFY CHAT
 
----
 
 ## Team BlueBerryPie
 
----
 
 ![Untitled](DOCS/WhatIsSSAFYCHAT.png)
 
@@ -13,23 +11,17 @@
 
 ## SSAFY CHAT 바로가기 : [https://ssafychat.shop/](https://ssafychat.shop/)
 
----
 
 ## UCC 보러가기 : [https://www.youtube.com/live/SMPDFbruars](UCC!!)
 
----
 
 ## 프로젝트 진행 기간
-
----
 
 2023.01.9(월) ~ 2023.02.17(금) 
 
 SSAFY 8기 2학기 공통프로젝트
 
 ## 기획 의도 및 배경
-
----
 
 SSAFY에서 제공하는 현직자의 멘토링은 실시간이 아니라 아쉬우셨다면?
 
@@ -59,8 +51,6 @@ SSAFY출신 후배와 일하고 싶은 SSAFY출신 현직 여러분,
 
 ## 주요 기능
 
----
-
 - 1:1 멘토링
     - 멘티가 원하는 회사와 직무를 선택한 후 멘토링을 신청합니다.
     - 멘토는 가능한 멘토링을 수락합니다.
@@ -82,8 +72,6 @@ SSAFY출신 후배와 일하고 싶은 SSAFY출신 현직 여러분,
 
 ## 💡주목 포인트
 
----
-
 - 오픈소스를 활용하지 않고 직접 구현한 WebRTC
 - 실시간 1:1 화상 미팅 및 실시간 채팅 기능 직접 구현
 - 6인의 Back-End 포지션이 모여서 만든 것이라고는 믿어지지 않을 만큼 탄탄한 퀄리티의 사이트 UI/UX 디자인
@@ -92,8 +80,6 @@ SSAFY출신 후배와 일하고 싶은 SSAFY출신 현직 여러분,
 - 최근 주목받는 신기술들을(JPA, MongoDB, Redis, React, TypeScript) 과감히 도입
 
 ## 주요 기술
-
----
 
 **Backend - Spring, node.js**
 
@@ -130,7 +116,6 @@ SSAFY출신 후배와 일하고 싶은 SSAFY출신 현직 여러분,
 
 ## 프로젝트 파일 구조
 
----
 ```
 S08P12A604/
 ├── backend
@@ -219,11 +204,8 @@ S08P12A604/
 │       └── widget
 └── jenkins
 ```
----
 
 ## 협업 툴
-
----
 
 - GitLab
 - Notion
@@ -236,8 +218,6 @@ S08P12A604/
 
 
 ## 협업 환경
-
----
 
 - Gitlab
     - 코드의 버전을 관리
@@ -256,8 +236,6 @@ S08P12A604/
     
 
 ## 컨벤션
-
----
 
 ### **Git**
 
@@ -351,8 +329,6 @@ S08P12A604/
 
 ## 팀원 역할 분배
 
----
-
 FE : 김도원, 김태현, 조원재
 
 BE : 박정희, 백체은, 신희수
@@ -360,8 +336,6 @@ BE : 박정희, 백체은, 신희수
 CI/CD : 박정희
 
 ## 프로젝트 산출물
-
----
 
 - [요구 사항 정의서](DOCS/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%20%EC%A0%95%EC%9D%98%EC%84%9C/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD_%EC%A0%95%EC%9D%98%EC%84%9C__PRD_.md)
 - [아키텍처](DOCS/%EC%95%84%ED%82%A4%ED%85%8D%EC%B3%90/%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98.md)
